@@ -61,7 +61,7 @@
   }
   .section-header img { width: 34px; height: 34px; border-radius: 50% }
   .section-header .stitle { color: #fff; font-size: 16px; font-weight: 600 }
-  .section-header .stitle em { color: var(--yellow); font-style: italic }
+  .section-header .stitle em { color:var(--accent-fg); font-style: italic }
   .section-sub { font-size:var(--fs-body-min); color: var(--t4); font-weight: 300; margin: 10px 2px 22px }
 
   /* ---------- INDEX ---------- */
@@ -124,7 +124,7 @@
   .hero-success h2 { color: #fff; font-size: 22px; font-weight: 700; margin: 0 0 8px }
   .hero-success .hero-sub { color: #d5d5d5; font-size:var(--fs-body-min); font-weight: 300; margin: 0 0 20px; max-width: 640px }
   .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px }
-  .hero-stats .hs-val { display: block; color: var(--yellow); font-size: 28px; font-weight: 700 }
+  .hero-stats .hs-val { display: block; color:var(--accent-fg); font-size: 28px; font-weight: 700 }
   .hero-stats .hs-lbl { display: block; color: #bbb; font-size: 12px; font-weight: 400; margin-top: 3px }
   .hero-success .hero-note { color: #cfcfcf; font-size:var(--fs-body-min); font-weight: 300; line-height: 1.6; margin: 0; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 16px; position: relative; z-index: 1 }
   .hero-success .hero-note b { color: #fff; font-weight: 600 }
@@ -133,7 +133,7 @@
   .data-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #fff;
     padding: 8px 16px; border-radius: var(--radius-sm); margin: 26px 0 4px }
   .data-tag.industry { background: #5C6BC0 }
-  .data-tag.corpas { background: #1A1A1A; border: 1px solid var(--yellow); color: var(--yellow) }
+  .data-tag.corpas { background: #1A1A1A; border: 1px solid var(--yellow); color:var(--accent)}
 
   /* ---------- CHART CARDS ---------- */
   .chart-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; margin-bottom: 26px }
@@ -152,7 +152,7 @@
   table.datatable td.strong { font-weight: 700; color: var(--t1) }
   table.datatable td.accent { font-weight: 700; color:var(--accent-fg)}
   .table-wrap { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 4px; margin-bottom: 14px; overflow-x: auto }
-  .group-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; color:var(--fg-muted);
+  .group-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; color:var(--fg);
      padding: 9px 16px; border-radius: var(--radius-sm); margin: 22px 0 10px }
   .group-tag.pregrado { background: #2E5AAC }
   .group-tag.posgrado { background: #7A3FC9 }
@@ -232,7 +232,7 @@
 </head>
 <body>
 
-<section class="portada" data-suelo="papel">
+<section class="portada">
   <div class="portada-wrap">
     <div class="portada-copy">
       <span class="portada-kicker">Corpas &middot; Informe final</span>
@@ -251,7 +251,7 @@
 <div class="wrap">
 
   <!-- ============ ÍNDICE ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">¿Qué vas a <em>encontrar?</em></div>
   </div>
@@ -270,7 +270,7 @@
   </div>
 
   <!-- ============ 01 RESUMEN GENERAL ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">01 · Resumen <em>General</em></div>
   </div>
@@ -306,7 +306,7 @@
   </div>
 
   <!-- ============ 02 PERFORMANCE POR CANAL ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">02 · Performance por <em>Canal</em></div>
   </div>
@@ -360,7 +360,7 @@
   <div class="insight-bar"><b>Lectura rápida:</b> Google concentra el 49% de la inversión pero convierte casi 4 veces mejor que Facebook (1,96% leads CRM → matrícula en Google vs. 0,55% en Facebook). TikTok y Programática aportan volumen y presencia, no cierre directo.</div>
 
   <!-- ============ 03 MODALIDAD VS META ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">03 · Panorama por <em>Modalidad</em></div>
   </div>
@@ -407,7 +407,7 @@
   <div class="callout"><b>Ed. Continuada</b> no registró inversión ni leads propios en pauta digital durante el periodo — permanece sin actividad de captación dedicada.</div>
 
   <!-- ============ 05/06 DETALLE POR PROGRAMA ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">04 · Detalle por <em>Programa</em></div>
   </div>
@@ -617,7 +617,7 @@
   <div class="insight-bar"><b>Epidemiología</b> tiene el costo por matrícula más bajo de todo el portafolio de pauta ($928.519) — casi 4 veces más barato que Medicina, que aun así sigue siendo el motor de volumen del portafolio. Los cinco programas sin matrícula en el periodo (Lenguas Extranjeras, Música, MBA, Lingüística Aplicada, Educación para la Salud) no tienen costo por matrícula calculable todavía — son justamente los que entran al ejercicio de datos y al replanteamiento de oferta por categorías.</div>
 
   <!-- ============ 07 BRANDING Y PROGRAMÁTICA ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">06 · Branding y <em>Programática</em></div>
   </div>
@@ -674,7 +674,7 @@
   <div class="insight-bar"><b>Campaña General Programática</b> ($30,9M) representa el 87% del presupuesto de branding — ejecutada en mayo–junio vía DOOH/Audio (Basis DSP), reforzando la presencia de marca fuera del embudo digital de conversión directa.</div>
 
   <!-- ============ 08 LLAMADAS IA ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">07 · Llamadas <em>IA</em></div>
   </div>
@@ -773,7 +773,7 @@
   <div class="insight-bar"><b>33 segundos</b> de duración promedio por conversación — suficiente para presentar el programa, resolver la duda de costos y enviar el enlace de preinscripción por WhatsApp. El agente está <b>disponible de 6 a.m. a 9 p.m., incluidos fines de semana, sin ampliar el equipo de admisiones</b>.</div>
 
   <!-- ============ 09 EMBUDO CRM COMPLETO ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">08 · Embudo CRM <em>Completo</em></div>
   </div>
@@ -825,7 +825,7 @@
   <div class="insight-bar"><b>Especialización en Medicina Familiar Integral</b> es el único programa que llegó exactamente a su meta (100% — 10 matrículas sobre 10 esperadas), y <b>Terapéuticas Alternativas y Farmacología Vegetal</b> queda muy cerca (96,7% — 29 sobre 30), ambos muy por encima del resto del portafolio — una referencia útil de lo que es posible replicar. <b>Premédico</b> y <b>Maestría en Lingüística Aplicada</b> muestran la mayor brecha frente a su meta: Premédico porque sus matrículas históricas caen fuera de la ventana de la cohorte (es un curso preparatorio sin periodo académico formal), y Lingüística Aplicada porque generó demanda (176 contactos) que todavía no maduró a negocio este semestre — una oportunidad concreta para el próximo periodo.</div>
 
   <!-- ============ 10 CONTEXTO ESTRATÉGICO ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">09 · Contexto <em>Estratégico</em></div>
   </div>
@@ -897,7 +897,7 @@
   <div class="callout">📎 Fuente completa del diagnóstico: <a href="https://adcom-forecast.github.io/corpas/ruta-estrategica-20271" target="_blank" rel="noopener">adcom-forecast.github.io/corpas/ruta-estrategica-20271</a></div>
 
   <!-- ============ 11 INSIGHTS ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">10 · Insights y <em>Recomendaciones</em></div>
   </div>
@@ -928,7 +928,7 @@
 
 
   <!-- ============ 12 CREATIVOS ============ -->
-  <div class="section-header">
+  <div class="section-header" data-roles="tinta">
     <span class="logo-badge" style="width:34px;height:34px;"></span>
     <div class="stitle">11 · Creativos por <em>Programa</em></div>
   </div>

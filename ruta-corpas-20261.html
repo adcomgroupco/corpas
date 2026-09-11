@@ -44,8 +44,8 @@ section:first-of-type{border-top:none}
 .kpi-card{background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-lg); padding:26px 24px; opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
 .kpi-card.in{opacity:1; transform:translateY(0)}
 .kpi-card .val{font-size:36px; font-weight:800; font-variant-numeric:tabular-nums; letter-spacing:-.02em}
-.kpi-card.bad .val{color:var(--red)}
-.kpi-card.good .val{color:var(--green)}
+.kpi-card.bad .val{color:var(--neg)}
+.kpi-card.good .val{color:var(--pos)}
 .kpi-card .lbl{font-size:var(--fs-body-min); color:var(--gray-600); margin-top:6px; line-height:1.5}
 
 /* ---------- SECTION HEAD ---------- */
@@ -64,9 +64,9 @@ section:first-of-type{border-top:none}
 .diag-badge.verde{background:var(--green)}
 .diag-head .name{font-size:15px; font-weight:700; flex:1}
 .diag-head .semaforo-txt{font-size:12px; font-weight:700}
-.diag-head .semaforo-txt.rojo{color:var(--red)}
+.diag-head .semaforo-txt.rojo{color:var(--neg)}
 .diag-head .semaforo-txt.amarillo{color:var(--accent-fg)}
-.diag-head .semaforo-txt.verde{color:var(--green)}
+.diag-head .semaforo-txt.verde{color:var(--pos)}
 .diag-head .chev{color:var(--gray-400); font-size:14px; transition:transform .25s ease}
 .diag-card.open .chev{transform:rotate(90deg)}
 .diag-body{max-height:0; opacity:0; overflow:hidden; transition:max-height .4s ease, opacity .3s ease}
@@ -93,7 +93,7 @@ table.dtable tr.total td{font-weight:700; background:var(--gray-50)}
 .sem-pill .d{width:7px; height:7px; border-radius:50%}
 .sem-pill.rojo .d{background:#C0392B} .sem-pill.amarillo .d{background:#8A6D00} .sem-pill.verde .d{background:#1E8449}
 .conclusion-box{margin-top:28px; background:var(--black); color:var(--white); border-radius:var(--radius-lg); padding:26px 28px;border:1px solid var(--yellow)}
-.conclusion-box .eyebrow{font-size:12px; color:var(--yellow); font-weight:700; margin-bottom:10px}
+.conclusion-box .eyebrow{font-size:12px; color:var(--accent-fg); font-weight:700; margin-bottom:10px}
 .conclusion-box p{font-size:14.5px; line-height:1.7; color:rgba(255,255,255,.9)}
 
 /* ---------- IMAN CHAPTER ---------- */
@@ -104,7 +104,7 @@ table.dtable tr.total td{font-weight:700; background:var(--gray-50)}
 .button-flow{display:flex; flex-direction:column; gap:10px; margin:28px 0 36px}
 .bf-item{display:flex; align-items:flex-start; gap:16px; border:1px solid var(--gray-200); border-radius:var(--radius-md); padding:16px 20px; transition:box-shadow .2s ease}
 .bf-item:hover{box-shadow: none}
-.bf-rank{width:28px; height:28px; border-radius:50%; background:var(--black); color:var(--yellow); font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0}
+.bf-rank{width:28px; height:28px; border-radius:50%; background:var(--black); color:var(--accent-fg); font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0}
 .bf-item:first-child .bf-rank{background:var(--yellow); color:var(--black)}
 .bf-body .t{font-size:13.5px; font-weight:700; margin-bottom:3px}
 .bf-body .d{font-size:12.5px; color:var(--gray-600)}
@@ -118,7 +118,7 @@ table.dtable tr.total td{font-weight:700; background:var(--gray-50)}
 /* ---------- IMAN DEMO EMBED ---------- */
 .iman-embed-wrap{max-width:420px; margin:0 auto; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--gray-200); box-shadow: none}
 .iman-embed-head{background:var(--black); color:#fff; font-size:12px; font-weight:600; padding:14px 18px; display:flex; align-items:center; justify-content:space-between}
-.iman-embed-head a{color:var(--yellow); text-decoration:none; font-weight:700; font-size:12px}
+.iman-embed-head a{color:var(--accent-fg); text-decoration:none; font-weight:700; font-size:12px}
 .iman-iframe{width:100%; height:760px; border:none; display:block; background:var(--gray-50)}
 .embed-note{text-align:center; font-size:var(--fs-body-min); color:var(--gray-600); margin-top:18px; max-width:460px; margin-left:auto; margin-right:auto; line-height:1.6}
 
@@ -397,7 +397,7 @@ footer{padding:40px 48px; text-align:center; font-size:12px; color:var(--gray-40
         <tr><td>3</td><td>Propuesta de valor</td><td>2/5</td><td><span class="sem-pill rojo"><span class="d"></span>Rojo</span></td></tr>
         <tr><td>6</td><td>Nutrición y seguimiento</td><td>1/5</td><td><span class="sem-pill rojo"><span class="d"></span>Rojo — columna prioritaria</span></td></tr>
       </table>
-      <div class="conclusion-box">
+      <div class="conclusion-box" data-roles="tinta">
         <div class="eyebrow">Conclusión del diagnóstico</div>
         <p>El problema de Corpas no es de presupuesto ni de canal — es estructural, concentrado en el tramo entre la captura del lead de pauta y su seguimiento efectivo. La comparación con orgánico lo confirma: el embudo de admisiones convierte casi igual para ambos orígenes (47,5% vs 51,7%), pero solo el 2,0% de los leads de pauta llega siquiera a esa etapa, frente al 7,9% de los orgánicos. La columna 7 confirma que el mecanismo de admisiones funciona bien — particularmente en Medicina, el programa que mejor convierte hoy — el resto del portafolio de pauta no logra ni siquiera llegar a esa etapa por falta de seguimiento.</p>
       </div>
@@ -456,7 +456,7 @@ footer{padding:40px 48px; text-align:center; font-size:12px; color:var(--gray-40
       <p class="sec-lead">Estructura genérica de referencia — la piel visual se define para Corpas una vez estén los datos de WhatsApp, Calendly y teléfono. Haz clic en cada botón para ver la vista previa de lo que pasa después.</p>
 
       <div class="iman-embed-wrap">
-        <div class="iman-embed-head">
+        <div class="iman-embed-head" data-roles="tinta">
           <span>Efecto Imán® — demo interactiva</span>
           <a href="https://adcom-forecast.github.io/forecast-test/landing-iman" target="_blank" rel="noopener">Pantalla completa ↗</a>
         </div>
