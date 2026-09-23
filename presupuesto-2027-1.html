@@ -418,7 +418,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
   <div class="chapter-head"><div class="num">01</div><div class="head-copy"><h2>Aprendizajes de 2026-2</h2><p>Lo que ya funcionó, dónde se pierde la conversión, y qué dice cada canal.</p></div></div>
 
   <div class="block reveal">
-    <div class="sub-head"><span class="tag">Medicina</span><h3>El caso de éxito: conversión récord del portafolio</h3></div>
+    <div class="sub-head"><span class="tag">Medicina</span><h3>Un caso efectivo: conversión récord del portafolio</h3></div>
     <div class="metric-grid" style="grid-template-columns:repeat(3,1fr);max-width:100%;">
       <div class="metric-card accent"><div class="metric-label">Conversión récord del programa</div><div class="metric-value">2,1%</div></div>
       <div class="metric-card" style="grid-column:span 2;"><div class="metric-label">Lograda con tres acciones trabajando juntas</div><div style="margin-top:10px;font-size:.92rem;line-height:1.6;color:#ddd;"><b style="color:var(--yellow);">Landing propia</b> + <b style="color:var(--yellow);">click-to-call</b> + <b style="color:var(--yellow);">refuerzo de agente de voz IA</b></div></div>
@@ -437,7 +437,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
       <table class="signal-table">
         <thead><tr><th>Hallazgo</th><th>Evidencia</th></tr></thead>
         <tbody>
-          <tr><td><strong>La segmentación mejora la voz</strong></td><td>Landing Medicina: 41,9% contactabilidad / 33,6% interés — vs. Pregrado General: 31,1% / 8,7%.</td></tr>
+          <tr><td><strong>Con más contexto, la IA contacta mejor</strong></td><td>Cuando la llamada ya sabe de qué landing viene el lead (caso Medicina): 41,9% contactabilidad y 33,6% interés — vs. 31,1% y 8,7% en Pregrado General, donde la llamada es genérica.</td></tr>
           <tr><td><strong>El horario cambia el resultado</strong></td><td>Mejores franjas: 10 a.m. (41,5%), 4 p.m. (39,4%), 12 m. (37,0%). El bloque 7-8 a.m. ronda 24%.</td></tr>
           <tr><td><strong>La IA ya opera a escala</strong></td><td>8.448 llamadas, 1.813 alcanzados (48,3%), 199 con interés confirmado (11% de los alcanzados).</td></tr>
         </tbody>
@@ -672,9 +672,9 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
   <div class="block reveal">
     <div class="sub-head"><span class="tag">Resumen</span><h3>Los tres bloques del presupuesto</h3></div>
     <div class="universe-grid">
-      <article class="universe-card"><span class="lbl">Pauta</span><div class="big">$300,4M</div><p class="d">Branding + medios de captación</p></article>
-      <article class="universe-card accent"><span class="lbl">Gestión IA</span><div class="big">$20,4M</div><p class="d">Agentes de voz — misma línea que ya funcionó en 2026-2</p></article>
-      <article class="universe-card"><span class="lbl">Meta de matrículas</span><div class="big">220</div><p class="d">149 pregrado + 72 posgrado · 7.566 leads proyectados</p></article>
+      <article class="universe-card"><span class="lbl">Pauta</span><div class="big" id="resumenPautaBig">$300,4M</div><p class="d">Branding + medios de captación</p></article>
+      <article class="universe-card accent"><span class="lbl">Gestión IA</span><div class="big" id="resumenIaBig">$20,4M</div><p class="d">Agentes de voz — misma línea que ya funcionó en 2026-2</p></article>
+      <article class="universe-card"><span class="lbl">Meta de matrículas</span><div class="big" id="resumenMatriculasBig">220</div><p class="d" id="resumenMatriculasDetail">149 pregrado + 72 posgrado · 7.566 leads proyectados</p></article>
     </div>
   </div>
 
@@ -970,6 +970,10 @@ revealEls.forEach(el => revealObs.observe(el));
 
 // budget scenarios - chapter 3
 (function () {
+  const RESUMEN = {
+    s1: { pauta: '$300,4M', ia: '$20,4M', matriculas: '220', detail: '149 pregrado + 72 posgrado · 7.566 leads proyectados' },
+    s2: { pauta: '$159,2M', ia: '$10,2M', matriculas: '110', detail: '74 pregrado + 36 posgrado · 3.783 leads proyectados' }
+  };
   const NIVEL = {
     s1: {
       headline: 'Pregrado 69% · Posgrado 31% de los medios',
@@ -1046,6 +1050,14 @@ revealEls.forEach(el => revealObs.observe(el));
     }
   };
 
+  function renderResumen(key) {
+    const r = RESUMEN[key];
+    document.getElementById('resumenPautaBig').textContent = r.pauta;
+    document.getElementById('resumenIaBig').textContent = r.ia;
+    document.getElementById('resumenMatriculasBig').textContent = r.matriculas;
+    document.getElementById('resumenMatriculasDetail').textContent = r.detail;
+  }
+
   function renderNivel(key) {
     const n = NIVEL[key];
     document.getElementById('nivelHeadline').textContent = n.headline;
@@ -1107,6 +1119,7 @@ revealEls.forEach(el => revealObs.observe(el));
   }
 
   function applyScenario(key) {
+    renderResumen(key);
     renderNivel(key);
     renderMeses(key);
     renderMedio(key);
