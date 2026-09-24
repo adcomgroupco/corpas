@@ -797,6 +797,89 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
 .tech-list li{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line-light);padding-top:5px}
 .tech-list b{color:var(--ink)}
 .universe-grid.four{grid-template-columns:1.2fr 1fr 1fr}
+
+/* escenarios */
+.scen-switch{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.scen-switch button{font-family:inherit;text-align:left;cursor:pointer;padding:16px 18px;border-radius:18px;border:1px solid var(--line-light);background:#fff;color:var(--ink);transition:all .2s ease}
+.scen-switch small{display:block;font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#8a7300}
+.scen-switch strong{display:block;font-size:1.3rem;font-weight:900;letter-spacing:-.02em;margin-top:4px}
+.scen-switch span{display:block;font-size:.76rem;color:#666;margin-top:2px}
+.scen-switch button.is-active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.scen-switch button.is-active small{color:var(--yellow)}
+.scen-switch button.is-active span{color:#bbb}
+@media(max-width:720px){.scen-switch{grid-template-columns:1fr}}
+.scen-compare td.scen-on,.scen-compare th.scen-on{background:#fff8d1;font-weight:800}
+.scen-compare .total-row td.scen-on{background:var(--ink);color:var(--yellow)}
+
+/* ---------- BATERÍA ---------- */
+.funnel-strip{display:grid;grid-template-columns:2fr 1fr 2fr;gap:6px;margin-bottom:14px}
+.funnel-strip div{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;border-radius:12px;background:#151515;border:1px solid var(--line-dark)}
+.funnel-strip div:nth-child(2){background:#1d1a06;border-color:rgba(255,212,0,.35)}
+.funnel-strip div:nth-child(3){background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+.funnel-strip b{font-size:.72rem;font-weight:900;letter-spacing:.08em}
+.funnel-strip span{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+@media(max-width:620px){.funnel-strip{grid-template-columns:1fr}}
+.vgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.vcard{grid-column:span 2;background:#111;border:1px solid var(--line-dark);border-radius:20px;padding:20px;display:flex;flex-direction:column}
+.vcard:nth-child(4),.vcard:nth-child(5){grid-column:span 3}
+@media(max-width:1000px){.vgrid{grid-template-columns:1fr 1fr}.vcard,.vcard:nth-child(4),.vcard:nth-child(5){grid-column:span 1}}
+@media(max-width:640px){.vgrid{grid-template-columns:1fr}}
+.vcard header{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+.vnum{font-size:2rem;font-weight:900;color:var(--yellow);line-height:1;letter-spacing:-.04em}
+.vcard h4{font-size:1.15rem;font-weight:800;line-height:1.15}
+.vcard header p{font-size:.78rem;color:#999;margin-top:3px;font-style:italic}
+.vacts{list-style:none;display:flex;flex-direction:column;gap:8px}
+.vacts li{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:11px 12px;border-radius:12px;background:#171717;border:1px solid #242424}
+.vacts li.star{background:#1d1a06;border-color:rgba(255,212,0,.45)}
+.vacts strong{display:block;font-size:.84rem}
+.vacts em{display:block;font-style:normal;font-size:.74rem;color:#aaa;line-height:1.4;margin-top:2px}
+.vtags{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end;flex:0 0 auto;max-width:44%}
+.vtags i{font-style:normal;font-size:.58rem;font-weight:800;letter-spacing:.04em;padding:3px 7px;border-radius:999px;white-space:nowrap}
+.t-med{background:var(--yellow);color:var(--ink)}
+.t-pre{background:#fff;color:var(--ink)}
+.t-pos{background:#555;color:#fff}
+.t-lp{background:#7894ff;color:var(--ink)}
+.t-tt{background:#000;color:#fff;border:1px solid #555}
+.t-ev{background:#ff8a65;color:var(--ink)}
+.t-fm{background:#4fd1a5;color:var(--ink)}
+.t-wa{background:#25d366;color:#053d1c}
+.vnote{margin-top:12px;font-size:.78rem;color:#8a8a8a}
+
+/* ---------- BECA: formulario Meta + correo ---------- */
+.bk-media{background:linear-gradient(140deg,#1d3a6e,#2d5bb0 60%,#8a6b14)}
+.bk-bubble{background:#c9a13b!important;color:#1b1400!important}
+.bk-btn{background:#0866ff!important;color:#fff!important;animation:none!important}
+.lf,.mail{display:none;flex-direction:column;height:100%;background:#fff}
+.lf.on,.mail.on{display:flex}
+.lf-top{display:flex;align-items:center;gap:10px;padding:36px 14px 10px;border-bottom:1px solid #eee;font-size:.78rem;font-weight:700;color:#444}
+.lf-x{border:0;background:none;font-size:.9rem;cursor:pointer;color:#666}
+.lf-prog{height:4px;background:#e4e6eb}
+.lf-prog i{display:block;height:100%;width:0;background:#0866ff;transition:width .35s ease}
+.lf-body{flex:1;padding:18px 16px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;animation:qin .3s ease;color:#1c1e21}
+.lf-body .lf-cover{height:110px;border-radius:12px;background:linear-gradient(140deg,#1d3a6e,#2d5bb0 60%,#8a6b14);display:grid;place-items:center;color:#fff;font-weight:800;font-size:1rem;text-align:center;padding:0 16px}
+.lf-body h5{font-size:1.05rem;font-weight:800;line-height:1.25}
+.lf-body p{font-size:.78rem;color:#65676b;line-height:1.5}
+.lf-field{display:flex;flex-direction:column;gap:3px;font-size:.68rem;color:#65676b;font-weight:600}
+.lf-field input,.lf-field select{height:38px;border:1px solid #ccd0d5;border-radius:8px;padding:0 10px;font-size:.8rem;color:#1c1e21;background:#f5f6f7;font-family:inherit}
+.lf-pre{font-size:.64rem;color:#0866ff;font-weight:700}
+.lf-check{display:flex;gap:8px;font-size:.7rem;color:#65676b;line-height:1.45;align-items:flex-start}
+.lf-btn{margin-top:auto;height:42px;border:0;border-radius:8px;background:#0866ff;color:#fff;font-weight:700;font-size:.86rem;cursor:pointer;font-family:inherit}
+.lf-done{align-items:center;text-align:center;justify-content:center}
+.lf-done .ok{width:64px;height:64px;border-radius:50%;background:#e7f3ff;color:#0866ff;display:grid;place-items:center;font-size:1.6rem}
+.mail-top{padding:36px 14px 10px;font-size:.8rem;color:#0a66c2;font-weight:600;border-bottom:1px solid #eee}
+.mail-head{display:flex;gap:10px;align-items:center;padding:12px 14px}
+.mail-head .av{width:34px;height:34px;border-radius:50%;background:#1d3a6e;color:#fff;display:grid;place-items:center;font-family:Georgia,serif;font-size:.62rem;font-weight:700}
+.mail-head strong{display:block;font-size:.8rem;color:#111}
+.mail-head span{font-size:.66rem;color:#777}
+.mail-body{flex:1;overflow-y:auto;padding:4px 16px 18px;display:flex;flex-direction:column;gap:9px;color:#222;animation:qin .35s ease}
+.mail-body h5{font-size:1rem;font-weight:800;line-height:1.25;color:#1d3a6e}
+.mail-body p{font-size:.76rem;line-height:1.5}
+.mail-box{border-left:3px solid #c9a13b;background:#fbf7ec;border-radius:0 8px 8px 0;padding:8px 10px}
+.mail-box b{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:#8a6b14}
+.mail-box span{font-size:.74rem;line-height:1.45}
+.mail-att{font-size:.72rem;border:1px solid #ddd;border-radius:8px;padding:8px 10px;color:#333}
+.mail-cta{display:block;text-align:center;border-radius:999px;background:#2d5bb0;color:#fff;font-weight:700;font-size:.8rem;padding:10px}
+.mail-cta.ghost{background:#fff;color:#128c4a;border:1px solid #25d366}
 </style>
 </head>
 <body>
@@ -1204,80 +1287,134 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
     </div>
   </div>
 
-  <!-- COMUNICACIÓN -->
-  <div class="block reveal">
-    <div class="sub-head"><span class="tag">CPL → Comunicación</span><h3>Un eje por landing en Medicina, dos en pregrado general, uno en posgrado y uno en WhatsApp</h3><p>La comunicación es lo que mueve el CPL. Cada eje se produce con una sola idea por pieza y al menos 1 de cada 3 piezas con testimonio real en video, que fue lo que mejor rindió en 2026-2 (índice 85 frente a 127 de la plantilla institucional).</p></div>
+  <!-- BATERÍA DE ACCIONES TÁCTICAS -->
+  <div class="block reveal" id="bateria">
+    <div class="sub-head"><span class="tag">CPL → Batería de acciones tácticas</span><h3>Cinco verticales, una por cada pregunta del aspirante</h3><p>Todo lo que sale a pauta se agrupa según la pregunta que resuelve. Juntas funcionan como embudo: las dos primeras despiertan interés, la tercera convierte ese interés en intención y las dos últimas quitan las barreras para inscribirse. Cada pieza lleva una sola idea y al menos 1 de cada 3 lleva testimonio real en video (índice 85 frente a 127 de la plantilla institucional en 2026-2).</p></div>
 
-    <div class="axis-group">
-      <div class="axis-group-h"><h4>Medicina</h4><span>80% · $200M · 3 ejes = 3 puertas de entrada</span></div>
-      <div class="axis-grid">
-        <article class="axis">
-          <div class="axis-top"><span class="axis-lp"><i style="background:#ffd400">A</i>Landing formulario</span><span class="axis-tone">Directo · racional</span></div>
-          <h5>Práctica clínica desde el inicio</h5>
-          <p class="axis-quote">"Tu primer paciente no espera al último semestre. Escenarios de práctica propios desde el inicio."</p>
-          <dl><dt>Para quién</dt><dd>Ya decidió estudiar Medicina y compara universidades</dd><dt>Formato</dt><dd>Estático, carrusel y anuncios de búsqueda</dd><dt>Canal</dt><dd>Google Search</dd><dt>CTA</dt><dd>Solicita información</dd></dl>
-        </article>
-        <article class="axis">
-          <div class="axis-top"><span class="axis-lp"><i style="background:#7894ff">B</i>Landing video</span><span class="axis-tone">Emocional · testimonial</span></div>
-          <h5>Míralo antes de decidirlo</h5>
-          <p class="axis-quote">"Así es un día estudiando Medicina en la Corpas, contado por quien lo vive."</p>
-          <dl><dt>Para quién</dt><dd>Lo está considerando y necesita verse ahí</dd><dt>Formato</dt><dd>Video vertical de 30 a 60 s</dd><dt>Canal</dt><dd>Meta + YouTube</dd><dt>CTA</dt><dd>Mira el video</dd></dl>
-        </article>
-        <article class="axis">
-          <div class="axis-top"><span class="axis-lp"><i style="background:#4fd1a5">C</i>Landing quiz</span><span class="axis-tone">Curioso · autodescubrimiento</span></div>
-          <h5>¿Tienes perfil de médico?</h5>
-          <p class="axis-quote">"Descubre en 2 minutos si Medicina es tu vocación."</p>
-          <dl><dt>Para quién</dt><dd>Explora y aún no está seguro, o es un padre que busca validar</dd><dt>Formato</dt><dd>Video corto y estático con pregunta</dd><dt>Canal</dt><dd>Meta</dd><dt>CTA</dt><dd>Haz el test</dd></dl>
-        </article>
-      </div>
+    <div class="funnel-strip">
+      <div><b>01 · 02</b><span>Interés</span></div>
+      <div><b>03</b><span>Intención</span></div>
+      <div><b>04 · 05</b><span>Quitar barreras</span></div>
     </div>
 
-    <div class="axis-group">
-      <div class="axis-group-h"><h4>Pregrado general</h4><span>8% · $20M · 2 ejes</span></div>
-      <div class="axis-grid two">
-        <article class="axis">
-          <div class="axis-top"><span class="axis-lp">Eje 01</span><span class="axis-tone">Transparencia</span></div>
-          <h5>Precio y valor</h5>
-          <p class="axis-quote">"Esto cuesta estudiar Enfermería en la Corpas, y así lo puedes financiar."</p>
-          <dl><dt>Idea</dt><dd>Cuánto cuesta, cómo financiarlo y qué incluye, en lugar de un descuento genérico</dd></dl>
-        </article>
-        <article class="axis">
-          <div class="axis-top"><span class="axis-lp">Eje 02</span><span class="axis-tone">Aspiracional concreto</span></div>
-          <h5>Aplicación y salida</h5>
-          <p class="axis-quote">"Cuidar es una carrera: campo laboral real desde que te gradúas."</p>
-          <dl><dt>Idea</dt><dd>Qué voy a poder hacer con esto, en mi vida</dd></dl>
-        </article>
-      </div>
-    </div>
+    <div class="vgrid">
+      <article class="vcard">
+        <header><span class="vnum">01</span><div><h4>Por qué la Corpas</h4><p>¿Qué tiene de distinto?</p></div></header>
+        <ul class="vacts">
+          <li><div><strong>Práctica clínica desde el inicio</strong><em>"Tu primer paciente no espera al último semestre."</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-lp">Landing A</i></span></li>
+          <li><div><strong>Instalaciones del hospital</strong><em>"Conoce la Clínica donde vas a aprender."</em></div><span class="vtags"><i class="t-med">Medicina</i></span></li>
+          <li><div><strong>Aplicación y salida</strong><em>"Cuidar es una carrera: campo laboral real desde que te gradúas."</em></div><span class="vtags"><i class="t-pre">Pregrado</i></span></li>
+          <li><div><strong>Aplicación y salida</strong><em>"De aula a práctica clínica, con nombre propio."</em></div><span class="vtags"><i class="t-pos">Posgrado</i></span></li>
+        </ul>
+      </article>
 
-    <div class="axis-group">
-      <div class="axis-group-h"><h4>Posgrado general</h4><span>10% · $25M · 1 eje</span></div>
-      <div class="axis-grid one">
-        <article class="axis">
-          <div class="axis-top"><span class="axis-lp">Eje 01</span><span class="axis-tone">Profesional</span></div>
-          <h5>Aplicación y salida</h5>
-          <p class="axis-quote">"De aula a práctica clínica, con nombre propio."</p>
-          <dl><dt>Idea</dt><dd>Qué cambia en tu práctica profesional desde el lunes siguiente</dd></dl>
-        </article>
-      </div>
-    </div>
+      <article class="vcard">
+        <header><span class="vnum">02</span><div><h4>Voces Corpas</h4><p>¿Quién lo vive?</p></div></header>
+        <ul class="vacts">
+          <li><div><strong>Docentes</strong><em>"Te enseña quien ejerce."</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-pos">Posgrado</i></span></li>
+          <li><div><strong>Entrevistas a estudiantes</strong><em>"Así es un día estudiando Medicina, contado por quien lo vive."</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-lp">Landing B</i></span></li>
+          <li><div><strong>Egresados</strong><em>"Dónde están hoy los médicos Corpas."</em></div><span class="vtags"><i class="t-med">Medicina</i></span></li>
+        </ul>
+      </article>
 
-    <div class="axis-group">
-      <div class="axis-group-h"><h4>Campaña W · Meta → WhatsApp</h4><span>2% · $5M · 1 eje</span></div>
-      <div class="axis-grid one">
-        <article class="axis">
-          <div class="axis-top"><span class="axis-lp"><i style="background:#25d366">W</i>Click-to-WhatsApp</span><span class="axis-tone">Cercano · inmediato</span></div>
-          <h5>Resuelve tus dudas ya, sin formularios</h5>
-          <p class="axis-quote">"¿Dudas sobre qué estudiar? Escríbenos y te respondemos al instante."</p>
-          <dl><dt>Para quién</dt><dd>Aspirantes y padres que prefieren preguntar antes de dejar datos</dd><dt>Formato</dt><dd>Estático y video corto con el botón "Enviar mensaje"</dd><dt>Canal</dt><dd>Meta (Instagram y Facebook)</dd></dl>
-        </article>
-      </div>
+      <article class="vcard">
+        <header><span class="vnum">03</span><div><h4>Vívelo</h4><p>¿Esto es para mí?</p></div></header>
+        <ul class="vacts">
+          <li><div><strong>Quiz "¿Tienes perfil de médico?"</strong><em>"Descubre en 2 minutos si Medicina es tu vocación."</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-lp">Landing C</i><i class="t-tt">TikTok</i></span></li>
+          <li><div><strong>Evento Médico por un día</strong><em>"Ponte la bata por un día: talleres en la Clínica Corpas."</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-ev">Evento</i></span></li>
+        </ul>
+      </article>
+
+      <article class="vcard">
+        <header><span class="vnum">04</span><div><h4>Cómo pagarlo</h4><p>¿Me alcanza?</p></div></header>
+        <ul class="vacts">
+          <li><div><strong>Precio y valor</strong><em>"Esto cuesta estudiar en la Corpas, y así lo puedes financiar."</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-pre">Pregrado</i></span></li>
+          <li><div><strong>Financiación</strong><em>Planes de pago y crédito directo con la universidad.</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-pre">Pregrado</i></span></li>
+          <li><div><strong>Entidades</strong><em>ICETEX, bancos y cajas de compensación aliadas.</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-pre">Pregrado</i><i class="t-pos">Posgrado</i></span></li>
+          <li class="star"><div><strong>Beca de excelencia ★</strong><em>Acción táctica: formulario de Meta + correo con toda la información. Demo abajo.</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-fm">Form Meta</i></span></li>
+        </ul>
+      </article>
+
+      <article class="vcard">
+        <header><span class="vnum">05</span><div><h4>Cómo entrar</h4><p>¿Qué tengo que hacer?</p></div></header>
+        <ul class="vacts">
+          <li><div><strong>Proceso de inscripción paso a paso</strong><em>"Inscríbete en 3 pasos."</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-pre">Pregrado</i></span></li>
+          <li><div><strong>Fechas y requisitos</strong><em>Calendario de admisión y documentos, sin letra pequeña.</em></div><span class="vtags"><i class="t-med">Medicina</i><i class="t-pre">Pregrado</i><i class="t-pos">Posgrado</i></span></li>
+          <li><div><strong>Resuelve tus dudas por WhatsApp</strong><em>"¿Dudas sobre qué estudiar? Escríbenos y te respondemos al instante."</em></div><span class="vtags"><i class="t-wa">Campaña W</i></span></li>
+        </ul>
+      </article>
     </div>
+    <p class="vnote">El destino de cada pieza (landing A, B o C, WhatsApp, formulario de Meta o evento) se define en la siguiente etapa. Las etiquetas de arriba marcan solo los que ya están decididos.</p>
 
     <div class="opt-rules">
       <div class="opt-rule"><b>Regla semanal</b><p>Una pieza que gasta 2 veces el CPL meta sin traer un lead se pausa.</p></div>
       <div class="opt-rule"><b>Cada 2 semanas</b><p>Se reemplaza el 20% de las piezas de peor desempeño con variantes de la ganadora.</p></div>
-      <div class="opt-rule"><b>Mover presupuesto</b><p>El dinero pasa al eje con mejor CPL solo si su conversión no cae.</p></div>
+      <div class="opt-rule"><b>Mover presupuesto</b><p>El dinero pasa a la vertical con mejor CPL solo si su conversión no cae.</p></div>
+    </div>
+  </div>
+
+  <!-- BECA DE EXCELENCIA -->
+  <div class="block reveal" id="beca">
+    <div class="sub-head"><span class="tag">Acción táctica · Beca de excelencia · demo en vivo</span><h3>El anuncio capta el lead; el correo explica la beca</h3><p>Anuncio genérico con formulario instantáneo de Meta: el aspirante deja sus datos sin salir de Instagram o Facebook. Toda la información legal de la beca y cómo aplicar le llega de inmediato por correo. Se financia con los $200M de Medicina. Toca "Registrarte" en el celular para recorrerla.</p></div>
+    <div class="wa-demo">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="ig-feed" id="bkFeed">
+            <div class="ig-top">Instagram <span>Publicidad</span></div>
+            <div class="ig-post-h"><div class="av">JNC</div><div><strong>juanncorpas</strong><span>Publicidad</span></div></div>
+            <div class="ig-media bk-media">
+              <span class="bubble bk-bubble">★ Beca de excelencia</span>
+              <h4>Tu esfuerzo puede abrirte las puertas de Medicina.</h4>
+              <p>Conoce la Beca de excelencia de la Corpas y cómo aplicar.</p>
+            </div>
+            <div class="ig-cta"><span>Formulario · Corpas</span><button type="button" id="bkOpen" class="bk-btn">Registrarte</button></div>
+            <div class="ig-copy"><b>juanncorpas</b> Déjanos tus datos y te enviamos a tu correo toda la información de la beca.</div>
+          </div>
+
+          <div class="lf" id="bkForm">
+            <div class="lf-top"><button type="button" class="lf-x" id="bkClose">✕</button><span>Formulario · Corpas</span></div>
+            <div class="lf-prog"><i id="bkProg"></i></div>
+            <div class="lf-body" id="bkBody"></div>
+          </div>
+
+          <div class="mail" id="bkMail">
+            <div class="mail-top">‹ Recibidos</div>
+            <div class="mail-head">
+              <div class="av">JNC</div>
+              <div><strong>Admisiones Corpas</strong><span>para mí · ahora</span></div>
+            </div>
+            <div class="mail-body">
+              <h5>Beca de excelencia: todo lo que necesitas para aplicar</h5>
+              <p>Hola <span class="bk-name">Laura</span>, gracias por tu interés en la Beca de excelencia de la Fundación Universitaria Juan N. Corpas.</p>
+              <div class="mail-box"><b>Qué incluye</b><span>[Beneficio de la beca, por confirmar con Corpas]</span></div>
+              <div class="mail-box"><b>Quién puede aplicar</b><span>[Requisitos académicos y puntaje, por confirmar]</span></div>
+              <div class="mail-box"><b>Cómo aplicar</b><span>1. Inscríbete al programa · 2. Carga tus documentos · 3. Presenta tu postulación antes de la fecha límite</span></div>
+              <div class="mail-att">📎 Reglamento de la beca.pdf</div>
+              <span class="mail-cta">Iniciar mi postulación</span>
+              <span class="mail-cta ghost">Tengo dudas: hablar por WhatsApp</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wa-side">
+        <h4>Lo que pasa detrás</h4>
+        <p>El formulario es corto a propósito: el objetivo del anuncio es captar el lead. Las condiciones, requisitos y reglamento van completos en el correo.</p>
+        <ol class="wa-steps" id="bkSteps">
+          <li data-s="1"><b>1</b><div><strong>Anuncio en Meta</strong><span>Mensaje genérico de beca, con el botón "Registrarte".</span></div></li>
+          <li data-s="2"><b>2</b><div><strong>Formulario instantáneo</strong><span>Nombre, correo y celular ya precargados por Meta. Solo se agrega el programa de interés.</span></div></li>
+          <li data-s="3"><b>3</b><div><strong>Correo inmediato</strong><span>Información legal de la beca, requisitos, reglamento en PDF y botón para postularse.</span></div></li>
+          <li data-s="4"><b>4</b><div><strong>Seguimiento</strong><span>Día 2: historia de un becado. Día 5: recordatorio de la fecha límite. Quien hace clic en WhatsApp o en postularse pasa al agente de IA.</span></div></li>
+          <li data-s="5"><b>5</b><div><strong>Postulación → matrícula</strong><span>El lead entra al CRM con la etiqueta "Beca" para medirlo aparte.</span></div></li>
+        </ol>
+        <div class="wa-kpis">
+          <div><span>Presupuesto</span><strong>De los $200M</strong></div>
+          <div><span>Captación</span><strong>CPL form</strong></div>
+          <div><span>Correo</span><strong>% apertura · % clic</strong></div>
+          <div><span>Resultado</span><strong>Postulaciones</strong></div>
+        </div>
+        <button type="button" class="wa-restart" id="bkRestart">↺ Reiniciar la demo de la beca</button>
+      </div>
     </div>
   </div>
 
@@ -1297,59 +1434,55 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
 
 <div id="ch-03">
 <section class="section-light">
-  <div class="chapter-head"><div class="num">03</div><div class="head-copy"><h2>Distribución de presupuesto</h2><p>$250M para programas (80% Medicina), $16M de branding y $28,3M de tecnología: agente de voz, agente de WhatsApp y landings.</p></div></div>
+  <div class="chapter-head"><div class="num">03</div><div class="head-copy"><h2>Distribución de presupuesto</h2><p>Tres escenarios según la meta de Medicina: 150, 100 o 75 matrículas. Branding, agente de WhatsApp y landings se mantienen fijos en los tres.</p></div></div>
 
   <div class="block reveal">
-    <div class="sub-head"><span class="tag">Resumen</span><h3>Los tres bloques del presupuesto</h3></div>
+    <div class="sub-head"><span class="tag">Tres escenarios</span><h3>Cuánto cuesta cada meta de Medicina</h3><p>El CPL y la conversión por campaña son los mismos en los tres escenarios. Lo único que cambia es la inversión en Medicina y, con ella, los leads, los minutos del agente de voz y las matrículas.</p></div>
+    <div class="scen-switch" id="scenSwitch">
+      <button type="button" class="is-active" data-s="s1"><small>Escenario 1</small><strong>150 matrículas</strong><span>Medicina · $294,3M total</span></button>
+      <button type="button" data-s="s2"><small>Escenario 2</small><strong>100 matrículas</strong><span>Medicina · $223,8M total</span></button>
+      <button type="button" data-s="s3"><small>Escenario 3</small><strong>75 matrículas</strong><span>Medicina · $187,6M total</span></button>
+    </div>
+    <div class="signal-table-wrap" style="margin-top:14px;">
+      <table class="signal-table on-light scen-compare">
+        <thead><tr><th></th><th>Escenario 1</th><th>Escenario 2</th><th>Escenario 3</th></tr></thead>
+        <tbody>
+          <tr><td>Inversión Medicina</td><td>$200.000.000</td><td>$133.880.000</td><td>$100.000.000</td></tr>
+          <tr><td>Matrículas Medicina (meta 150)</td><td>150 · 100%</td><td>100 · 67%</td><td>75 · 50%</td></tr>
+          <tr><td>Programas (pauta de captación)</td><td>$250.000.000</td><td>$183.880.000</td><td>$150.000.000</td></tr>
+          <tr><td>Leads totales</td><td>6.758</td><td>5.105</td><td>4.258</td></tr>
+          <tr><td>Matrículas totales</td><td>176</td><td>126</td><td>101</td></tr>
+          <tr><td>CPL blended</td><td>$36.994</td><td>$36.020</td><td>$35.228</td></tr>
+          <tr class="total-row"><td>Inversión total</td><td>$294.347.500</td><td>$223.764.400</td><td>$187.597.500</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="block reveal">
+    <div class="sub-head"><span class="tag">Resumen · <span class="scen-name">Escenario 1</span></span><h3>Los tres bloques del presupuesto</h3></div>
     <div class="universe-grid four">
-      <article class="universe-card accent"><span class="lbl">Programas · pauta de captación</span><div class="big">$250M</div><p class="d">80% Medicina · 8% pregrado general · 10% posgrado general · 2% WhatsApp</p></article>
+      <article class="universe-card accent"><span class="lbl">Programas · pauta de captación</span><div class="big" id="rProg"></div><p class="d" id="rProgD"></p></article>
       <article class="universe-card"><span class="lbl">Branding</span><div class="big">$16M</div><p class="d">$8M pregrado + $8M posgrado. Incluye TikTok hacia la landing del quiz.</p></article>
-      <article class="universe-card"><span class="lbl">Tecnología</span><div class="big">$28,3M</div>
+      <article class="universe-card"><span class="lbl">Tecnología</span><div class="big" id="rTec"></div>
         <ul class="tech-list">
-          <li><span>Agente de voz IA</span><b>$17.347.500</b></li>
+          <li><span>Agente de voz IA</span><b id="rVoz"></b></li>
           <li><span>Agente de WhatsApp</span><b>$9.000.000</b></li>
           <li><span>Landings (3 variantes)</span><b>$2.000.000</b></li>
         </ul>
       </article>
     </div>
-    <div class="total-strip"><span>Inversión total</span><strong>$294.347.500</strong><small>Meta: 176 matrículas · 6.758 leads · CPL $36.994</small></div>
+    <div class="total-strip"><span>Inversión total</span><strong id="rTotal"></strong><small id="rTotalD"></small></div>
   </div>
 
   <div class="block reveal">
-    <div class="sub-head"><span class="tag">Por campaña</span><h3>Medicina 80% · el resto del portafolio 20%</h3><p>El 80/20 se calcula sobre los $250M de programas. Branding y tecnología van aparte.</p></div>
-    <div class="camp-bar">
-      <div style="flex:80;background:var(--yellow);color:var(--ink)">Medicina · 80%<small>$200.000.000</small></div>
-      <div style="flex:8;background:var(--ink);color:#fff">8%<small>Pregrado</small></div>
-      <div style="flex:10;background:#3a3a3a;color:#fff">10%<small>Posgrado</small></div>
-      <div style="flex:2;background:#25d366;color:#053d1c;padding:0 4px;align-items:center">W</div>
-    </div>
-    <div class="camp-card-grid four">
-      <article class="camp-card accent">
-        <span class="lbl">Pregrado Medicina</span>
-        <div class="big">$200M</div><span class="pct">80% · test de landings A/B/C</span>
-        <div class="camp-stats"><div><span>Leads</span><strong>5.000</strong></div><div><span>CPL</span><strong>$40.000</strong></div><div><span>Matrículas</span><strong>150</strong></div><div><span>Conversión</span><strong>3,00%</strong></div></div>
-        <p class="note">2026-2: 2.193 leads CRM, CPL $69.877, 2,1% de conversión.</p>
-      </article>
-      <article class="camp-card">
-        <span class="lbl">Campaña general pregrados</span>
-        <div class="big">$20M</div><span class="pct">8% · Precio y valor + Aplicación y salida</span>
-        <div class="camp-stats"><div><span>Leads</span><strong>800</strong></div><div><span>CPL</span><strong>$25.000</strong></div><div><span>Matrículas</span><strong>12</strong></div><div><span>Conversión</span><strong>1,50%</strong></div></div>
-      </article>
-      <article class="camp-card">
-        <span class="lbl">Campaña general posgrados</span>
-        <div class="big">$25M</div><span class="pct">10% · Aplicación y salida</span>
-        <div class="camp-stats"><div><span>Leads</span><strong>625</strong></div><div><span>CPL</span><strong>$40.000</strong></div><div><span>Matrículas</span><strong>9</strong></div><div><span>Conversión</span><strong>1,44%</strong></div></div>
-      </article>
-      <article class="camp-card">
-        <span class="lbl">Campaña general WhatsApp</span>
-        <div class="big">$5M</div><span class="pct">2% · Meta → bot de WhatsApp</span>
-        <div class="camp-stats"><div><span>Leads</span><strong>333</strong></div><div><span>CPL</span><strong>$15.000</strong></div><div><span>Matrículas</span><strong>5</strong></div><div><span>Conversión</span><strong>1,50%</strong></div></div>
-      </article>
-    </div>
+    <div class="sub-head"><span class="tag">Por campaña · <span class="scen-name">Escenario 1</span></span><h3 id="campH"></h3><p id="campP"></p></div>
+    <div class="camp-bar" id="campBar"></div>
+    <div class="camp-card-grid four" id="campCards"></div>
   </div>
 
   <div class="block reveal">
-    <div class="sub-head"><span class="tag">Por mes</span><h3>Noviembre y diciembre concentran la inversión: los meses pico de admisión</h3><p>Estimado con la curva de la propuesta anterior (oct medio, nov-dic pico, ene medio-alto), a validar con el corte real. El agente de voz sigue el flujo de leads; el agente de WhatsApp se reparte igual en los cuatro meses; las landings se pagan en octubre, antes de salir al aire.</p></div>
+    <div class="sub-head"><span class="tag">Por mes · <span class="scen-name">Escenario 1</span></span><h3>Noviembre y diciembre concentran la inversión: los meses pico de admisión</h3><p>Estimado con la curva de la propuesta anterior (oct medio, nov-dic pico, ene medio-alto), a validar con el corte real. El agente de voz sigue el flujo de leads; el agente de WhatsApp se reparte igual en los cuatro meses; las landings se pagan en octubre, antes de salir al aire.</p></div>
     <div class="chart-shell">
       <div class="chart-toolbar">
         <p>Inversión mensual · estimado</p>
@@ -1358,38 +1491,27 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
           <span class="legend-item"><i class="legend-swatch" style="background:var(--blue)"></i>Tecnología (voz + WhatsApp + landings)</span>
         </div>
       </div>
-      <div class="monthly-chart">
-        <div class="bar-group"><div class="bar-pair"><div class="mini-bar pauta" style="height:66%" title="Pauta $50.738.417"></div><div class="mini-bar ia" style="height:10%" title="Tecnología $7.586.058"></div></div><div class="bar-label"><strong>Octubre</strong><span>medio</span></div></div>
-        <div class="bar-group"><div class="bar-pair"><div class="mini-bar pauta" style="height:100%" title="Pauta $77.170.035"></div><div class="mini-bar ia" style="height:9%" title="Tecnología $7.254.087"></div></div><div class="bar-label"><strong>Noviembre</strong><span>pico</span></div></div>
-        <div class="bar-group"><div class="bar-pair"><div class="mini-bar pauta" style="height:100%" title="Pauta $77.205.448"></div><div class="mini-bar ia" style="height:9%" title="Tecnología $7.254.087"></div></div><div class="bar-label"><strong>Diciembre</strong><span>pico</span></div></div>
-        <div class="bar-group"><div class="bar-pair"><div class="mini-bar pauta" style="height:79%" title="Pauta $60.886.100"></div><div class="mini-bar ia" style="height:8%" title="Tecnología $6.253.268"></div></div><div class="bar-label"><strong>Enero</strong><span>medio-alto</span></div></div>
-      </div>
-      <p class="chart-foot">Total del periodo: $294.347.500 · $266.000.000 pauta + $28.347.500 tecnología.</p>
+      <div class="monthly-chart" id="monthChart"></div>
+      <p class="chart-foot" id="monthFoot"></p>
     </div>
     <div class="signal-table-wrap" style="margin-top:14px;">
       <table class="signal-table on-light">
         <thead><tr><th>Mes</th><th>Pauta</th><th>Agente de voz</th><th>Agente WhatsApp</th><th>Landings</th><th>Total</th></tr></thead>
-        <tbody>
-          <tr><td>Octubre</td><td>$50.738.417</td><td>$3.336.058</td><td>$2.250.000</td><td>$2.000.000</td><td>$58.324.475</td></tr>
-          <tr><td>Noviembre</td><td>$77.170.035</td><td>$5.004.087</td><td>$2.250.000</td><td>—</td><td>$84.424.122</td></tr>
-          <tr><td>Diciembre</td><td>$77.205.448</td><td>$5.004.087</td><td>$2.250.000</td><td>—</td><td>$84.459.535</td></tr>
-          <tr><td>Enero</td><td>$60.886.100</td><td>$4.003.268</td><td>$2.250.000</td><td>—</td><td>$67.139.368</td></tr>
-          <tr class="total-row"><td>Total</td><td>$266.000.000</td><td>$17.347.500</td><td>$9.000.000</td><td>$2.000.000</td><td>$294.347.500</td></tr>
-        </tbody>
+        <tbody id="monthBody"></tbody>
       </table>
     </div>
   </div>
 
   <div class="block reveal">
-    <div class="sub-head"><span class="tag">Por medio</span><h3>Google sigue siendo el motor; Meta sube por el test y por WhatsApp</h3><p>Medicina va 60/40 Google/Meta porque dos de las tres landings (video y quiz) se alimentan de formatos nativos de Meta. Pregrado general se mantiene 70/30 hacia Google, posgrado 70/30 hacia Meta y la campaña W va 100% en Meta.</p></div>
+    <div class="sub-head"><span class="tag">Por medio · <span class="scen-name">Escenario 1</span></span><h3>Google sigue siendo el motor; Meta sube por el test y por WhatsApp</h3><p>Medicina va 60/40 Google/Meta porque dos de las tres landings (video y quiz) se alimentan de formatos nativos de Meta. Pregrado general se mantiene 70/30 hacia Google, posgrado 70/30 hacia Meta y la campaña W va 100% en Meta. La proporción no cambia entre escenarios, solo el monto de Medicina.</p></div>
     <div class="channel-grid">
       <details class="channel-card">
         <summary>
-          <div class="channel-top"><div class="channel-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAMAAADDpiTIAAABKVBMVEX///88i9n6vAQ0qFL6/P5Bjtrw9vz///5GkdthoeBLlNyz0vDt9PtuqeN/s+b3+v7d6/imyu6Svuq81/Lo8fvQ4/ZopeGfxuz7xCPL4PWKueiszu9RmN3E3PTY6PdXm97//fZCrl52mpf81WG74sXq9u14r+WKn4L+8tD96atPj8T934b/++7ArUb+8s7+9t1EjdD7yTZ2rzjnugzWuBJ6xo6Z06hPtGlbuXOMzp383Hv+7r/PsTRdk7T95Z/80VL7yDD96rFprT2CsDTKtxertCO+tRxDqUyesyhpv3+z37+ipWaNoH59nI+XonRxmJ7JrzvhtiBklqzasyitqFr83X794ZBrrjzO6tWSsS2m2bPZxWqpp19Ukb65q07801pZrUm82qjK6NJ4vYw2AAAYzklEQVR4nO2dC0PbSJaFjYMxNmCeCW8Im8B0ppnOBkJIumeTDgTy2Nf0zk5eM7udzf//EYssC6vsUqlKqqr78P1+geRblurUPeeq0RAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQSDK/NLm6vL6ylbvKKG3tbK+PLe7Nw99WUJ4ZnaXt+7NTulpdXrru2vQlyiEYmm7t19Q+jzdo+W709DXKnhmZnVrx6L4GbNH2/Ik4MPM3ELLofoDOutL0BcueGB69ahC9QdrYFk2hsSZX3Z58mtY2IW+BaE6m0f1qt9nf3sR+j6ESmze81D+hNmVGeh7EZxZ7Xgqf7oEZDNAi70Fj+VPl4C8COiw1vNc/oSdOejbEuyYXq+s+8x09qBvTbDgrs+X/whb8h7AzuJWuPLfsL8JfYOCkT2bdk8tevIQQMx2oLd/nn3ZCWBl3rf209Pahr5RQctezWN/e+Q1gJHVIqNPADriFkDHSrzy39C9C32/gsJ0iLM/E61V6FsWcizG2f4pyFYQDzO+Gr9OrEDftjBgPvjpj6wAzMwHPPyXFYCfGbD6T02tQ9+8AFr/qall6NufeBZB9n9DRA0CE1v/j9KS/jAo68D1n5qalfwQIKvQ5b9hXzzjYOxFaP+XswD9M0wsi0AHQKOIGAQCegN4i2wEQdiGrvstXbEHALCEYgOQItsAAIBPgFSkNxydZeiaK8zKSyAyaxEdgDbISyAyABYgMxIdjQqGI0CVrhwIRgTLEVAecYdEBL4HpEG6QtHAtgNMkX1gNMJGwCsjE+UisYboDDDPvowYjgOaJtAoch4YBUxNABWRglFA+wAQKRgFrDuAhJa0BMITNwfuyBH0r8OfGZRnALfI3IDQoDwEHNKB/n24Mx1tEFBFJCoUll3oApexIwOkgoLOBzCGmMRDsgZd3nJm5dMCAUG+BeyzBf0jMeb4j9DVtaAlxoBg/B26uFbIaVAoXv8JurZ2SFQsDO1f/wBdWjs6YgwIwsfmv0CX1hLxiIfguHkKXVhbunIaFIAHTSJbgCk5DQrBD83mv0LX1RoxBvjnSbP5T9B1tUdOg3zzqNlsUjgGypAvC/nl/kaz+Rt0UV2QmIhffrx5ANDZAyZITMQnj2/qT2gPmCAxEZ88SBYAkXPADImJ+OOnpP7N/4IuqRsSE/FG+0l/AVASAQkSE/HFy379yRwEZ4gxwBOJBLzhz9AFdUaMAX74uV9/Yiqwj0hBHzxO69/8b+hyuiNS0AevBguA1jFAikjB+vwyqH/z36CrWYFZkYJ1af+aLYB/h65mFaQrWJePWf0pNYNziBSsx/EG8QUgXcF6/NwkvgBECtbicZP8AhApWIdX9BeAfF62Bq+bDBaAxIUrc38jvwBIysAEkYJV+ZivPzU/SA4xiFbjWKl/8z+g61gZkYLVeKAuAIq9gAEiBavwg1p/it3ADJGCVXgysgAI+gFuESnozqOR+hN0BA0RKeiMKgETyHkC84gUdOXH0fo3m/8MXcU6iBR04/F4/anlAlTuQf+ixPhdswDIHgX2kSHCLvykqT/hk6AEGSLsQHtUAvb5X+ga1kPGxtjzUlf/5l+hS1gP+cS8NeMSMIVaOHCEHvTvSoaf9fVv/id0CWsi35OxQycBGewC5XsytrwqWgB/ga5gXWSCqA2/FNW/eYr4k4FWyARRC4ZRoHFInwUmyMyIcj4W15/8JkAmiJZzXCAB+1DuCKfIzIgyiiRgCvGTgCn5mEQZhRIwha4zOEM+JmGmUAKmULaFDZCZESZem+vP4R0g4wMNFDUBOL0DRAoaMEnAFPo6QGZGFHNcWv8mme9GGZCgUBEPyutPOR90iwSF9Gh9YKOQ7wdMSVCoCK0PbAza1tAUCQrpGIsC6SFuDOsjQSEN5RJwAHVfUIIEhcb5m2X9OZwGSlBonJImQB4GSlCCQmPookAFEM8HpEhQSMVKAnJ6BEhQSEEfBSqCxS5AgkJ59FGgQsh7A6fEHaZgLQEHcGgJiTssh9kHpoHq1FAFcYdlOEjAAX9l0BEQd9gtJT4wHRS/HzOGBIVSiqNAxZzS94aJO2yAKQpUzD+gq+cDcYcllPvAtHA4DZKPyzZKokAGyEeFE8QdVkECZrCQguIOc5eAGb+RHhw5QNxhFSRgBvmscMKku8NKo0AGNjhIwQl3h7k2AVQIf0FgyGS7wzQjoV3g0BWcaHeYTRTIBIuu4CS7w2yiQEY4hAQm2B3m5APTwkIKTq47zMkHpodDVHBi3WGWUSAz/wNdPQ9MqDusngTMYOERn8wx0tZRIDMckmITOUa6ehNAhYc7DLoaADhEgcwwGBs0ie6wKj4wPTzcYZMmBd2iQGbEHUYQxyiQGXGHkcOPBMxg4Q6brKBQZR+YHhbusEkKCvmSgBksWgKT5A6r4QPTw8IdNjljpP1JwAwW7rCJCQpViwKZYeEOmxQpWDEKZIaFO2wypGDVKJAZFu6wyQgK1faB6WHhDpuEoNAPYeovUpAK3iVgBgspyD8oVCcKVAIHdxj7oJDfJoAKC3cY96BQzSiQGRZSkHdQqG4UyAwLdxjvoFAgCZjBwh3GOShUPwpk5lSkIGp8+sD0SFAINV6iQGY4uMPYSsGQEjCDxSR5rlLQUxTIDIugEE8p6NsHpkekIFq8RYHMsBgjzVEK+veB6WERFGI4MyK8BMxg4Q7jJwW9RoHMcGgJsJsZEUMCZrBwh3GbGeE5CmSGhTuM18yIOBIwg4U7jNfMiGA+MD0s3GGcZkbEkoC3cHCHMZoZESIKZIaFO4yPFAwSBTIjUhARYaJAZli0BLhIwcA+MD0s3GE8pGCoKJAZFu4wHlIwsgTMYOEO4yAFA0aBzIgUREHMJoAKC3cY/ZkRQaNAZji4w8iPDwwbBTLDQgpSHx8IIgEzWLjDaI8PDB0FMsPCHdahHBSK5wPTw2KMNOXxgRGiQGY4BIUIjw+Ek4AZLMZI05WCUaJAZjiMkSYrBeP6wPSwcIdRHR8YKQpkhoU7jKYUjO4D08JijDTJmRHQEjCDhTuMohSMGAUyw8EdRlAKwkvAjD9zaAnQmxkRNQpkhkVQiJoUxCABM1i4w6hJQSAfmB4W7jBak+RxSMBbOLjDSEnB+FEgMyzcYZQmyQNEgcxwcIcRGh8IEQUyw8IdRkcKgvrA9LAIClEZHwgTBTLDwh1GZXwgKgmYwcIdRmN8IFgUyAwHdxiJ8YF4mgAqLNxhFGZGAEaBzHBwh83inxkBGQUyw8Idhn9mBEIJmMHCHYZdCsJGgcywcIchl4JYfGB6WIyRxi0F0fjA9HBwh6GWglglYAaLMdKYpSCCKJAZDu4wxOMDMfnA9IgUDAqKKJAZFu4wrOMDkfnA9HBwhyEdH4hbAmawCArhHB+IXAJmcHCHoRwfiM8HpoeFOwyjFEQUBTLDwR2GUAril4AZLIJC+KQgSh+YHhZSENvMCBISMIODOwyZFMQWBTLDwh2GSwqiiwKZ4eAOQzUzgooEzGDREsA0PhCxD0wPhzHSiMYHYowCmWERFMIzSZ6QBMxg4Q7DIgXBR0JXgYM7DMnMCOw+MD0s3GE4xgeijQKZ4eAOQyEF8UaBzIgU9AQ5CZjBISiEQApijgKZYREUAh8fSMMHpoeFFIQeH0jEB6aHQ1cQWArSlIAZLMYHwkpB9FEgMxwMoqDjA+n4wPSwMIhCjg8k2ARQ4WAQBZwkT8oHpoWFQRRMCtLygelhYRCFkoKkJWAGh6wgkBSk5gPTsrECXT0fwEySJxMFMvFocR+6eh4AkYLUJWCfJ+3GXejq+QBCCpKXgAk/3dxID7p6Pog/PhDpSGg3HiR3sjYLXT0PRB8fyEECNpvH/XtZh66eD2KPDyQWBdLzMb2XxR3o6nkg8vhAqj4whV/bg7tZha6eD+LOjCDrA8vz+vZ2FqCr54GoMyPoRYE0vBrezx509XwQc2YEYR/YkMe5G9qCrp4P4o0PJBkFGuXn/B3NixR0gLYPbMDGsXJPy9DV80EsKUg0CqTyUr2naQ4tgUhSkEsTQGUXuno+iCMFWUjAn8ZuS6SgJXSjQDkejN/XEgeDaAQpSDkKNORYc2ciBa1g4QP7qLuzmS509TwQfHwgDwl4X3tv29DV80Ho8YHEo0Apr/X3Nt2Brp4HAk+SZyEBXxXd3SZ09XwQdmYEga8ClfO48PaOoKvngaBSkH4UqDnSBFBZ4yAFA44PZCEBN3QSMINFSiDc+EAWEvCl6Q4XWUjBUEEhFhJwrAmgMgddPR+EmhnBIgr0S8lNspCCYcYHspCAmiaACougUBgpyCIKVCwBMzgEhYKMD2QhAX8sv08WQaEAUpBFFKigCaDCIijkXwqykIAFTQAVFkEh7zMjWEyDKGwCqIgU1MBCAv5gebP3oKvnAc9SkIUENDQBVFgEhfxKQQ4S0NgEUOEgBb2OD2QhAY1NABUWQSGP4wNZSMCSJoAKCynob3yg3TSI06fXV+8uL09OLm74dHJy+eXq+s3TwGW1p6wJoMAiKORNCpZKwNPrd5cXb+/o+fbpyxWCZfC72z2zmBnha3ygUQI+vbr8VlD6PBdfrk9j1VpLeRNAhUNQyNP4wGIJuHF9WfS/1z4LvryJWHEViyaACgsp6Gd8YIEEPL365FD8AW9PruMWfoBVE0CFRVDIx/hA/UDA6xP36g/WwCXAc+CR+32LFEzRScDTLy5Pfs0aeBd5P2DZBFBhMTOivhQcl4BPK//5c5xEfQzYNgEURAomjA0EfFPhza/lW7zdgHUTQEVmRjTGpkG8ufBU/phLwKEJoMIhKFRTCqoDAb08/JUlEOVF4NAEUGExM6KeFMxLwNNLz+VPuAh/SPirSxNAhUVQqI4UzEvAq3o7/0IuQysCpyaACouZETXGB+aiQKe+9n7jvL0KWn/HJoAKi5kR1ccHDgcCvgtW/oRPIR8Crk0AFQ5BocrjA28l4KnPvb+OgA+Bv9WqP4+ZEVWlYCYBrwO9/fOcBHoIVGgCqHCQghVnRmQDAb+EL/8Nb8MowgpNABUWMyOqjQ9Mp0Gc2nT7vfAuQP2dfGB6WEjBKuMD05nwT6PV/+Y14D98UqkJoMJjZoT7facS8E2E1/+Qb743AqVhcBtYBIXcxwf2JeB1zPLf8NbzuWDVJoAKBynoPD6w7wO7ilz/mxXgtT+knQjrDouZEa5SMJGAYU9/CvC4Amo0AVQ4BIUcpWAiAS8h6n/njr8zoRpNABUWMyOcpGD7SXMj3OF/pBVQyQemh0VQyEUKPgp/+ht+BdRrAiiwmBnhIAXvb8Q7/tHhZR9Q0Qemh0VQyFoKtn9/GlX+j+PhWLh2E0CFxcwIWyn4cgO4/j7OAyr7wPSwCArZzoz47RK4/jcroO6ZoIcmgAqHoJDl+MBD0Pf/gIuaC2D8s3A1YREUshof2H4PXfw+l7Xq76UJoMJCCtqMD/wKXfoBtcSgnyaAAougkMUk+cMD6Mpn1NgIemoCqLAICpWPDzyDrvst3yrbAzxLwAwOMyNKxwd+gC57jsrbAKuJsO6wCAqVSEE8L4CEiieCHpsAKhMgBfG8ABIqngZ48IHpYREUMs6M+A5d8hEqvQS8NgFUWASFDFKwfQ5d8VEqNAUqh8EtYPFxWcPMiGfQ9R7jm/sC8NwEUGERFCqUgrh2gCnOYQFvPjA9HIJChVLwBXS1NTjvA735wPSwkIIFMyMOoYutxXEfWCsMbgOLoJBeCuJoAo3h9gjw6APTw0IKag2in6ErXYDTI8B5Iqw7LKSgZmwMki6wBoemUKAmgAoHKagxBjyErnMhDo+A2mFwG1hIwXGP+HPoOhdjvQvw7gPTw0EKjh0IY90BJHyxXQDBmgAqLGZGjAoBXF0glbeW9Q/gA9PDQQqOnAXgPAPIsHSHBWwCqHAICrXUEbIYDwGH2HUEgvjA9HCYGaHkxe8j7ALksVGCgZsAKgyCQt18UxCLE7gIm21g4CaACoeZEflvSSDWgH0stoHBfGB6GMyMyB0G4d4CJpQbQ4I3AVQYBIVaw64wPiPIKKWngQF9YHoYBIWGxhB0TrAxyt4BIX1gehhIwdvTQMyngBklOiCoD0wPg5kR2TsA/xugzBoWqQmgQj8olH1IALsGSLgwLgDvYXAb6M+MGOgA/BogwdQSjNYEUCEfFJpNz4LwOgHymGJikSVgBn0pmLoCcPcBMgyHgRF8YHrIf1w27QfgF4EJnwrrH8UHpoX8zIj+JoDGFsBwEhAoDG4D9ZkRs8lNYAuEFlF0EhC5CaBCXQom7mAKpwAJRa6QSD4wPdSDQsnwUMxmsDwFu8DoTQAV4u6wZF4IjT3gnTsn+h1g9CaACvGg0EKj0YYurC16XxhAE0CFdlCoS0YE3KCrf1QfmBbiMyPmiZwDJugOg6P6wPTQDgrdRW8HHKJxBQUPg9tAOii0SuQgOEGjA4GaACqkg0LLZFSgzhJQ88vgvqAsBVewjoXQMHYQANcEUKH8cdkeCTdIypgxNEoY3AbCQaEFMudA4ydBID4wPXSlYKeBPBSW42JkAYD4wPTQDQrt010AQD4wPWSDQjsN6LLaM7IAgJsAKmQ/LjtLdgFEDIPbQDUo1CK0AJRuEBYJmEE1KER2AQD6wPQQDQrNEt0EgvrA9NCcGUF1AaBoAqjQDAp1aR4EAfvA9JCUgjskj4KhfWB6SAaFOoSaQcMFAO4D00NRCi4QagffdgMRNQEUKAaFehQNIQh8YHoISsEtQpawLB+MqgmgQi8otE7IFJplwxBKwIwl6Ho6M0diQFDKwBUMFga3gdzMiE1yuQBsTQAVclJwrUHmKPAb0iaACrGZEa0GjRFRCZdYmwAKxKTgfoNOOjh1hYOGwW2gNTMi+X4cFR14jVwCZpAKCi03aMwJTThF5wPTQ2pmRPIpeSL58LcIfWB6KAWF+sNiaewCkylh8GFwGwjNjNjvXzCNbsA7zE0AFTozI9JPh9E4DH6DXwLeQiYolE6LpnEWiLsJoEJmZsTg03EUNgEXaMLgNhCRgp3B5VKYFPgFeRNAhcjMiJXB5VI4CXiKJwxuAw0pePsJcfz9oLdofWB6SMyM6N5eLn4heIIpDG4DhZkRw+9H458XfUWgCaBCQApu3l5sG/s74NtTAk0AFfwzI/IfD8b+DrhCGQUygz4otJK7WOxnQW/IPQAIzIxYyl8t8rOg/4OqYh2QB4XuKRf7AbrERs5JScAM5DMj5pSLxb0NfAhUwpqgDgrlt4AJmI+Dn5N8ADRwB4XWR64V8zbwO0j1PIB4ZsTszOjF4jUHv4eonR/wBoW2xq4V7yPgM0DlPIE2KNRaG79YrI+AF/Hr5g+sQaEVzbUifQQcHEavmkeQBoVa87qLxXke/DV2zfyCMyikewDcPAIwngXQPAPKgdEd1h2TACkYzwLISsAMjC2B7YJrbeObGXgWtVhBwLcP7BReK7qEAO0dYAq+L0veLb5YbEMDiTYBVLCdB46fAQ1Btg8kfAaYB5dFeKdgB5iCqi3M4QWQgOslsGm81jamlwB5BZCBSQmYXgAJiF4CpM+AVfCYxPcXy64VjUWcrAtABxaHaMugADKQnAhz2QCkzCDpCRQdAeVBsg34ELwoUdlDsQ3oWV3rIYYDwWeBCxIdDF2h8g1ACoK0MJMTgDzwR8JdjQtED/iR8HNWG4AB0P4wmw1gBnBfkNcGMGMa2CS86nKxoFLggLAL0MQi6IngstO1tiFXAJsTwFEgV8BoDqAMwBXAogWoZwZsBehNYEagXMLMDgBU5oFWQIX6N9owK4C4CbQMmBVQpf5AbwHW//+EGQAt4Lb/G9KOrwYZv/8zpqM3hubKL6qIyB+T4Kr/RojrEJrdrXOt32PaAyak/o3GXMRBovtL5ddjImJniOX5r57NaHMkF7QhMBfuxxIDZ5wMIGXMR9oKrkyXX0spcTYCzOXfGDFGSHVrvf6HfA4/Q+x8Ul7/Q8K/Bo5qP/4zgp8InN33damEmA+rB2dt7F/WBH0IHEyA+teyG3CQ3ELN3f8oAQ+FziZn9z/KYqgjgW6Nw58iDsPIgXO2zV8r7t4LUP7WijH+VZkA74GDr5Mk/rRsem8P9ay9f660H3peAi8m9+k/ZHrO61ZgYS/o1fpcAlL+AYvL3pbAkYPzsyLf/QRHDqT8eXZ97AVaPc9b/wIOn9VuEZ1/lfKPcLfuOKn9dW8HP6W0P9R6DJxN3rmfDfPb1R8DrZ459++fw68VdwNnH+TPX8jSepUUaetozjL05ZfDr+8d3wUHZw8nXvaVsbe84GQX2NnaBal+SvvzM9tFcH4m731LFjdXOlaLYKc3F0zz29P+/OGFeRU8P3v2UIrvxvTe3Mq94kx5q9Nb3oy36bPg/ueHX1+cvX/+/Pz84ODOwcHB+fnz92cvvn74fihP/crM7+1ur/QWFjqd/W63u9/pLCz0VrZ391CVXhAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEIP4fHp2MTgOGFq0AAAAASUVORK5CYII=" alt="Google Ads" style="width:100%;height:100%;object-fit:contain;"></div><div class="channel-role">56,6%</div></div>
+          <div class="channel-top"><div class="channel-icon"><img src="data:image/png;base64,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" alt="Google Ads" style="width:100%;height:100%;object-fit:contain;"></div><div class="channel-role" id="gPct"></div></div>
           <div class="channel-name">Google Ads</div>
-          <div class="channel-val">$141,5M</div>
+          <div class="channel-val" id="gVal"></div>
           <div class="channel-numbers">
-            <div><span>Medicina 60%</span><strong>$120,0M</strong></div>
+            <div><span>Medicina 60%</span><strong id="gMed"></strong></div>
             <div><span>Pregrado gral. 70%</span><strong>$14,0M</strong></div>
             <div><span>Posgrado 30%</span><strong>$7,5M</strong></div>
             <div><span>Landing principal</span><strong>A · Formulario</strong></div>
@@ -1400,11 +1522,11 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
       </details>
       <details class="channel-card">
         <summary>
-          <div class="channel-top"><div class="channel-icon"><img src="data:image/png;base64,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" alt="Meta" style="width:100%;height:100%;object-fit:contain;"></div><div class="channel-role">43,4%</div></div>
+          <div class="channel-top"><div class="channel-icon"><img src="data:image/png;base64,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" alt="Meta" style="width:100%;height:100%;object-fit:contain;"></div><div class="channel-role" id="mPct"></div></div>
           <div class="channel-name">Meta</div>
-          <div class="channel-val">$108,5M</div>
+          <div class="channel-val" id="mVal"></div>
           <div class="channel-numbers">
-            <div><span>Medicina 40%</span><strong>$80,0M</strong></div>
+            <div><span>Medicina 40%</span><strong id="mMed"></strong></div>
             <div><span>Pregrado gral. 30%</span><strong>$6,0M</strong></div>
             <div><span>Posgrado 70%</span><strong>$17,5M</strong></div>
             <div><span>WhatsApp 100%</span><strong>$5,0M</strong></div>
@@ -1430,28 +1552,11 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
   </div>
 
   <div class="block reveal">
-    <div class="sub-head"><span class="tag">Tabla completa</span><h3>176 matrículas proyectadas con $294,3M de inversión total</h3><p>$250M de programas + $16M de branding + $28,3M de tecnología. CPL blended $36.994 y conversión de 2,60% sobre los programas.</p></div>
+    <div class="sub-head"><span class="tag">Tabla completa · <span class="scen-name">Escenario 1</span></span><h3 id="tablaH"></h3><p id="tablaP"></p></div>
     <div class="signal-table-wrap">
       <table class="signal-table on-light">
-        <thead><tr><th>Concepto</th><th>Modalidad</th><th>%</th><th>Presupuesto</th><th>Leads</th><th>CPL</th><th>Matrículas</th><th>% Conv.</th></tr></thead>
-        <tbody>
-          <tr class="group-row"><td colspan="8">Programas · pauta de captación</td></tr>
-          <tr><td><strong>Pregrado Medicina</strong></td><td>Pregrado</td><td>80%</td><td>$200.000.000</td><td>5.000</td><td>$40.000</td><td>150</td><td>3,00%</td></tr>
-          <tr><td>Campaña general pregrados</td><td>Pregrado</td><td>8%</td><td>$20.000.000</td><td>800</td><td>$25.000</td><td>12</td><td>1,50%</td></tr>
-          <tr><td>Campaña general posgrados</td><td>Posgrado</td><td>10%</td><td>$25.000.000</td><td>625</td><td>$40.000</td><td>9</td><td>1,44%</td></tr>
-          <tr><td>Campaña general WhatsApp</td><td>General</td><td>2%</td><td>$5.000.000</td><td>333</td><td>$15.000</td><td>5</td><td>1,50%</td></tr>
-          <tr class="subtotal-row"><td>Subtotal programas</td><td></td><td>100%</td><td>$250.000.000</td><td>6.758</td><td>$36.994</td><td>176</td><td>2,60%</td></tr>
-          <tr class="group-row"><td colspan="8">Branding</td></tr>
-          <tr><td>Campaña branding pregrados</td><td>Branding</td><td>50%</td><td>$8.000.000</td><td colspan="4">Incluye TikTok → quiz ($2,4M)</td></tr>
-          <tr><td>Campaña branding posgrados</td><td>Branding</td><td>50%</td><td>$8.000.000</td><td colspan="4">—</td></tr>
-          <tr class="subtotal-row"><td>Subtotal branding</td><td></td><td>100%</td><td>$16.000.000</td><td colspan="4"></td></tr>
-          <tr class="group-row"><td colspan="8">Tecnología</td></tr>
-          <tr><td>Agente de voz IA</td><td>Pregrado 13.050 min · Posgrado 1.406 min</td><td>—</td><td>$17.347.500</td><td colspan="4">14.456 minutos × $1.200</td></tr>
-          <tr><td>Agente de WhatsApp</td><td>Todas las campañas</td><td>—</td><td>$9.000.000</td><td colspan="4">Bot de la campaña W + botón de la página de gracias</td></tr>
-          <tr><td>Landings</td><td>Medicina</td><td>—</td><td>$2.000.000</td><td colspan="4">Variantes B (video) y C (quiz) + página de gracias con WhatsApp</td></tr>
-          <tr class="subtotal-row"><td>Subtotal tecnología</td><td></td><td></td><td>$28.347.500</td><td colspan="4"></td></tr>
-          <tr class="grand-row"><td>Inversión total</td><td></td><td></td><td>$294.347.500</td><td colspan="4">176 matrículas proyectadas</td></tr>
-        </tbody>
+        <thead><tr><th>Concepto</th><th>Modalidad</th><th>%</th><th>Presupuesto</th><th>Leads</th><th>CPL</th><th>Matrículas</th><th>Meta</th><th>% Conv.</th></tr></thead>
+        <tbody id="tablaBody"></tbody>
       </table>
     </div>
   </div>
@@ -1977,6 +2082,170 @@ function waTyping(body) {
     });
   });
   document.getElementById('waRestart').addEventListener('click', reset);
+  reset();
+})();
+
+// ---------- presupuesto: 3 escenarios ----------
+(function () {
+  const CAMPS = [
+    { name: 'Campaña general pregrados', short: 'Pregrado', mod: 'Pregrado', inv: 20000000, leads: 800, cpl: '$25.000', mat: 12, meta: 12, conv: '1,50%', pct: { s1: '8%', s2: '10,88%', s3: '13,33%' }, eje: 'Precio y valor + Aplicación y salida', color: 'var(--ink)', fg: '#fff' },
+    { name: 'Campaña general posgrados', short: 'Posgrado', mod: 'Posgrado', inv: 25000000, leads: 625, cpl: '$40.000', mat: 9, meta: 9, conv: '1,44%', pct: { s1: '10%', s2: '13,60%', s3: '16,67%' }, eje: 'Aplicación y salida', color: '#3a3a3a', fg: '#fff' },
+    { name: 'Campaña general WhatsApp', short: 'W', mod: 'General', inv: 5000000, leads: 333, cpl: '$15.000', mat: 5, meta: 5, conv: '1,50%', pct: { s1: '2%', s2: '2,72%', s3: '3,33%' }, eje: 'Meta → bot de WhatsApp', color: '#25d366', fg: '#053d1c' }
+  ];
+  const S = {
+    s1: { name: 'Escenario 1', medBig: '$200M', med: 200000000, medPct: '80%', medLeads: '5.000', medMat: 150, prog: '$250.000.000', progBig: '$250M', progD: '80% Medicina · 8% pregrado general · 10% posgrado general · 2% WhatsApp',
+          voz: '$17.347.500', vozMin: 'Pregrado 13.050 min · Posgrado 1.406 min', vozTot: '14.456 minutos × $1.200', tec: '$28.347.500', tecBig: '$28,3M', total: '$294.347.500',
+          leads: '6.758', mat: 176, cpl: '$36.994', conv: '2,60%',
+          months: [['Octubre', '$50.738.417', '$3.336.058', '$58.324.475'], ['Noviembre', '$77.170.035', '$5.004.087', '$84.424.122'], ['Diciembre', '$77.205.448', '$5.004.087', '$84.459.535'], ['Enero', '$60.886.100', '$4.003.268', '$67.139.368']],
+          pautaTot: '$266.000.000', bars: [[66, 10], [100, 9], [100, 9], [79, 8]],
+          g: ['$141,5M', '56,6%', '$120,0M'], m: ['$108,5M', '43,4%', '$80,0M'] },
+    s2: { name: 'Escenario 2', medBig: '$133,9M', med: 133880000, medPct: '72,81%', medLeads: '3.347', medMat: 100, prog: '$183.880.000', progBig: '$183,9M', progD: '72,8% Medicina · 10,9% pregrado general · 13,6% posgrado general · 2,7% WhatsApp',
+          voz: '$12.884.400', vozMin: 'Pregrado 9.331 min · Posgrado 1.406 min', vozTot: '10.737 minutos × $1.200', tec: '$23.884.400', tecBig: '$23,9M', total: '$223.764.400',
+          leads: '5.105', mat: 126, cpl: '$36.020', conv: '2,47%',
+          months: [['Octubre', '$38.126.296', '$2.477.769', '$44.854.065'], ['Noviembre', '$57.987.769', '$3.716.654', '$63.954.423'], ['Diciembre', '$58.014.380', '$3.716.654', '$63.981.034'], ['Enero', '$45.751.555', '$2.973.323', '$50.974.878']],
+          pautaTot: '$199.880.000', bars: [[66, 11], [100, 10], [100, 10], [79, 9]],
+          g: ['$101,8M', '55,4%', '$80,3M'], m: ['$82,1M', '44,6%', '$53,6M'] },
+    s3: { name: 'Escenario 3', medBig: '$100M', med: 100000000, medPct: '66,67%', medLeads: '2.500', medMat: 75, prog: '$150.000.000', progBig: '$150M', progD: '66,7% Medicina · 13,3% pregrado general · 16,7% posgrado general · 3,3% WhatsApp',
+          voz: '$10.597.500', vozMin: 'Pregrado 7.425 min · Posgrado 1.406 min', vozTot: '8.831 minutos × $1.200', tec: '$21.597.500', tecBig: '$21,6M', total: '$187.597.500',
+          leads: '4.258', mat: 101, cpl: '$35.228', conv: '2,37%',
+          months: [['Octubre', '$31.663.824', '$2.037.981', '$37.951.805'], ['Noviembre', '$48.158.743', '$3.056.971', '$53.465.714'], ['Diciembre', '$48.180.844', '$3.056.971', '$53.487.815'], ['Enero', '$37.996.589', '$2.445.577', '$42.692.166']],
+          pautaTot: '$166.000.000', bars: [[66, 12], [100, 11], [100, 11], [79, 10]],
+          g: ['$81,5M', '54,3%', '$60,0M'], m: ['$68,5M', '45,7%', '$40,0M'] }
+  };
+  const money = n => '$' + Math.round(n).toLocaleString('es-CO').replace(/,/g, '.');
+  const $ = id => document.getElementById(id);
+  const WA = '$2.250.000';
+
+  function render(key) {
+    const s = S[key];
+    const col = { s1: 1, s2: 2, s3: 3 }[key];
+    document.querySelectorAll('.scen-name').forEach(el => { el.textContent = s.name; });
+    document.querySelectorAll('.scen-compare tr').forEach(tr => {
+      Array.from(tr.children).forEach((c, i) => c.classList.toggle('scen-on', i === col));
+    });
+
+    $('rProg').textContent = s.progBig;
+    $('rProgD').textContent = s.progD;
+    $('rTec').textContent = s.tecBig;
+    $('rVoz').textContent = s.voz;
+    $('rTotal').textContent = s.total;
+    $('rTotalD').textContent = 'Meta: ' + s.mat + ' matrículas · ' + s.leads + ' leads · CPL ' + s.cpl;
+
+    const cumpl = Math.round(s.medMat / 150 * 100);
+    $('campH').textContent = 'Medicina ' + s.medPct + ' · ' + s.medMat + ' matrículas (' + cumpl + '% de la meta de 150)';
+    $('campP').textContent = 'El porcentaje se calcula sobre los ' + s.prog + ' de programas. Las otras tres campañas mantienen su monto en los tres escenarios; branding y tecnología van aparte.';
+    let bar = '<div style="flex:' + s.med / 1e6 + ';background:var(--yellow);color:var(--ink)">Medicina · ' + s.medPct + '<small>' + money(s.med) + '</small></div>';
+    CAMPS.forEach(c => {
+      bar += '<div style="flex:' + c.inv / 1e6 + ';background:' + c.color + ';color:' + c.fg + (c.short === 'W' ? ';padding:0 4px;align-items:center' : '') + '">' + (c.short === 'W' ? 'W' : c.pct[key] + '<small>' + c.short + '</small>') + '</div>';
+    });
+    $('campBar').innerHTML = bar;
+    const stats = (l, cpl, m, cv) => '<div class="camp-stats"><div><span>Leads</span><strong>' + l + '</strong></div><div><span>CPL</span><strong>' + cpl + '</strong></div><div><span>Matrículas</span><strong>' + m + '</strong></div><div><span>Conversión</span><strong>' + cv + '</strong></div></div>';
+    let cards = '<article class="camp-card accent"><span class="lbl">Pregrado Medicina</span><div class="big">' + s.medBig + '</div><span class="pct">' + s.medPct + ' · test de landings A/B/C</span>' +
+      stats(s.medLeads, '$40.000', s.medMat, '3,00%') + '<p class="note">Meta de 150 matrículas: ' + cumpl + '% de cumplimiento. 2026-2: 2.193 leads CRM, CPL $69.877, 2,1%.</p></article>';
+    CAMPS.forEach(c => {
+      cards += '<article class="camp-card"><span class="lbl">' + c.name + '</span><div class="big">$' + c.inv / 1e6 + 'M</div><span class="pct">' + c.pct[key] + ' · ' + c.eje + '</span>' + stats(c.leads.toLocaleString('es-CO'), c.cpl, c.mat, c.conv) + '</article>';
+    });
+    $('campCards').innerHTML = cards;
+
+    const labels = [['Octubre', 'medio'], ['Noviembre', 'pico'], ['Diciembre', 'pico'], ['Enero', 'medio-alto']];
+    $('monthChart').innerHTML = s.bars.map((b, i) =>
+      '<div class="bar-group"><div class="bar-pair"><div class="mini-bar pauta" style="height:' + b[0] + '%" title="Pauta ' + s.months[i][1] + '"></div><div class="mini-bar ia" style="height:' + b[1] + '%" title="Tecnología"></div></div><div class="bar-label"><strong>' + labels[i][0] + '</strong><span>' + labels[i][1] + '</span></div></div>').join('');
+    $('monthFoot').textContent = 'Total del periodo: ' + s.total + ' · ' + s.pautaTot + ' pauta + ' + s.tec + ' tecnología.';
+    $('monthBody').innerHTML = s.months.map((r, i) => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td>' + WA + '</td><td>' + (i === 0 ? '$2.000.000' : '—') + '</td><td>' + r[3] + '</td></tr>').join('') +
+      '<tr class="total-row"><td>Total</td><td>' + s.pautaTot + '</td><td>' + s.voz + '</td><td>$9.000.000</td><td>$2.000.000</td><td>' + s.total + '</td></tr>';
+
+    $('gVal').textContent = s.g[0]; $('gPct').textContent = s.g[1]; $('gMed').textContent = s.g[2];
+    $('mVal').textContent = s.m[0]; $('mPct').textContent = s.m[1]; $('mMed').textContent = s.m[2];
+
+    $('tablaH').textContent = s.mat + ' matrículas proyectadas con ' + s.total + ' de inversión total';
+    $('tablaP').textContent = s.prog + ' de programas + $16.000.000 de branding + ' + s.tec + ' de tecnología. CPL blended ' + s.cpl + ' y conversión de ' + s.conv + ' sobre los programas.';
+    let t = '<tr class="group-row"><td colspan="9">Programas · pauta de captación</td></tr>';
+    t += '<tr><td><strong>Pregrado Medicina</strong></td><td>Pregrado</td><td>' + s.medPct + '</td><td>' + money(s.med) + '</td><td>' + s.medLeads + '</td><td>$40.000</td><td>' + s.medMat + '</td><td>150</td><td>3,00%</td></tr>';
+    CAMPS.forEach(c => { t += '<tr><td>' + c.name + '</td><td>' + c.mod + '</td><td>' + c.pct[key] + '</td><td>' + money(c.inv) + '</td><td>' + c.leads.toLocaleString('es-CO') + '</td><td>' + c.cpl + '</td><td>' + c.mat + '</td><td>' + c.meta + '</td><td>' + c.conv + '</td></tr>'; });
+    t += '<tr class="subtotal-row"><td>Subtotal programas</td><td></td><td>100%</td><td>' + s.prog + '</td><td>' + s.leads + '</td><td>' + s.cpl + '</td><td>' + s.mat + '</td><td>176</td><td>' + s.conv + '</td></tr>';
+    t += '<tr class="group-row"><td colspan="9">Branding</td></tr>';
+    t += '<tr><td>Campaña branding pregrados</td><td>Branding</td><td>50%</td><td>$8.000.000</td><td colspan="5">Incluye TikTok → quiz ($2,4M)</td></tr>';
+    t += '<tr><td>Campaña branding posgrados</td><td>Branding</td><td>50%</td><td>$8.000.000</td><td colspan="5">—</td></tr>';
+    t += '<tr class="subtotal-row"><td>Subtotal branding</td><td></td><td>100%</td><td>$16.000.000</td><td colspan="5"></td></tr>';
+    t += '<tr class="group-row"><td colspan="9">Tecnología</td></tr>';
+    t += '<tr><td>Agente de voz IA</td><td>' + s.vozMin + '</td><td>—</td><td>' + s.voz + '</td><td colspan="5">' + s.vozTot + '</td></tr>';
+    t += '<tr><td>Agente de WhatsApp</td><td>Todas las campañas</td><td>—</td><td>$9.000.000</td><td colspan="5">Bot de la campaña W + botón de la página de gracias</td></tr>';
+    t += '<tr><td>Landings</td><td>Medicina</td><td>—</td><td>$2.000.000</td><td colspan="5">Variantes B (video) y C (quiz) + página de gracias con WhatsApp</td></tr>';
+    t += '<tr class="subtotal-row"><td>Subtotal tecnología</td><td></td><td></td><td>' + s.tec + '</td><td colspan="5"></td></tr>';
+    t += '<tr class="grand-row"><td>Inversión total</td><td></td><td></td><td>' + s.total + '</td><td colspan="5">' + s.mat + ' matrículas proyectadas</td></tr>';
+    $('tablaBody').innerHTML = t;
+  }
+
+  const btns = document.querySelectorAll('#scenSwitch button');
+  btns.forEach(b => b.addEventListener('click', () => {
+    btns.forEach(x => x.classList.remove('is-active'));
+    b.classList.add('is-active');
+    render(b.dataset.s);
+  }));
+  render('s1');
+})();
+
+// ---------- demo beca de excelencia ----------
+(function () {
+  const feed = document.getElementById('bkFeed');
+  const form = document.getElementById('bkForm');
+  const mail = document.getElementById('bkMail');
+  const body = document.getElementById('bkBody');
+  const prog = document.getElementById('bkProg');
+  const steps = document.querySelectorAll('#bkSteps li');
+  let name = 'Laura Gómez';
+
+  function setStep(n) {
+    steps.forEach(li => {
+      const s = +li.dataset.s;
+      li.classList.toggle('active', s === n);
+      li.classList.toggle('done', s < n);
+    });
+  }
+  function screen(i) {
+    prog.style.width = [34, 67, 100, 100][i] + '%';
+    const screens = [
+      '<div class="lf-cover">★ Beca de excelencia Corpas</div><h5>Recibe toda la información de la beca en tu correo</h5>' +
+        '<p>Déjanos tus datos y te enviamos los beneficios, requisitos, reglamento y cómo aplicar.</p><button type="button" class="lf-btn" data-next>Continuar</button>',
+      '<h5>Tus datos</h5><span class="lf-pre">Meta completó estos datos desde tu perfil</span>' +
+        '<label class="lf-field">Nombre completo<input name="n" value="Laura Gómez"></label>' +
+        '<label class="lf-field">Correo electrónico<input value="laura.gomez@correo.com"></label>' +
+        '<label class="lf-field">Número de teléfono<input value="+57 310 123 4567"></label>' +
+        '<label class="lf-field">¿Qué programa te interesa?<select><option>Medicina</option><option>Otro pregrado</option><option>Posgrado</option></select></label>' +
+        '<button type="button" class="lf-btn" data-next>Siguiente</button>',
+      '<h5>Política de privacidad</h5><p>La Fundación Universitaria Juan N. Corpas usará tus datos para enviarte información de la beca y contactarte por correo, llamada o WhatsApp, según su política de tratamiento de datos personales.</p>' +
+        '<label class="lf-check"><input type="checkbox" checked> Acepto la política de tratamiento de datos personales (Ley 1581).</label>' +
+        '<button type="button" class="lf-btn" data-next>Enviar</button>',
+      '<div class="ok">✓</div><h5>¡Listo, ' + name.split(' ')[0] + '!</h5><p>Te enviamos a tu correo toda la información de la Beca de excelencia y cómo aplicar.</p><button type="button" class="lf-btn" data-mail>Ver el correo</button>'
+    ];
+    body.className = 'lf-body' + (i === 3 ? ' lf-done' : '');
+    body.innerHTML = screens[i];
+    body.style.animation = 'none'; void body.offsetWidth; body.style.animation = '';
+    const next = body.querySelector('[data-next]');
+    if (next) next.addEventListener('click', () => {
+      const n = body.querySelector('input[name="n"]');
+      if (n && n.value.trim()) name = n.value.trim();
+      if (i === 1) setStep(2);
+      if (i === 2) setStep(3);
+      screen(i + 1);
+    });
+    const toMail = body.querySelector('[data-mail]');
+    if (toMail) toMail.addEventListener('click', () => {
+      form.classList.remove('on'); mail.classList.add('on');
+      mail.querySelector('.bk-name').textContent = name.split(' ')[0];
+      setStep(4);
+      setTimeout(() => setStep(5), 1800);
+    });
+  }
+  function reset() {
+    feed.classList.remove('off'); form.classList.remove('on'); mail.classList.remove('on');
+    name = 'Laura Gómez'; setStep(1);
+  }
+  document.getElementById('bkOpen').addEventListener('click', () => {
+    feed.classList.add('off'); form.classList.add('on'); setStep(2); screen(0);
+  });
+  document.getElementById('bkClose').addEventListener('click', reset);
+  document.getElementById('bkRestart').addEventListener('click', reset);
   reset();
 })();
 </script>
