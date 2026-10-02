@@ -288,7 +288,9 @@ async function loadData() {
       if (json.status !== 'ok') throw new Error(json.message || 'respuesta inválida');
       copys = json.copys;
     }
-    const angulos = PROPUESTA.angulos, piezas = PROPUESTA.piezas;
+    const angulos = PROPUESTA.angulos;
+    let piezas = PROPUESTA.piezas;
+    try { const p = await gviz('Piezas'); if (p.length && 'ID ángulo' in p[0]) piezas = p } catch (e) { /* copia fija */ }
     angulos.forEach(a => ANG[a['ID']] = a);
     piezas.forEach(p => (PZ[p['ID ángulo']] = PZ[p['ID ángulo']] || []).push(p));
 

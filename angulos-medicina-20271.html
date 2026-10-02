@@ -383,10 +383,25 @@ const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g,
 const num = v => parseInt(v, 10) || 0;
 const isTest = p => p['Testimonio real'] === 'Sí';
 
-function load() {
+const SHEET_ID = '15D_f3eiWxsgjkeGHd0JVeNwKhpRWq3B1VG89i8m_hU8';
+async function gvizPiezas() {
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&headers=1&sheet=Piezas';
+  const txt = await (await fetch(url)).text();
+  const j = JSON.parse(txt.substring(txt.indexOf('{'), txt.lastIndexOf('}') + 1));
+  const cols = j.table.cols.map(c => c.label.trim());
+  if (!cols.includes('ID ángulo') || !cols.includes('Cantidad')) throw new Error('Pestaña Piezas sin encabezados');
+  return j.table.rows.map(r => {
+    const o = {};
+    cols.forEach((h, i) => { const c = r.c[i]; o[h] = c ? String(c.f != null ? c.f : (c.v != null ? c.v : '')) : '' });
+    return o
+  }).filter(o => o['ID ángulo'])
+}
+
+async function load() {
   ANG = DATA.angulos;
   DATA.copys.forEach(c => COPY[c['ID']] = c);
   PZ = DATA.piezas;
+  try { const p = await gvizPiezas(); if (p.length) PZ = p } catch (e) { /* se usa la copia fija */ }
   CAMPS = [...new Set(ANG.map(a => a['Campaña']))];
   render()
 }
