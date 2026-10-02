@@ -274,15 +274,19 @@ async function gviz(sheet) {
 async function loadData() {
   try {
     let copys, angulos, piezas;
-    if (scriptReady()) {
+    // Lectura directa del Sheet (incluye las columnas Estado que escribe el Apps Script).
+    // Si falla, se intenta por el Apps Script.
+    try {
+      [copys, angulos, piezas] = await Promise.all([gviz('Copys'), gviz('Angulos'), gviz('Piezas')]);
+    } catch (e) {
+      if (!scriptReady()) throw e;
       const ctl = new AbortController();
       const tmo = setTimeout(() => ctl.abort(), 30000);
-      const json = await (await fetch(SURL + '?action=getCopys', { signal: ctl.signal })).json();
+      const txt = await (await fetch(SURL + '?action=getCopys', { signal: ctl.signal })).text();
       clearTimeout(tmo);
+      const json = JSON.parse(txt);
       if (json.status !== 'ok') throw new Error(json.message || 'respuesta inválida');
       ({ copys, angulos, piezas } = json);
-    } else {
-      [copys, angulos, piezas] = await Promise.all([gviz('Copys'), gviz('Angulos'), gviz('Piezas')]);
     }
     if (!copys || !copys.length) { showError('No se encontraron copys en la pestaña Copys.'); return }
 
