@@ -222,7 +222,7 @@ select:focus,input:focus{border-color:var(--accent-fg)}
       <div class="foot-note">
         <b>Inversión y leads plataforma</b>: pestaña RESUMEN GENERAL. <b>Leads CRM</b>: HUBSPOT_CONTACTS con "Lead de Pauta" = 1, por fecha de creación.
         <b>Oportunidades, inscritos, pendientes de pago y matriculados</b>: HUBSPOT_DEALS con "Deal de pauta" = 1; las etapas van por la fecha de creación del deal y la matrícula por su fecha de cierre ganado.
-        Con un periodo elegido en los atajos, el CRM se cuenta por "Periodo Académico Universitario" (los registros sin periodo no entran); con fechas libres, por fecha.
+        Con un periodo elegido en los atajos, el rango de fechas va del inicio del periodo a hoy y las metas son las del periodo completo; leads, etapas y matrículas del CRM se cuentan siempre por su fecha (las matrículas, en la fecha en que se matricularon).
         <b>Metas</b>: con un periodo elegido, la meta completa del periodo; con fechas libres, la parte proporcional a los días del rango. Con "Repartir" activo, la inversión y metas de campañas generales se reparten entre los programas del mismo nivel según sus leads CRM.
         Branding, eventos, quiz y programática van en su propia sección y no entran en los costos. El nivel de cada programa sale de su nombre (una maestría siempre es posgrado).
       </div>
@@ -474,7 +474,8 @@ function F(){ const g = id => document.getElementById(id).value;
   return { desde: g('f-desde'), hasta: g('f-hasta'), niv: g('f-nivel'), grp: g('f-grupo'), medio: g('f-medio'), prog: g('f-programa'),
     per: QUICK[0] === 'P' ? QUICK.slice(1) : '', rep: document.getElementById('f-repartir').checked } }
 // La pauta no trae periodo: siempre por fechas. El CRM, con periodo elegido, por su columna Periodo.
-const enRango = (r, f) => (r.src !== 'rg' && f.per) ? r.per === f.per : (r.d >= f.desde && r.d <= f.hasta);
+// el CRM siempre por fecha: con periodo elegido, las fechas son las del periodo
+const enRango = (r, f) => r.d >= f.desde && r.d <= f.hasta;
 const pasa = (r, f) => enRango(r, f) && (!f.niv || r.niv === f.niv) && (!f.medio || r.medio === f.medio);
 function cascade(){
   const f = F(), base = RAW.filter(r => pasa(r, f));
@@ -522,13 +523,13 @@ function render(){
   ENT = entradas(f);
   const T = M(ENT.reduce((a, e) => add(a, e), Z()));
   document.getElementById('rango-note').textContent = `${fDate(f.desde)} – ${fDate(f.hasta)} ${f.hasta.slice(0,4)} · ${days(f.desde, f.hasta)} días`;
-  document.getElementById('embudo-note').textContent = f.per ? `CRM del periodo ${f.per} · pauta en el rango de fechas` : 'cada etapa del CRM por su propia fecha';
+  document.getElementById('embudo-note').textContent = 'etapas por fecha de creación del deal · matrículas por fecha de cierre ganado';
   const gen = RAW.filter(r => r.gen && pasa(r, f)).reduce((a, r) => a + r.inv, 0);
   document.getElementById('gen-note').textContent = gen ? `Campañas generales: ${fCOP(gen)}, ${f.rep ? 'repartidas entre programas según leads CRM' : 'en su propio grupo'}` : '';
   // branding, eventos y programática no tienen nivel: solo se suman en la vista de todos los niveles
   const B = renderBrand(f, (r, f) => !f.niv && r.d >= f.desde && r.d <= f.hasta && (!f.medio || r.medio === f.medio), r => r.grupo);
   renderBasis(f);
-  renderKPIs(T, B); renderFunnel(T); renderFuentes(f, (r, f) => (f.per ? r.per === f.per : (r.d >= f.desde && r.d <= f.hasta)) && (!f.niv || r.niv === f.niv)); renderNivel(); renderMedio(f); renderSemana(f); renderDetalle();
+  renderKPIs(T, B); renderFunnel(T); renderFuentes(f, (r, f) => (r.d >= f.desde && r.d <= f.hasta) && (!f.niv || r.niv === f.niv)); renderNivel(); renderMedio(f); renderSemana(f); renderDetalle();
 }
 
 function bar(p, lbl){ if(p === null) return '';
