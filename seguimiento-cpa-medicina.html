@@ -4,354 +4,443 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Seguimiento interno diario del costo por conversión de Search Medicina 2027-1 frente al objetivo de $50.000. ADCOM.">
-<title>Corpas · Seguimiento CPA Search Medicina · ADCOM</title>
+<title>Seguimiento CPL Search Medicina · Corpas</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="assets/css/adcom.css">
 <script defer src="assets/js/adcom.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-/* Tablero operativo interno: resumen arriba (estado frente a la meta), gráfico de CPA móvil con la meta y los cambios marcados,
-   tabla diaria, bitácora y reglas de decisión. Colores y tipografía del sistema Adcom (assets/css/adcom.css). */
-*{box-sizing:border-box}
-body{margin:0;font-family:'Poppins',system-ui,sans-serif;background:var(--ground);color:var(--fg);font-size:14px;line-height:1.5}
-.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:0 56px;display:grid;gap:20px}
-h1,h2,h3{margin:0;line-height:1.2;text-wrap:balance}
-p{margin:0}
-.muted{color:var(--fg-muted)}
-.lbl{font-size:var(--fs-min,.75rem);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted)}
-.num{font-variant-numeric:tabular-nums}
+:root{
+  --black:#050505;--white:#fcfcfa;--yellow:#ffd400;
+  --gray-50:var(--ground);--gray-100:var(--sunken);--gray-200:var(--rule);--gray-400:var(--fg-muted);--gray-600:var(--fg-secondary);
+  --sidebar:230px;--r-sm:8px;--r-md:12px;
+  --c-pos:#15803d;--c-mid:#b45309;--c-neg:#b91c1c
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',sans-serif;background:var(--gray-50);color:var(--black);min-height:100vh;overflow-x:hidden}
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
 
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--raised);border-bottom:1px solid var(--rule)}
-.top-in{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
-.crumb{font-size:.8rem;color:var(--fg-muted);font-weight:600;text-decoration:none}
-.crumb:hover{color:var(--fg)}
-.top h1{font-size:1rem;font-weight:700}
-.top .goal{font-size:.8rem;background:var(--accent);color:var(--accent-ink);padding:2px 10px;border-radius:99px;font-weight:600}
-.top .upd{margin-left:auto;font-size:.8rem;color:var(--fg-muted)}
-.ctrl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.qbtn{font:inherit;font-size:.8rem;font-weight:500;padding:4px 11px;border:1px solid var(--rule);background:var(--raised);border-radius:99px;cursor:pointer;color:var(--fg-secondary)}
-.qbtn:hover{border-color:var(--fg);color:var(--fg)}
-.qbtn.on{background:var(--fg);color:var(--ground);border-color:var(--fg)}
-.qbtn:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--accent-fg);outline-offset:2px}
-select{font:inherit;font-size:.8rem;padding:4px 8px;border:1px solid var(--rule);border-radius:var(--radius-sm);background:var(--raised);color:var(--fg);max-width:100%}
-.reload{font:inherit;font-size:.8rem;font-weight:600;padding:5px 12px;background:var(--fg);color:var(--ground);border:0;border-radius:var(--radius-sm);cursor:pointer}
+/* TOPBAR */
+.topbar{background:var(--white);border-bottom:1px solid var(--gray-200);padding:10px 20px;position:sticky;top:0;z-index:50;display:flex;flex-direction:column;gap:8px}
+.tb-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.topbar-title{font-size:12px;font-weight:700;margin-right:4px;white-space:nowrap}
+.f-sep{width:1px;height:18px;background:var(--gray-200)}
+.fg{display:flex;align-items:center;gap:5px}
+.fl{font-size:12px;color:var(--gray-600);font-weight:500;white-space:nowrap}
+select,input[type=date],input[type=search]{font-family:'Poppins',sans-serif;font-size:12px;padding:5px 8px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--white);color:var(--black);outline:none}
+select{cursor:pointer;max-width:220px}
+select:focus,input:focus{border-color:var(--accent-fg)}
+.qbtn{font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;padding:4px 10px;border:1px solid var(--gray-200);background:var(--white);border-radius:999px;cursor:pointer;color:var(--gray-600)}
+.qbtn:hover{border-color:var(--black);color:var(--black)}
+.qbtn.on{background:var(--black);color:var(--white);border-color:var(--black)}
+.btn-reset{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;padding:5px 10px;background:var(--black);color:var(--white);border:none;border-radius:var(--radius-sm);cursor:pointer}
+.chk{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--gray-600);cursor:pointer;white-space:nowrap}
+.last-upd{margin-left:auto;font-size:12px;color:var(--gray-400)}
 
-.status{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,2fr);gap:14px;margin-top:20px}
-@media (max-width:820px){.status{grid-template-columns:1fr}}
-.verdict{background:var(--inv-ground);color:var(--inv-fg);border-radius:var(--radius);padding:20px 22px;display:grid;gap:10px;align-content:start}
-.verdict .lbl{color:var(--inv-secondary)}
-.verdict .big{font-size:clamp(34px,5vw,48px);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
-.verdict .vs{font-size:.9rem;color:var(--inv-secondary)}
-.chip{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:99px;justify-self:start}
-.chip::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
-.s-ok{color:#16693a;background:#e3f1e8}
-.s-mid{color:#7d5a00;background:#fff3c4}
-.s-bad{color:#c2261c;background:#fbe4e1}
-.verdict .msg{font-size:.9rem;color:var(--inv-fg)}
-.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-@media (max-width:560px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.kpi{background:var(--raised);border:1px solid var(--rule);border-radius:var(--radius);padding:12px 14px;display:grid;gap:2px;min-width:0}
-.kpi b{font-size:1.35rem;font-weight:700;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.kpi small{font-size:.75rem;color:var(--fg-muted)}
-.kpi.pos b{color:var(--pos)} .kpi.neg b{color:var(--neg)}
+/* CONTENT */
+.content{padding:18px 20px;min-width:0}
+.sec-title{font-size:13px;font-weight:700;margin:4px 0 10px;display:flex;align-items:center;gap:7px;scroll-margin-top:110px}
+.sec-title>span:first-child{display:inline-block;width:3px;height:13px;background:var(--yellow);flex-shrink:0}
+.sec-note{font-size:12px;color:var(--gray-400);font-weight:400;margin-left:6px}
+.card{background:var(--white);border-radius:var(--r-md);border:1px solid var(--gray-200)}
 
-.panel2{background:var(--raised);border:1px solid var(--rule);border-radius:var(--radius);padding:16px 18px;display:grid;gap:12px;min-width:0}
-.panel2 h2{font-size:1rem}
-.phead{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
-.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.75rem;color:var(--fg-secondary)}
+/* KPIs */
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
+.kpi-card{padding:14px}
+.kpi-label{font-size:12px;color:var(--gray-600);font-weight:600;margin-bottom:3px}
+.kpi-value{font-size:20px;font-weight:700;line-height:1.15;font-variant-numeric:tabular-nums}
+.kpi-sub{font-size:12px;color:var(--gray-400);margin-top:3px}
+.kpi-bwrap{margin-top:8px}
+.kpi-brow{display:flex;justify-content:space-between;font-size:11px;color:var(--gray-600);margin-bottom:3px}
+.kpi-bar{height:4px;background:var(--gray-200);border-radius:999px;overflow:hidden}
+.kpi-bfill{height:100%;border-radius:999px}
+.bg-pos{background:var(--c-pos)} .bg-mid{background:var(--c-mid)} .bg-neg{background:var(--c-neg)}
+.t-pos{color:var(--c-pos);font-weight:600} .t-mid{color:var(--c-mid);font-weight:600} .t-neg{color:var(--c-neg);font-weight:600} .t-mute{color:var(--gray-400)}
+
+/* EMBUDO */
+.funnel{padding:16px 18px;margin-bottom:20px;display:grid;grid-template-columns:1fr;gap:9px}
+.f-row{display:grid;grid-template-columns:150px 1fr 190px 190px;align-items:center;gap:12px}
+.f-head{font-size:11px;color:var(--gray-400);font-weight:600}
+.f-cost{font-size:12px;font-variant-numeric:tabular-nums;display:flex;justify-content:flex-end;align-items:baseline;gap:8px;border-left:1px solid var(--gray-200);padding-left:12px}
+.f-cost b{font-size:14px}
+.f-lbl{font-size:12px;font-weight:600;color:var(--gray-600)}
+.f-track{height:22px;background:var(--gray-100);border-radius:6px;overflow:hidden}
+.f-fill{height:100%;background:var(--yellow);border-radius:6px;min-width:2px}
+.f-fill.dark{background:var(--black)}
+.f-val{font-size:12px;font-variant-numeric:tabular-nums;display:flex;justify-content:space-between;gap:8px}
+.f-val b{font-size:14px}
+
+/* NIVEL / MEDIO */
+.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+.nivel-card{padding:16px}
+.nivel-tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;margin-bottom:12px}
+.tag-pre{background:#FFF8E1;color:#92400E} .tag-pos{background:#EDE9FE;color:#4C1D95}
+.nm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 10px}
+.nm-label{font-size:11px;color:var(--gray-400);font-weight:500}
+.nm-value{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+.chart-card{padding:14px;margin-bottom:20px}
+.chart-wrap{height:260px;position:relative}
+
+/* TABLAS */
+.tcard{margin-bottom:20px;overflow:hidden}
+.tbar{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--gray-100);flex-wrap:wrap}
+.tbar .sp{flex:1}
+.tbtn{font-family:'Poppins',sans-serif;font-size:12px;padding:4px 10px;border:1px solid var(--gray-200);background:var(--white);border-radius:var(--radius-sm);cursor:pointer}
+.tscroll{overflow-x:auto}
+.tscroll table{width:100%;min-width:0;border-collapse:collapse;font-size:12px}
+.tscroll thead tr{background:var(--gray-50);border-bottom:2px solid var(--gray-200)}
+.tscroll thead th{font-weight:700;padding:9px 10px;text-align:left;white-space:nowrap;color:var(--fg-muted);border-bottom:0;position:sticky;top:0;background:var(--gray-50)}
+.tscroll thead th.r{text-align:right}
+.tscroll thead th.sortable{cursor:pointer;user-select:none}
+.tscroll thead th.sortable:hover,.tscroll thead th.sort-act{color:var(--black)}
+.tscroll thead th.grp{border-left:1px solid var(--gray-200)}
+.tscroll tbody tr{border-bottom:1px solid var(--gray-100)}
+.tscroll tbody td{padding:7px 10px;color:var(--gray-600);white-space:nowrap;text-align:left;vertical-align:middle;border-top:0}
+.tscroll tbody td.r{text-align:right;font-variant-numeric:tabular-nums}
+.tscroll tbody td.grp{border-left:1px solid var(--gray-100)}
+.tscroll tbody tr:hover td{background:var(--gray-50)}
+.tscroll .tr-total td{font-weight:700;color:var(--black);background:var(--gray-50) !important;border-top:2px solid var(--gray-200) !important}
+.lv1 td{font-weight:600;color:var(--black)}
+.lv1{cursor:pointer}
+.lv2{cursor:pointer;background:#fafafa}
+.lv2 td:first-child{padding-left:30px}
+.lv3 td:first-child{padding-left:56px;color:var(--gray-600)}
+.lv2 td:first-child,.lv2 td{font-weight:500}
+.hidden{display:none}
+.tog{display:inline-block;transition:transform .18s;margin-right:6px;color:var(--accent-fg);font-size:11px;width:9px}
+.tog.open{transform:rotate(90deg)}
+.nv{display:inline-block;font-size:10px;font-weight:700;padding:0 5px;border-radius:999px;margin-left:6px;vertical-align:1px}
+.nv-pre{background:#FFF8E1;color:#92400E} .nv-pos{background:#EDE9FE;color:#4C1D95} .nv-gen{background:var(--gray-100);color:var(--gray-600)}
+.foot-note{font-size:11px;color:var(--gray-400);padding:8px 12px;border-top:1px solid var(--gray-100);line-height:1.5}
+@media(max-width:1700px){.tscroll thead th,.tscroll tbody td{font-size:11px;padding:6px 8px}}
+@media(max-width:1450px){.tscroll thead th,.tscroll tbody td{font-size:10px;padding:5px 6px}.lv2 td:first-child{padding-left:22px}.lv3 td:first-child{padding-left:40px}}
+
+/* LOADING */
+#loading{position:fixed;inset:0;background:rgba(10,10,10,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:12px}
+.ld-logo img{height:36px}
+.spinner{width:28px;height:28px;border:3px solid #222;border-top-color:var(--accent-fg);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#ld-msg{color:var(--fg-muted);font-size:12px}
+
+@media(max-width:1300px){.kpi-grid{grid-template-columns:repeat(3,1fr)}.nm-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.f-row{grid-template-columns:90px 1fr 120px 130px}.f-cost span{display:none}.content{padding:14px 16px}}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.tag-pau{background:#FFF3B0;color:#7A5B00} .tag-org{background:#E0F2FE;color:#075985} .tag-otr{background:var(--gray-100);color:var(--gray-600)}
+@media(max-width:1300px){.three-col{grid-template-columns:1fr}}
+.nm-sub{margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-200)}
+.tag-ec{background:#DCFCE7;color:#14532D} .nv-ec{background:#DCFCE7;color:#14532D}
+#preview-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center}#preview-modal.open{display:flex}
+.preview-inner{background:var(--white);width:min(900px,92vw);height:80vh;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.preview-bar{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid var(--gray-200);font-size:12px;font-weight:600}
+.preview-frame{flex:1;border:0;width:100%}
+/* ── propio de este tablero ── */
+.kpi-grid.k4{grid-template-columns:repeat(4,1fr)}
+.kpi-card.hero{background:var(--black);border-color:var(--black)}
+.kpi-card.hero .kpi-label,.kpi-card.hero .kpi-sub,.kpi-card.hero .kpi-brow{color:#aaa9a4}
+.kpi-card.hero .kpi-value{color:var(--white);font-size:26px}
+.kpi-card.hero .kpi-bar{background:#2a2a28}
+.goal-pill{font-size:12px;font-weight:700;background:var(--yellow);color:var(--accent-ink);padding:2px 10px;border-radius:999px;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--gray-600);margin-left:auto;font-weight:500}
 .legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:5px}
-.chartbox{position:relative;height:300px}
-.chartbox.sm{height:220px}
-.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.cmp{border:1px solid var(--rule);border-radius:var(--radius-sm);padding:10px 12px;display:grid;gap:2px}
-.cmp b{font-size:1.1rem;font-variant-numeric:tabular-nums}
-
-.tbl{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:.8rem;min-width:640px}
-th{text-align:right;font-size:.75rem;font-weight:600;color:var(--fg-muted);padding:6px 8px;border-bottom:1px solid var(--rule-strong);white-space:nowrap}
-th:first-child,td:first-child,th:last-child,td:last-child{text-align:left}
-td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-td:last-child{white-space:normal;color:var(--fg-secondary);min-width:220px}
-tr.ev td{background:color-mix(in srgb,var(--accent) 14%,transparent)}
-tr.lag td:nth-child(3),tr.lag td:nth-child(4){color:var(--fg-muted);font-style:italic}
-
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-.log{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.log li{display:grid;grid-template-columns:86px minmax(0,1fr);gap:10px;font-size:.85rem}
-.log time{font-weight:700;font-variant-numeric:tabular-nums}
-.rules{margin:0;padding-left:18px;display:grid;gap:8px;font-size:.85rem}
-.rules b{font-weight:600}
-.note{font-size:.8rem;color:var(--fg-muted)}
-#loading{position:fixed;inset:0;background:color-mix(in srgb,var(--ground) 88%,transparent);display:flex;align-items:center;justify-content:center;z-index:60;font-weight:600}
-#loading[hidden]{display:none!important}
+.cmp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.st{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px}
+.st-pos{background:#DCFCE7;color:#14532D} .st-mid{background:#FFF3B0;color:#7A5B00} .st-neg{background:#FEE2E2;color:#991B1B} .st-mute{background:var(--gray-100);color:var(--gray-600)}
+.tscroll tbody tr.ev td{background:#FFFBEA}
+.tscroll tbody tr.lag td.lagc{font-style:italic;color:var(--gray-400)}
+.log{list-style:none;padding:14px 16px;display:grid;gap:10px}
+.log li{display:grid;grid-template-columns:70px 1fr;gap:10px;font-size:12px;color:var(--gray-600)}
+.log time{font-weight:700;color:var(--black)}
+.rules{padding:14px 16px 14px 34px;display:grid;gap:8px;font-size:12px;color:var(--gray-600)}
+.rules b{color:var(--black)}
+@media(max-width:1300px){.kpi-grid.k4{grid-template-columns:repeat(2,1fr)}.cmp-grid{grid-template-columns:1fr}}
 </style>
 </head>
-<body>
-<div id="loading"><span id="ld-msg">Cargando datos del Sheet…</span></div>
+<body class="con-shell">
+<div id="loading">
+  <div class="spinner"></div>
+  <div id="ld-msg">Cargando datos...</div>
+</div>
 
-<header class="top">
-  <div class="top-in">
-    <a class="crumb" href="index.html">Corpas documentos</a>
-    <h1>Seguimiento CPA · Search Medicina</h1>
-    <span class="goal">Objetivo: CPA $50.000</span>
-    <span class="upd" id="upd">—</span>
-  </div>
-  <div class="top-in" style="padding-top:0">
-    <div class="ctrl" id="ranges" role="group" aria-label="Rango de fechas"></div>
-    <select id="camp" aria-label="Campaña"></select>
-    <button class="reload" id="reload" type="button">Recargar datos</button>
-  </div>
-</header>
-
-<main class="wrap">
-  <section class="status" aria-label="Estado frente al objetivo">
-    <div class="verdict">
-      <span class="lbl">CPA últimos 7 días</span>
-      <span class="big" id="v-cpa7">—</span>
-      <span class="vs" id="v-vs">—</span>
-      <span class="chip" id="v-chip">—</span>
-      <p class="msg" id="v-msg"></p>
+<nav class="app-sidebar">
+  <div class="app-sidebar-top">
+    <a class="app-sidebar-brand" href="index.html"><i></i>Adcom</a>
+    <div class="app-sidebar-client">
+      <span class="app-sidebar-client-label">Cliente · uso interno</span>
+      <strong class="app-sidebar-client-name">Juan N. Corpas, Search Medicina</strong>
     </div>
-    <div class="kpis" id="kpis"></div>
-  </section>
+  </div>
+  <div class="app-sidebar-nav">
+    <span class="app-sidebar-nav-title">Secciones</span>
+    <a href="#sec-kpi" class="active"><b></b>Resumen</a>
+    <a href="#sec-cpl"><b></b>CPL plataforma y CRM</a>
+    <a href="#sec-cmp"><b></b>Antes y después</a>
+    <a href="#sec-vol"><b></b>Inversión y leads</a>
+    <a href="#sec-dia"><b></b>Detalle diario</a>
+    <a href="#sec-log"><b></b>Bitácora y reglas</a>
+  </div>
+  <div class="app-sidebar-foot">Datos cargados: <span id="last-upd-side">—</span><br><button class="tbtn" style="margin-top:6px" onclick="load()">↻ Actualizar datos</button></div>
+</nav>
 
-  <section class="panel2">
-    <div class="phead">
-      <h2>CPA diario y móvil de 7 días</h2>
-      <div class="legend">
-        <span><i style="background:var(--fg)"></i>CPA móvil 7 días</span>
-        <span><i style="background:var(--ramp-2);height:8px"></i>CPA del día</span>
-        <span><i style="background:var(--pos)"></i>Objetivo $50.000</span>
-        <span><i style="background:var(--accent-fg)"></i>Cambio en la campaña</span>
-      </div>
+<div class="main">
+  <div class="topbar">
+    <div class="tb-row">
+      <span class="topbar-title">Seguimiento CPL · Search Medicina</span>
+      <span class="goal-pill">Meta: CPL plataforma $50.000</span>
+      <div class="f-sep"></div>
+      <div class="fg"><span class="fl">Desde</span><input type="date" id="f-desde" onchange="onDate()"></div>
+      <div class="fg"><span class="fl">Hasta</span><input type="date" id="f-hasta" onchange="onDate()"></div>
+      <div class="f-sep"></div>
+      <div id="quick" class="fg"></div>
+      <span class="last-upd" id="last-upd"></span>
     </div>
-    <div class="chartbox"><canvas id="c-cpa" aria-label="Gráfico de CPA diario y móvil frente al objetivo"></canvas></div>
-  </section>
-
-  <section class="panel2">
-    <div class="phead"><h2>Antes y después de la optimización del 8 de octubre</h2><span class="note">Mismo número de días con inversión a cada lado (mínimo 7 antes)</span></div>
-    <div class="compare" id="compare"></div>
-  </section>
-
-  <section class="panel2">
-    <div class="phead"><h2>Inversión y conversiones por día</h2></div>
-    <div class="chartbox sm"><canvas id="c-vol" aria-label="Gráfico de inversión y conversiones por día"></canvas></div>
-  </section>
-
-  <section class="panel2">
-    <div class="phead"><h2>Detalle diario</h2><span class="note">Los últimos 3 días van en cursiva: Google sigue sumando conversiones a esos días por el retraso de atribución.</span></div>
-    <div class="tbl"><table>
-      <thead><tr><th>Fecha</th><th>Inversión</th><th>Conv.</th><th>CPA día</th><th>CPA 7 días</th><th>Estado 7 días</th><th>Cambio en la campaña</th></tr></thead>
-      <tbody id="rows"></tbody>
-    </table></div>
-  </section>
-
-  <div class="two">
-    <section class="panel2">
-      <h2>Bitácora de cambios</h2>
-      <ul class="log" id="log"></ul>
-      <p class="note">Para agregar un cambio, edita la lista <code>EVENTOS</code> al inicio del script de esta página.</p>
-    </section>
-    <section class="panel2">
-      <h2>Reglas de decisión</h2>
-      <ol class="rules">
-        <li><b>Hasta el 22 de octubre no se hacen cambios grandes</b> (CPA objetivo, presupuesto, concordancias): la puja está aprendiendo después de la optimización.</li>
-        <li><b>Lunes y jueves:</b> revisar términos de búsqueda y negativizar universidades sin «medicina», otras carreras y búsquedas sin intención.</li>
-        <li><b>CPA 7 días por encima de $60.000 tres días seguidos:</b> revisar términos de búsqueda, cuota perdida por ranking y aprobación de keywords y sitelinks.</li>
-        <li><b>CPA 7 días en $50.000 o menos durante 7 días seguidos:</b> bajar el CPA objetivo de $55.000 a $50.000. Si además pierde cuota por presupuesto, subir el presupuesto 15–20 %.</li>
-        <li><b>No leer el CPA de los últimos 3 días como definitivo:</b> sus conversiones todavía suben.</li>
-      </ol>
-    </section>
   </div>
 
-  <p class="note">Fuente: pestaña <a href="https://docs.google.com/spreadsheets/d/12-tP-61OKnLdx1wONS0YT0q7O19eZ8V3ZrTDChOmyGo/edit" target="_blank" rel="noopener">GG_CORPAS</a> de «[Corpas] Fuente de datos» (Power My Analytics, se actualiza cada día a las 6 a. m. con datos hasta ayer). Conversiones = conversiones de Google Ads (registro_completo). Uso interno ADCOM.</p>
-</main>
+  <div class="content">
+    <div class="sec-title" id="sec-kpi"><span></span>Resumen del rango<span class="sec-note" id="rango-note"></span></div>
+    <div class="kpi-grid" id="kpi-grid"></div>
+    <div class="kpi-grid k4" id="kpi-grid2"></div>
+
+    <div class="sec-title" id="sec-cpl"><span></span>CPL plataforma y CPL CRM por día
+      <span class="legend"><span><i style="background:var(--black)"></i>CPL plataforma</span><span><i style="background:var(--serie-1)"></i>CPL CRM</span><span><i style="background:var(--c-pos)"></i>Meta $50.000</span><span><i style="background:var(--accent-fg)"></i>Cambio en la campaña</span></span>
+      <span style="display:flex;gap:6px;margin-left:10px"><button class="qbtn on" data-cv="dia" onclick="setCplVista('dia')">Por día</button><button class="qbtn" data-cv="7d" onclick="setCplVista('7d')">Últimos 7 días</button></span></div>
+    <div class="card chart-card"><div class="chart-wrap" style="height:300px"><canvas id="chart-cpl"></canvas></div></div>
+
+    <div class="sec-title" id="sec-cmp"><span></span>Antes y después de la optimización del 8 de octubre<span class="sec-note">mismo número de días con inversión a cada lado (mínimo 7 antes)</span></div>
+    <div class="cmp-grid" id="cmp-grid"></div>
+
+    <div class="sec-title" id="sec-vol"><span></span>Inversión y leads por día
+      <span class="legend"><span><i style="background:var(--ramp-3);height:8px"></i>Inversión</span><span><i style="background:var(--black)"></i>Leads plataforma</span><span><i style="background:var(--serie-1)"></i>Leads CRM</span></span></div>
+    <div class="card chart-card"><div class="chart-wrap"><canvas id="chart-vol"></canvas></div></div>
+
+    <div class="sec-title" id="sec-dia"><span></span>Detalle diario<span class="sec-note">el estado compara el CPL plataforma de los últimos 7 días con la meta · los últimos 3 días van en cursiva: Google sigue sumando conversiones a esos días</span></div>
+    <div class="card tcard"><div class="tscroll"><table>
+      <thead><tr><th>Fecha</th><th class="r">Inversión</th><th class="r grp">Leads plataforma</th><th class="r">CPL plataforma</th><th class="r grp">Leads CRM</th><th class="r">CPL CRM</th><th class="r grp">CPL plat. 7 días</th><th>Estado</th><th class="grp">Cambio en la campaña</th></tr></thead>
+      <tbody id="dia-body"></tbody></table></div>
+      <div class="foot-note">Inversión y leads de plataforma: pestaña RESUMEN GENERAL (Google Ads, campañas <code>_search_pregrado-medicina</code>). Leads CRM: HUBSPOT_CONTACTS con Lead de Pauta = 1, Canal de Ingreso «Google Ads» y Programa de interés «Pregrado Medicina», por fecha de creación. Medio y programa salen igual que en el tablero semanal.</div>
+    </div>
+
+    <div class="two-col" id="sec-log">
+      <div class="card"><div class="tbar"><b style="font-size:12px">Bitácora de cambios</b><span class="sp"></span><span class="sec-note" style="margin:0">se edita en la lista EVENTOS del script</span></div><ul class="log" id="log"></ul></div>
+      <div class="card"><div class="tbar"><b style="font-size:12px">Reglas de decisión</b></div>
+        <ol class="rules">
+          <li><b>Hasta el 22 de octubre no se hacen cambios grandes</b> (CPA objetivo, presupuesto, concordancias): la puja está aprendiendo después de la optimización.</li>
+          <li><b>Lunes y jueves:</b> revisar términos de búsqueda y negativizar universidades sin «medicina», otras carreras y búsquedas sin intención.</li>
+          <li><b>CPL plataforma de 7 días por encima de $60.000 tres días seguidos:</b> revisar términos, cuota perdida por ranking y aprobación de keywords y sitelinks.</li>
+          <li><b>CPL plataforma de 7 días en $50.000 o menos durante 7 días seguidos:</b> bajar el CPA objetivo de Google de $55.000 a $50.000; si además pierde cuota por presupuesto, subir el presupuesto 15–20 %.</li>
+          <li><b>Si el CPL CRM se separa más de 30 % del CPL plataforma</b> durante una semana: revisar con el CRM si hay leads duplicados, sin programa o mal atribuidos.</li>
+          <li><b>Los últimos 3 días no son definitivos:</b> sus conversiones todavía suben.</li>
+        </ol></div>
+    </div>
+  </div>
+</div>
 
 <script>
-// ── Configuración ───────────────────────────────────────────────────────────
 const SHEET_ID = '12-tP-61OKnLdx1wONS0YT0q7O19eZ8V3ZrTDChOmyGo';
-const TAB = 'GG_CORPAS';
-const GOAL = 50000, WARN = 60000;              // meta y umbral de alerta (COP)
-const OPT_DATE = '2026-10-08';                 // optimización para la comparación antes/después
-const CAMP_RE = /_search_pregrado-medicina/i, CAMP_EXCL = /premedic/i;   // todas las temporadas de Search pregrado Medicina
-const EVENTOS = [                              // fecha ISO, texto corto (tabla y gráfico), detalle (bitácora)
+const SRC = {
+  rg:       { gid: 1686215180 },              // RESUMEN GENERAL: Fecha | Campaña | Inversión | Leads plataforma | Medio | Programa | Modalidad
+  contacts: { gid: 929744023, head: true },   // HUBSPOT_CONTACTS
+};
+const GOAL = 50000, WARN = 60000;             // meta y umbral de alerta sobre el CPL plataforma (COP)
+const OPT_DATE = '2026-10-08';
+const CAMP_RE = /_search_pregrado-medicina/i;  // todas las temporadas de Search pregrado Medicina
+const PROG_KEY = 'PREGRADO MEDICINA';
+const EVENTOS = [                             // fecha ISO, texto corto (tabla y gráfico), detalle (bitácora)
   ['2026-10-01', 'Reactivación', 'Se reactiva la campaña con presupuesto bajo (~$160.000 al día).'],
   ['2026-10-05', 'Presupuesto $865k', 'Presupuesto diario a $865.229.'],
-  ['2026-10-06', 'CPA objetivo $55k', 'CPA objetivo de $75.000 a $55.000.'],
+  ['2026-10-06', 'CPA objetivo $55k', 'CPA objetivo de Google de $75.000 a $55.000.'],
   ['2026-10-08', 'Optimización', '46 negativas (universidades sin medicina, otras carreras, sin intención); marca de amplia a frase y exacta + «corpas medicina»; pausa de genéricas caras y de «universidad militar medicina»; solo presencia en Bogotá y Cundinamarca; sitelinks propios a medicina-leadgen; exclusión de 65+; fuera la promoción y el callout de descuento.'],
 ];
-const RANGES = [['14', 'Últimos 14 días activos'], ['30', 'Últimos 30 días activos'], ['oct', 'Desde reactivación (1 oct)'], ['mes', 'Mes actual'], ['temp', 'Temporada (desde 1 jun)']];
+const MESES = ['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 
-// ── Utilidades ──────────────────────────────────────────────────────────────
-const $ = id => document.getElementById(id);
-const fmt$ = v => isFinite(v) ? '$' + Math.round(v).toLocaleString('es-CO') : '—';
-const fmtN = (v, d = 0) => isFinite(v) ? v.toLocaleString('es-CO', {maximumFractionDigits: d, minimumFractionDigits: d}) : '—';
-const num = s => { if (typeof s === 'number') return s; const t = String(s || '').replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.'); return parseFloat(t) || 0 };
-const iso = s => { const m = String(s || '').trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/); return m ? `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}` : (/^\d{4}-\d{2}-\d{2}/.test(s) ? String(s).slice(0, 10) : '') };
-const addDays = (d, n) => { const x = new Date(d + 'T12:00:00'); x.setDate(x.getDate() + n); return x.toISOString().slice(0, 10) };
-const label = d => new Date(d + 'T12:00:00').toLocaleDateString('es-CO', {day: 'numeric', month: 'short'});
-const cpa = (c, v) => v > 0 ? c / v : NaN;
-const estado = v => !isFinite(v) ? ['Sin conv.', 's-bad'] : v <= GOAL ? ['En meta', 's-ok'] : v <= WARN ? ['Cerca', 's-mid'] : ['Fuera de meta', 's-bad'];
+// ── Parsers y formato (los mismos del tablero semanal) ──────────────────────
+function num(v){ if(typeof v === 'number') return isFinite(v) ? v : 0;
+  const s = String(v ?? '').replace(/[$\s%]/g,''); if(!s) return 0;
+  return parseFloat(s.indexOf(',') >= 0 ? s.replace(/\./g,'').replace(',','.') : s.replace(/\./g,'')) || 0 }
+function iso(v){ const m = String(v||'').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if(m) return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+  const i = String(v||'').match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+  return i ? `${i[1]}-${i[2].padStart(2,'0')}-${i[3].padStart(2,'0')}` : '' }
+function norm(s){ return String(s||'').trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'') }
+const pkey = s => norm(s).replace(/[^A-Z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+const fCOP = n => (n && isFinite(n)) ? '$' + Math.round(n).toLocaleString('es-CO') : '—';
+const fN = n => (n && isFinite(n)) ? Math.round(n).toLocaleString('es-CO') : '0';
+const fN1 = n => isFinite(n) ? n.toLocaleString('es-CO',{maximumFractionDigits:1}) : '—';
+const div = (a,b) => b ? a/b : NaN;
+const fDate = s => { const p = s.split('-'); return `${+p[2]} ${MESES[+p[1]]}` };
+function addDays(s,n){ const d = new Date(Date.parse(s) + n*864e5); return d.toISOString().slice(0,10) }
+const todayISO = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset()*6e4).toISOString().slice(0,10) };
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function est(v){ return !isFinite(v) ? ['Sin leads','st-mute'] : v <= GOAL ? ['En meta','st-pos'] : v <= WARN ? ['Cerca','st-mid'] : ['Fuera de meta','st-neg'] }
+function tcls(v){ return !isFinite(v) ? 't-mute' : v <= GOAL ? 't-pos' : v <= WARN ? 't-mid' : 't-neg' }
+function bcls(v){ return v <= GOAL ? 'bg-pos' : v <= WARN ? 'bg-mid' : 'bg-neg' }
+function colsDe(rows, spec){ const h = (rows[0] || []).map(x => norm(x)), c = {};
+  Object.entries(spec).forEach(([k, lbl]) => { c[k] = h.indexOf(norm(lbl)); if(c[k] === -1) throw new Error('Falta la columna ' + lbl) });
+  return c }
 
-// ── Carga del Sheet: CSV en la web, JSONP abriendo el archivo local ─────────
+// ── Carga (CSV en la web, JSONP abriendo el archivo local) ──────────────────
 let SEQ = 0;
-function fetchCSV() { return new Promise((ok, ko) => {
-  const u = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(TAB)}&headers=1&_=${Date.now()}`;
-  Papa.parse(u, {download: true, header: false, skipEmptyLines: true, complete: r => ok(r.data.slice(1)), error: ko}) }) }
-function fetchJSONP() { return new Promise((ok, ko) => {
-  const cb = `__cpa_${Date.now()}_${++SEQ}`, s = document.createElement('script');
-  const t = setTimeout(() => { clean(); ko(new Error('timeout')) }, 30000);
-  const clean = () => { clearTimeout(t); s.remove(); delete window[cb] };
-  window[cb] = r => { clean(); try {
-    const cols = r.table.cols || [];
-    ok((r.table.rows || []).map(row => cols.map((col, i) => { const c = row.c?.[i]; if (!c || c.v == null) return '';
-      if (col.type === 'date') { const m = String(c.v).match(/^Date\((\d+),(\d+),(\d+)/); if (m) return `${m[3]}/${+m[2] + 1}/${m[1]}` }
-      return c.f && col.type !== 'number' ? c.f : c.v })));
-  } catch (e) { ko(e) } };
+function gvizRows(res){
+  if(res?.status !== 'ok' || !res.table) throw new Error('Respuesta inválida de Google Sheets');
+  const cols = res.table.cols || [];
+  return (res.table.rows || []).map(row => cols.map((col, i) => { const c = row.c?.[i];
+    if(!c || c.v === null || c.v === undefined) return '';
+    if(col.type === 'date' || col.type === 'datetime'){ if(c.f) return c.f; const m = String(c.v).match(/^Date\((\d+),(\d+),(\d+)/); if(m) return `${m[3]}/${+m[2]+1}/${m[1]}` }
+    return c.v }));
+}
+function fetchTab(src){ return location.protocol.startsWith('http') ? fetchCSV(src) : fetchJSONP(src) }
+function fetchCSV({gid, head}){ return new Promise((ok, ko) => {
+  const u = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${gid}&headers=1&_=${Date.now()}`;
+  Papa.parse(u, {download:true, header:false, skipEmptyLines:true, complete: r => ok(head ? r.data : r.data.slice(1)), error: ko }) }) }
+function fetchJSONP({gid, head}){ return new Promise((ok, ko) => {
+  const cb = `__cpl_${Date.now()}_${++SEQ}`, s = document.createElement('script');
+  const t = setTimeout(() => { cleanup(); ko(new Error('timeout')) }, 30000);
+  const cleanup = () => { clearTimeout(t); s.remove(); delete window[cb] };
+  window[cb] = r => { cleanup(); try{ const rows = gvizRows(r); ok(head ? [(r.table.cols || []).map(c => c.label), ...rows] : rows) } catch(e){ ko(e) } };
   const u = new URL(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq`);
-  u.searchParams.set('tqx', `out:json;responseHandler:${cb}`); u.searchParams.set('sheet', TAB); u.searchParams.set('headers', '1'); u.searchParams.set('_', Date.now());
-  s.src = u; s.async = true; s.onerror = () => { clean(); ko(new Error('red')) }; document.head.appendChild(s) }) }
-const fetchTab = () => location.protocol.startsWith('http') ? fetchCSV() : fetchJSONP();
+  u.searchParams.set('tqx', `out:json;responseHandler:${cb}`); u.searchParams.set('gid', gid); u.searchParams.set('headers', '1'); u.searchParams.set('_', Date.now());
+  s.src = u.toString(); s.async = true; s.onerror = () => { cleanup(); ko(new Error('red')) }; document.head.appendChild(s) }) }
 
-// ── Estado ──────────────────────────────────────────────────────────────────
-let RAW = [], CAMPS = [], RANGE = '14', CAMP = '__all', charts = {};
-try { RANGE = localStorage.getItem('cpaMedRange') || RANGE } catch (e) {}
-
-function load() {
-  $('loading').hidden = false; $('ld-msg').textContent = 'Cargando datos del Sheet…';
-  fetchTab().then(rows => {
-    RAW = rows.map(r => ({d: iso(r[0]), camp: String(r[1] || '').trim(), cost: num(r[2]), conv: num(r[3])}))
-              .filter(r => r.d && CAMP_RE.test(r.camp) && !CAMP_EXCL.test(r.camp));
-    CAMPS = [...new Set(RAW.map(r => r.camp))].sort();
-    $('camp').innerHTML = `<option value="__all">Todas las de Search Medicina (${CAMPS.length})</option>` + CAMPS.map(c => `<option value="${c}">${c.replace('adcom_ucorpas_gg_acq_search_', '')}</option>`).join('');
-    if (CAMP !== '__all' && !CAMPS.includes(CAMP)) CAMP = '__all';
-    $('camp').value = CAMP;
-    $('upd').textContent = 'Leído ' + new Date().toLocaleString('es-CO', {day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'});
-    render(); $('loading').hidden = true;
-  }).catch(e => { console.error(e); $('ld-msg').textContent = 'No se pudo leer el Sheet. Revisa que la pestaña GG_CORPAS siga compartida con el enlace.' });
+let DAYS = {}, LAST = '', CRM_HOY = 0, QUICK = '', CPLV = 'dia', CHARTS = {};
+function load(){
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('ld-msg').textContent = 'Cargando datos...';
+  Promise.all([fetchTab(SRC.rg), fetchTab(SRC.contacts)]).then(([rg, contacts]) => {
+    build(rg, contacts); prepare();
+    const t = new Date().toLocaleString('es-CO', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+    document.getElementById('last-upd').textContent = 'Datos cargados: ' + t;
+    document.getElementById('last-upd-side').textContent = t;
+    document.getElementById('loading').style.display = 'none';
+  }).catch(e => { console.error(e); document.getElementById('ld-msg').textContent = 'No se pudo leer la hoja de Corpas' });
 }
 
-function series() {
-  const by = {};
-  RAW.filter(r => CAMP === '__all' || r.camp === CAMP).forEach(r => { const x = by[r.d] = by[r.d] || {cost: 0, conv: 0}; x.cost += r.cost; x.conv += r.conv });
-  const days = Object.keys(by).filter(d => by[d].cost > 0 || by[d].conv > 0).sort();
-  if (!days.length) return [];
-  const out = [];
-  for (let d = days[0]; d <= days[days.length - 1]; d = addDays(d, 1)) out.push({d, cost: by[d]?.cost || 0, conv: by[d]?.conv || 0});
-  out.forEach((x, i) => { const w = out.slice(Math.max(0, i - 6), i + 1); x.c7 = w.reduce((a, y) => a + y.cost, 0); x.v7 = w.reduce((a, y) => a + y.conv, 0); x.cpa7 = cpa(x.c7, x.v7); x.cpa = cpa(x.cost, x.conv) });
-  return out;
+function build(rg, contacts){
+  DAYS = {}; const day = d => DAYS[d] = DAYS[d] || {d, inv: 0, lp: 0, lc: 0};
+  rg.forEach(x => { const d = iso(x[0]), nm = String(x[1]||'').trim();
+    if(!d || !CAMP_RE.test(nm) || !norm(x[4]).startsWith('GOOGLE')) return;
+    const r = day(d); r.inv += num(x[2]); r.lp += num(x[3]) });
+  LAST = Object.keys(DAYS).filter(d => DAYS[d].inv > 0).sort().pop() || todayISO();
+  const cc = colsDe(contacts, {d:'Create Date', canal:'Canal de Ingreso', pauta:'Lead de Pauta', prog:'Programa de interés'});
+  CRM_HOY = 0;
+  contacts.slice(1).forEach(x => { const d = iso(x[cc.d]);
+    if(!d || String(x[cc.pauta]).trim() !== '1' || !norm(x[cc.canal]).startsWith('GOOGLE ADS') || pkey(x[cc.prog]) !== PROG_KEY) return;
+    if(d > LAST){ CRM_HOY++; return }          // leads de días que la pauta todavía no reporta
+    day(d).lc += 1 });
+  // días corridos con 7 días acumulados
+  const all = Object.keys(DAYS).sort(); if(!all.length) return;
+  for(let d = all[0]; d <= LAST; d = addDays(d, 1)) day(d);
+  const ks = Object.keys(DAYS).sort();
+  ks.forEach((d, i) => { const w = ks.slice(Math.max(0, i - 6), i + 1).map(k => DAYS[k]);
+    const r = DAYS[d]; r.inv7 = w.reduce((a,y) => a + y.inv, 0); r.lp7 = w.reduce((a,y) => a + y.lp, 0); r.lc7 = w.reduce((a,y) => a + y.lc, 0) });
 }
 
-function inRange(all) {
-  if (!all.length) return [];
-  const last = all[all.length - 1].d;
-  const active = all.filter(x => x.cost > 0);                       // los días en pausa no cuentan
-  if (/^\d+$/.test(RANGE)) return active.slice(-(+RANGE));
-  const from = RANGE === 'oct' ? '2026-10-01' : RANGE === 'temp' ? '2026-06-01' : last.slice(0, 8) + '01';
-  return active.filter(x => x.d >= from);
+function prepare(){
+  const q = [['7','Últimos 7 días'],['14','Últimos 14 días'],['mes','Este mes'],['oct','Desde reactivación'],['temp','Temporada (desde 1 jun)']];
+  document.getElementById('quick').innerHTML = q.map(([k,l]) => `<button class="qbtn" data-q="${k}" onclick="setQuick('${k}')">${l}</button>`).join('');
+  setQuick(QUICK || '14');
 }
+function setQuick(k){
+  const act = Object.keys(DAYS).filter(d => DAYS[d].inv > 0).sort(); let a, b = LAST;
+  if(k === 'mes') a = LAST.slice(0,8) + '01';
+  else if(k === 'oct') a = '2026-10-01';
+  else if(k === 'temp') a = '2026-06-01';
+  else a = act.slice(-(+k))[0] || LAST;     // últimos N días con inversión
+  document.getElementById('f-desde').value = a; document.getElementById('f-hasta').value = b;
+  QUICK = k; render() }
+function onDate(){ QUICK = ''; render() }
+function setCplVista(v){ CPLV = v; document.querySelectorAll('[data-cv]').forEach(b => b.classList.toggle('on', b.dataset.cv === v)); render() }
 
-function render() {
-  $('ranges').innerHTML = RANGES.map(([k, t]) => `<button type="button" class="qbtn${k === RANGE ? ' on' : ''}" data-r="${k}">${t}</button>`).join('');
-  const all = series(), rows = inRange(all);
-  if (!rows.length) { $('kpis').innerHTML = '<p class="muted">Sin datos para esta selección.</p>'; return }
-  const last = all[all.length - 1];
-  const tot = rows.reduce((a, x) => ({cost: a.cost + x.cost, conv: a.conv + x.conv}), {cost: 0, conv: 0});
-  const cR = cpa(tot.cost, tot.conv);
+function sum(rows){ return rows.reduce((a,x) => ({inv: a.inv + x.inv, lp: a.lp + x.lp, lc: a.lc + x.lc}), {inv:0, lp:0, lc:0}) }
+function kpi(label, value, sub, extra = '', cls = ''){ return `<div class="card kpi-card ${cls}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div>${extra}</div>` }
+function bar(v){ if(!isFinite(v)) return ''; const p = Math.min(GOAL / v, 1);
+  return `<div class="kpi-bwrap"><div class="kpi-brow"><span>Meta ${fCOP(GOAL)}</span><span>${v <= GOAL ? 'en meta' : fCOP(v - GOAL) + ' arriba'}</span></div><div class="kpi-bar"><div class="kpi-bfill ${bcls(v)}" style="width:${Math.round(p*100)}%"></div></div></div>` }
 
-  // veredicto
-  const [st, cls] = estado(last.cpa7);
-  $('v-cpa7').textContent = fmt$(last.cpa7);
-  const diff = last.cpa7 - GOAL;
-  $('v-vs').textContent = `al ${label(last.d)} · ${isFinite(diff) ? (diff > 0 ? fmt$(diff) + ' por encima' : fmt$(-diff) + ' por debajo') : '—'} del objetivo`;
-  $('v-chip').textContent = st; $('v-chip').className = 'chip ' + cls;
-  const need = Math.ceil(last.c7 / GOAL) - last.v7;
-  $('v-msg').textContent = need > 0
-    ? `Con la inversión de los últimos 7 días (${fmt$(last.c7)}) faltaron ${fmtN(need)} conversiones para estar en $50.000, o sobraron ${fmt$(last.c7 - last.v7 * GOAL)} de inversión.`
-    : `Con la inversión de los últimos 7 días (${fmt$(last.c7)}) hay ${fmtN(-need)} conversiones de margen sobre el objetivo.`;
+function render(){
+  document.querySelectorAll('#quick .qbtn').forEach(b => b.classList.toggle('on', b.dataset.q === QUICK));
+  const a = document.getElementById('f-desde').value, b = document.getElementById('f-hasta').value;
+  const rows = Object.values(DAYS).filter(x => x.d >= a && x.d <= b && x.inv > 0).sort((x,y) => x.d < y.d ? -1 : 1);
+  if(!rows.length){ document.getElementById('kpi-grid').innerHTML = '<div class="sec-note">Sin inversión en el rango elegido.</div>'; return }
+  const T = sum(rows), nd = rows.length, cP = div(T.inv, T.lp), cC = div(T.inv, T.lc);
+  const prev = Object.values(DAYS).filter(x => x.d < rows[0].d && x.inv > 0).sort((x,y) => x.d < y.d ? -1 : 1).slice(-nd), P = sum(prev), pP = div(P.inv, P.lp);
+  const dlt = isFinite(pP) && isFinite(cP) ? cP / pP - 1 : NaN;
+  const L = DAYS[LAST], c7 = div(L.inv7, L.lp7), need = Math.ceil(T.inv / GOAL);
+  document.getElementById('rango-note').textContent = `${fDate(rows[0].d)} – ${fDate(rows[rows.length-1].d)} · ${nd} días con inversión · datos de pauta hasta ${fDate(LAST)}`;
 
-  // indicadores del rango
-  const nd = rows.length, prev = all.filter(x => x.d < rows[0].d && x.cost > 0).slice(-nd);
-  const pT = prev.reduce((a, x) => ({cost: a.cost + x.cost, conv: a.conv + x.conv}), {cost: 0, conv: 0}), pC = cpa(pT.cost, pT.conv);
-  const delta = isFinite(pC) && isFinite(cR) ? (cR / pC - 1) * 100 : NaN;
-  const k = (t, v, s, c = '') => `<div class="kpi ${c}"><span class="lbl">${t}</span><b>${v}</b><small>${s}</small></div>`;
-  $('kpis').innerHTML = [
-    k('CPA del rango', fmt$(cR), `${nd} días con inversión · ${estado(cR)[0].toLowerCase()}`, cR <= GOAL ? 'pos' : cR > WARN ? 'neg' : ''),
-    k('vs. periodo anterior', isFinite(delta) ? (delta > 0 ? '+' : '') + fmtN(delta, 1) + ' %' : '—', `CPA de ${fmt$(pC)} en los ${nd} días activos previos`, delta < 0 ? 'pos' : delta > 0 ? 'neg' : ''),
-    k('Inversión', fmt$(tot.cost), `${fmt$(tot.cost / nd)} al día`),
-    k('Conversiones', fmtN(tot.conv, tot.conv % 1 ? 1 : 0), `${fmtN(tot.conv / nd, 1)} al día`),
-    k('Días en meta', `${rows.filter(x => x.cpa7 <= GOAL).length} de ${nd}`, 'con CPA de 7 días ≤ $50.000'),
-    k('Conversiones para la meta', fmtN(Math.ceil(tot.cost / GOAL)), `con la inversión del rango; van ${fmtN(tot.conv)}`),
+  document.getElementById('kpi-grid').innerHTML = [
+    kpi('CPL plataforma', `<span>${fCOP(cP)}</span>`, `${fN(T.lp)} leads de Google · <b class="${tcls(cP)}">${est(cP)[0].toLowerCase()}</b>`, bar(cP), 'hero'),
+    kpi('CPL CRM', fCOP(cC), `${fN(T.lc)} leads en HubSpot · ${isFinite(cC) && isFinite(cP) ? fN1((cC / cP - 1) * 100) + ' % frente a plataforma' : '—'}`),
+    kpi('Inversión', fCOP(T.inv), `${fCOP(T.inv / nd)} al día`),
+    kpi('Leads plataforma', fN(T.lp), `${fN1(T.lp / nd)} al día · para la meta: ${fN(need)}`),
+    kpi('Leads CRM', fN(T.lc), `${fN1(T.lc / nd)} al día${CRM_HOY ? ` · hoy van ${CRM_HOY}` : ''}`),
+  ].join('');
+  document.getElementById('kpi-grid2').innerHTML = [
+    kpi('CPL plataforma últimos 7 días', `<span class="${tcls(c7)}">${fCOP(c7)}</span>`, `al ${fDate(LAST)} · ${fCOP(L.inv7)} y ${fN(L.lp7)} leads`),
+    kpi('vs. periodo anterior', `<span class="${!isFinite(dlt) ? 't-mute' : dlt <= 0 ? 't-pos' : 't-neg'}">${isFinite(dlt) ? (dlt > 0 ? '+' : '') + fN1(dlt * 100) + ' %' : '—'}</span>`, `CPL plataforma de ${fCOP(pP)} en los ${nd} días activos previos`),
+    kpi('Días en meta', `${rows.filter(x => div(x.inv7, x.lp7) <= GOAL).length} de ${nd}`, 'con CPL plataforma de 7 días ≤ $50.000'),
+    kpi('Brecha a la meta', T.lp >= need ? '<span class="t-pos">En meta</span>' : `<span class="t-neg">${fN(need - T.lp)} leads</span>`, T.lp >= need ? `${fN(T.lp - need)} leads de margen con esta inversión` : `o ${fCOP(T.inv - T.lp * GOAL)} de inversión de más`),
   ].join('');
 
   // antes / después
-  const after = all.filter(x => x.d >= OPT_DATE), before = all.filter(x => x.d < OPT_DATE && x.cost > 0).slice(-Math.max(after.filter(x => x.cost > 0).length, 7));
-  const agg = a => a.reduce((s, x) => ({cost: s.cost + x.cost, conv: s.conv + x.conv}), {cost: 0, conv: 0});
-  const A = agg(after), B = agg(before);
-  const cmp = (t, x, n) => `<div class="cmp"><span class="lbl">${t}</span><b>${fmt$(cpa(x.cost, x.conv))}</b><span class="muted">${n ? `${n} días · ${fmt$(x.cost)} · ${fmtN(x.conv)} conv.` : 'Todavía sin datos'}</span></div>`;
-  $('compare').innerHTML = cmp(`Antes (${before.length ? label(before[0].d) + ' – ' + label(before[before.length - 1].d) : '—'})`, B, before.length)
-    + cmp(`Después (desde ${label(OPT_DATE)})`, A, after.length)
-    + `<div class="cmp"><span class="lbl">Cambio</span><b>${after.length && isFinite(cpa(A.cost, A.conv)) && isFinite(cpa(B.cost, B.conv)) ? fmtN((cpa(A.cost, A.conv) / cpa(B.cost, B.conv) - 1) * 100, 1) + ' %' : '—'}</b><span class="muted">${after.length < 7 ? 'Menos de 7 días: la comparación todavía no es concluyente' : 'Comparación con el mismo número de días'}</span></div>`;
+  const act = Object.values(DAYS).filter(x => x.inv > 0).sort((x,y) => x.d < y.d ? -1 : 1);
+  const aft = act.filter(x => x.d >= OPT_DATE), bef = act.filter(x => x.d < OPT_DATE).slice(-Math.max(aft.length, 7));
+  const A = sum(aft), B = sum(bef);
+  const cm = (t, X, n, rg) => kpi(t, n ? fCOP(div(X.inv, X.lp)) : '—', n ? `CPL CRM ${fCOP(div(X.inv, X.lc))} · ${n} días · ${fCOP(X.inv)} · ${fN(X.lp)} leads plat. · ${fN(X.lc)} CRM` : 'todavía sin días con datos', '', '');
+  const ch = aft.length ? div(A.inv, A.lp) / div(B.inv, B.lp) - 1 : NaN;
+  document.getElementById('cmp-grid').innerHTML = cm(`Antes · ${bef.length ? fDate(bef[0].d) + ' – ' + fDate(bef[bef.length-1].d) : '—'}`, B, bef.length)
+    + cm(`Después · desde ${fDate(OPT_DATE)}`, A, aft.length)
+    + kpi('Cambio en CPL plataforma', `<span class="${!isFinite(ch) ? 't-mute' : ch <= 0 ? 't-pos' : 't-neg'}">${isFinite(ch) ? (ch > 0 ? '+' : '') + fN1(ch * 100) + ' %' : '—'}</span>`, aft.length < 7 ? 'menos de 7 días después: todavía no es concluyente' : 'mismo número de días a cada lado');
 
-  // tabla
-  const ev = Object.fromEntries(EVENTOS.map(e => [e[0], e[1]]));
-  const lagFrom = addDays(last.d, -2);
-  $('rows').innerHTML = rows.slice().reverse().map(x => { const [s, c] = estado(x.cpa7);
-    return `<tr class="${ev[x.d] ? 'ev' : ''} ${x.d >= lagFrom ? 'lag' : ''}"><td>${label(x.d)}</td><td>${fmt$(x.cost)}</td><td>${fmtN(x.conv, x.conv % 1 ? 1 : 0)}</td><td>${fmt$(x.cpa)}</td><td>${fmt$(x.cpa7)}</td><td><span class="chip ${c}">${s}</span></td><td>${ev[x.d] || ''}</td></tr>` }).join('');
+  // tabla diaria
+  const ev = Object.fromEntries(EVENTOS.map(e => [e[0], e[1]])), lag = addDays(LAST, -2);
+  document.getElementById('dia-body').innerHTML = rows.slice().reverse().map(x => { const c = div(x.inv7, x.lp7), [s, sc] = est(c), lg = x.d >= lag ? ' lagc' : '';
+    return `<tr class="${ev[x.d] ? 'ev' : ''} ${x.d >= lag ? 'lag' : ''}"><td>${fDate(x.d)}</td><td class="r">${fCOP(x.inv)}</td><td class="r grp${lg}">${fN(x.lp)}</td><td class="r${lg}">${fCOP(div(x.inv, x.lp))}</td><td class="r grp">${fN(x.lc)}</td><td class="r">${fCOP(div(x.inv, x.lc))}</td><td class="r grp ${tcls(c)}">${fCOP(c)}</td><td><span class="st ${sc}">${s}</span></td><td class="grp">${ev[x.d] || ''}</td></tr>` }).join('')
+    + `<tr class="tr-total"><td>Total</td><td class="r">${fCOP(T.inv)}</td><td class="r grp">${fN(T.lp)}</td><td class="r">${fCOP(cP)}</td><td class="r grp">${fN(T.lc)}</td><td class="r">${fCOP(cC)}</td><td class="r grp"></td><td><span class="st ${est(cP)[1]}">${est(cP)[0]}</span></td><td class="grp"></td></tr>`;
 
-  // bitácora
-  $('log').innerHTML = EVENTOS.slice().reverse().map(e => `<li><time datetime="${e[0]}">${label(e[0])}</time><span>${e[2]}</span></li>`).join('');
-
-  drawCharts(rows);
+  document.getElementById('log').innerHTML = EVENTOS.slice().reverse().map(e => `<li><time datetime="${e[0]}">${fDate(e[0])}</time><span>${e[2]}</span></li>`).join('');
+  charts(rows);
 }
 
-// línea vertical en las fechas de la bitácora
-const eventLines = {id: 'eventLines', afterDatasetsDraw(chart) {
-  const {ctx, chartArea: a, scales: {x}} = chart, keys = CUR_KEYS;
+// líneas verticales en las fechas de la bitácora
+let KEYS = [];
+const eventLines = {id: 'eventLines', afterDatasetsDraw(chart){
+  const {ctx, chartArea: a, scales: {x}} = chart; let n = 0;
   ctx.save(); ctx.strokeStyle = css('--accent-fg'); ctx.fillStyle = css('--accent-fg'); ctx.lineWidth = 1.5; ctx.setLineDash([4, 3]);
-  ctx.font = '600 11px Poppins, sans-serif'; ctx.textAlign = 'left';
-  let n = 0;
-  EVENTOS.forEach(([d, t]) => { const i = keys.indexOf(d); if (i < 0) return; const px = x.getPixelForValue(i), w = ctx.measureText(t).width;
+  ctx.font = '600 11px Poppins, sans-serif';
+  EVENTOS.forEach(([d, t]) => { const i = KEYS.indexOf(d); if(i < 0) return; const px = x.getPixelForValue(i), w = ctx.measureText(t).width;
     ctx.beginPath(); ctx.moveTo(px, a.top); ctx.lineTo(px, a.bottom); ctx.stroke();
     ctx.fillText(t, px + 4 + w > a.right ? px - w - 4 : px + 4, a.top + 12 + (n++ % 3) * 14) });
   ctx.restore() }};
 
-let CUR_KEYS = [];
-function drawCharts(rows) {
-  Object.values(charts).forEach(c => c.destroy());
-  CUR_KEYS = rows.map(x => x.d);
-  const labels = rows.map(x => label(x.d)), fg = css('--fg'), muted = css('--fg-muted'), rule = css('--rule');
-  Chart.defaults.font.family = 'Poppins, sans-serif'; Chart.defaults.font.size = 12; Chart.defaults.color = muted;
-  const yK = v => '$' + Math.round(v / 1000) + 'k';
+function charts(rows){
+  Object.values(CHARTS).forEach(c => c.destroy()); KEYS = rows.map(x => x.d);
+  Chart.defaults.font.family = 'Poppins, sans-serif'; Chart.defaults.font.size = 11; Chart.defaults.color = css('--fg-muted');
+  const labels = rows.map(x => fDate(x.d)), grid = css('--rule'), yK = v => '$' + Math.round(v / 1000) + 'k';
   const base = {responsive: true, maintainAspectRatio: false, animation: false, interaction: {mode: 'index', intersect: false},
-    plugins: {legend: {display: false}}, scales: {x: {grid: {display: false}, ticks: {maxRotation: 0, autoSkip: true, maxTicksLimit: 10}}}};
-  const cap = Math.max(GOAL * 2.2, ...rows.map(x => isFinite(x.cpa7) ? x.cpa7 * 1.15 : 0));
-  charts.cpa = new Chart($('c-cpa'), {
+    plugins: {legend: {display: false}}, scales: {x: {grid: {display: false}, ticks: {maxRotation: 0, autoSkip: true, maxTicksLimit: 12}}}};
+  const v7 = CPLV === '7d', cp = rows.map(x => v7 ? div(x.inv7, x.lp7) : div(x.inv, x.lp)), cc = rows.map(x => v7 ? div(x.inv7, x.lc7) : div(x.inv, x.lc));
+  const vals = [...cp, ...cc].filter(isFinite).sort((p, q) => p - q), cap = Math.max(GOAL * 2, (vals[Math.floor(vals.length * .9)] || GOAL) * 1.15);
+  const clip = v => isFinite(v) ? Math.min(v, cap) : null;
+  CHARTS.cpl = new Chart(document.getElementById('chart-cpl'), {type: 'line',
     data: {labels, datasets: [
-      {type: 'bar', label: 'CPA del día', data: rows.map(x => isFinite(x.cpa) ? Math.min(x.cpa, cap) : null), backgroundColor: css('--ramp-2'), borderRadius: 0, order: 3},
-      {type: 'line', label: 'CPA móvil 7 días', data: rows.map(x => isFinite(x.cpa7) ? x.cpa7 : null), borderColor: fg, backgroundColor: fg, borderWidth: 2.5, pointRadius: rows.map((_, i) => i === rows.length - 1 ? 4 : 0), tension: .25, order: 1},
-      {type: 'line', label: 'Objetivo', data: rows.map(() => GOAL), borderColor: css('--pos'), borderWidth: 2, pointRadius: 0, order: 2}]},
-    options: {...base, scales: {...base.scales, y: {min: 0, suggestedMax: cap, grid: {color: rule}, ticks: {callback: yK}}},
-      plugins: {...base.plugins, tooltip: {callbacks: {label: c => `${c.dataset.label}: ${fmt$(c.dataset.label === 'CPA del día' ? rows[c.dataIndex].cpa : c.raw)}`}}}},
+      {label: 'CPL plataforma', data: cp.map(clip), borderColor: css('--black'), backgroundColor: css('--black'), borderWidth: 2.5, pointRadius: 2.5, tension: 0, spanGaps: true},
+      {label: 'CPL CRM', data: cc.map(clip), borderColor: css('--serie-1'), backgroundColor: css('--serie-1'), borderWidth: 2, pointRadius: 2, tension: 0, spanGaps: true, borderDash: [5, 3]},
+      {label: 'Meta', data: rows.map(() => GOAL), borderColor: css('--c-pos'), borderWidth: 2, pointRadius: 0}]},
+    options: {...base, scales: {...base.scales, y: {min: 0, max: cap, grid: {color: grid}, ticks: {callback: yK}}},
+      plugins: {...base.plugins, tooltip: {callbacks: {label: c => `${c.dataset.label}: ${fCOP(c.dataset.label === 'Meta' ? GOAL : (c.datasetIndex === 0 ? cp : cc)[c.dataIndex])}`}}}},
     plugins: [eventLines]});
-  charts.vol = new Chart($('c-vol'), {
+  CHARTS.vol = new Chart(document.getElementById('chart-vol'), {
     data: {labels, datasets: [
-      {type: 'bar', label: 'Inversión', data: rows.map(x => x.cost), backgroundColor: css('--ramp-3'), yAxisID: 'y', order: 2},
-      {type: 'line', label: 'Conversiones', data: rows.map(x => x.conv), borderColor: css('--serie-1'), backgroundColor: css('--serie-1'), pointRadius: 2, borderWidth: 2, yAxisID: 'y1', order: 1}]},
+      {type: 'bar', label: 'Inversión', data: rows.map(x => x.inv), backgroundColor: css('--ramp-3'), yAxisID: 'y', order: 3},
+      {type: 'line', label: 'Leads plataforma', data: rows.map(x => x.lp), borderColor: css('--black'), backgroundColor: css('--black'), pointRadius: 2, borderWidth: 2, yAxisID: 'y1', order: 1},
+      {type: 'line', label: 'Leads CRM', data: rows.map(x => x.lc), borderColor: css('--serie-1'), backgroundColor: css('--serie-1'), pointRadius: 2, borderWidth: 2, borderDash: [5, 3], yAxisID: 'y1', order: 2}]},
     options: {...base, scales: {...base.scales,
-      y: {min: 0, grid: {color: rule}, ticks: {callback: yK}, title: {display: true, text: 'Inversión'}},
-      y1: {min: 0, position: 'right', grid: {display: false}, title: {display: true, text: 'Conversiones'}}},
-      plugins: {...base.plugins, tooltip: {callbacks: {label: c => c.dataset.label === 'Inversión' ? 'Inversión: ' + fmt$(c.raw) : 'Conversiones: ' + fmtN(c.raw)}}}},
+      y: {min: 0, grid: {color: grid}, ticks: {callback: yK}, title: {display: true, text: 'Inversión'}},
+      y1: {min: 0, position: 'right', grid: {display: false}, title: {display: true, text: 'Leads'}}},
+      plugins: {...base.plugins, tooltip: {callbacks: {label: c => c.dataset.label === 'Inversión' ? 'Inversión: ' + fCOP(c.raw) : `${c.dataset.label}: ${fN(c.raw)}`}}}},
     plugins: [eventLines]});
 }
 
-$('ranges').addEventListener('click', e => { const b = e.target.closest('[data-r]'); if (!b) return; RANGE = b.dataset.r; try { localStorage.setItem('cpaMedRange', RANGE) } catch (er) {} render() });
-$('camp').addEventListener('change', e => { CAMP = e.target.value; render() });
-$('reload').addEventListener('click', load);
 load();
 </script>
 </body>
