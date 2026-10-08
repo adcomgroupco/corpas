@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Estrategia de Search y Demand Gen de Corpas para pregrados y posgrados 2027-1: campañas, palabras clave, audiencias, anuncios y piezas. ADCOM.">
+<title>Corpas · Estrategia Search-DGen 2027-1 · ADCOM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: ADCOM client template on white. Black rounded header, yellow accent; a 2x2 map (Search / Demand Gen x pregrado / posgrado) leads into one section per campaign. Light only, as requested. */
+:root {
+  --bg: #FFFFFF; --ink: #141414; --muted: #63635E; --line: #E6E6E1; --panel: #F7F7F5;
+  --accent: #FFC000; --accent-soft: #FFF5D1; --head: #141414; --head-ink: #FFFFFF; --link: #1A0DAB; --img: #EDEBE4;
+  --f: "Poppins", "Segoe UI", Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body { color: var(--ink); font-family: var(--f); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; display: grid; gap: 48px; }
+h1, h2, h3, h4 { margin: 0; line-height: 1.2; text-wrap: balance; }
+p, ul, ol { margin: 0; }
+a { color: var(--link); overflow-wrap: anywhere; }
+.muted { color: var(--muted); }
+.lbl, .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+.top { background: var(--head); color: var(--head-ink); border-radius: 20px; padding: clamp(24px, 4vw, 44px); display: grid; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .16em; font-size: 13px; }
+.brand i { width: 12px; height: 12px; border-radius: 3px; background: var(--accent); }
+.top h1 { font-size: clamp(28px, 4.6vw, 42px); font-weight: 700; }
+.top h1 span { color: var(--accent); }
+.top p { max-width: 64ch; color: #D6D6D2; font-size: 16px; }
+
+.intro { display: grid; gap: 18px; }
+.intro h2, .camp-head h2, .block h2 { font-size: clamp(22px, 3vw, 28px); }
+.intro > p { max-width: 68ch; }
+.map { display: grid; grid-template-columns: auto 1fr 1fr; gap: 10px; }
+.ax { font-size: 12px; font-weight: 600; color: var(--muted); display: flex; align-items: center; }
+.ax.r { flex-direction: column; align-items: flex-start; justify-content: center; line-height: 1.3; }
+.ax.r small { font-weight: 400; }
+.tile { display: grid; gap: 4px; padding: 18px; border-radius: 14px; text-decoration: none; color: var(--ink); border: 1px solid var(--line); border-bottom: 4px solid var(--accent); }
+.tile:hover, .tile:focus-visible { background: var(--accent-soft); outline: none; }
+.tile-name { font-weight: 600; font-size: 18px; }
+.tile-stats { color: var(--muted); font-size: 13px; }
+.medline { grid-column: 2 / span 2; border: 2px dashed var(--line); border-radius: 14px; padding: 12px 16px; font-size: 14px; color: var(--muted); }
+.medline b { color: var(--ink); }
+@media (max-width: 600px) { .map { grid-template-columns: 1fr 1fr; } .ax.r, .ax.c0 { display: none; } .medline { grid-column: 1 / -1; } }
+
+.camp { display: grid; gap: 16px; scroll-margin-top: 16px; }
+.camp-head { display: grid; gap: 6px; padding-bottom: 14px; border-bottom: 3px solid var(--accent); }
+.lead { max-width: 70ch; font-size: 16px; }
+.legend { display: flex; gap: 8px; margin-top: 4px; }
+.group { border: 1px solid var(--line); border-radius: 16px; padding: clamp(16px, 3vw, 24px); display: grid; gap: 16px; }
+.group-head { display: grid; gap: 2px; }
+.group-head h3 { font-size: 19px; }
+.group-head p { font-size: 13px; }
+.group-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 780px) { .group-grid { grid-template-columns: 1fr; } }
+.col { display: grid; gap: 10px; min-width: 0; }
+.kwblock { display: grid; gap: 6px; }
+.kwblock h4 { font-size: 13px; font-weight: 600; }
+.chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li, .chip { background: var(--panel); border: 1px solid var(--panel); border-radius: 99px; padding: 2px 11px; font-size: 13px; }
+.chips li.b, .chip.b { background: var(--accent-soft); border-color: var(--accent); }
+.chip { font-size: 12px; }
+ul.sig { padding-left: 18px; font-size: 13px; display: grid; gap: 3px; }
+
+.serp { border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 4px; font-family: Arial, Helvetica, sans-serif; box-shadow: 0 1px 6px rgba(20,20,20,.06); }
+.serp-top { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--muted); }
+.serp-top b { color: var(--ink); }
+.serp-h { color: var(--link); font-size: 19px; line-height: 1.3; }
+.serp-d { font-size: 14px; color: #4D5156; }
+
+.dg { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 6px rgba(20,20,20,.06); font-family: Arial, Helvetica, sans-serif; }
+.dg-img { aspect-ratio: 1.91 / 1; max-width: 100%; background: repeating-linear-gradient(135deg, var(--img) 0 14px, #E4E1D8 14px 28px);
+  display: flex; align-items: flex-end; padding: 12px; }
+.dg-img span { background: rgba(255,255,255,.92); border-radius: 8px; padding: 4px 10px; font-size: 12px; color: var(--ink); }
+.dg-body { padding: 14px 16px 16px; display: grid; gap: 4px; }
+.dg-brand { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; }
+.dg-brand i { width: 18px; height: 18px; border-radius: 50%; background: var(--head); display: inline-block; }
+.dg-brand span { font-weight: 400; color: var(--muted); }
+.dg-h { font-size: 17px; font-weight: 700; line-height: 1.3; }
+.dg-d { font-size: 14px; color: #4D5156; }
+.dg-cta { justify-self: start; margin-top: 6px; background: var(--head); color: #fff; border-radius: 99px; padding: 6px 14px; font-size: 13px; font-weight: 600; }
+
+details summary { cursor: pointer; font-size: 13px; font-weight: 600; }
+details summary:focus-visible { outline: 2px solid var(--accent); border-radius: 4px; }
+.copy { display: grid; gap: 12px; margin-top: 10px; }
+.copy ol { padding-left: 22px; font-size: 13px; display: grid; gap: 2px; }
+
+.block { display: grid; gap: 14px; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.card { background: var(--panel); border-radius: 14px; padding: 18px; display: grid; gap: 8px; align-content: start; }
+.card h3 { font-size: 16px; }
+.card p, .card li { font-size: 14px; }
+.card ul { padding-left: 18px; display: grid; gap: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+td { padding: 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+td + td { padding-left: 12px; color: var(--muted); white-space: nowrap; }
+.angle { background: var(--panel); border-radius: 12px; padding: 14px 16px; display: grid; gap: 8px; }
+.angle-head { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 13px; }
+.vert { background: var(--head); color: #fff; border-radius: 99px; padding: 2px 10px; font-size: 12px; font-weight: 600; }
+.frase { font-size: 18px; font-weight: 600; line-height: 1.35; }
+.tblwrap { overflow-x: auto; }
+table.pieces { font-size: 13px; min-width: 520px; }
+table.pieces th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; padding: 4px 8px 4px 0; border-bottom: 1px solid var(--line); }
+table.pieces td { padding: 6px 8px 6px 0; white-space: normal; }
+table.pieces td + td { padding-left: 0; }
+.pt { display: inline-block; border-radius: 99px; padding: 1px 9px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.pt-0 { background: var(--accent); }
+.pt-1 { background: #E3ECF7; }
+.pt-2 { background: #EDEBE4; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.stats div { border: 1px solid var(--line); border-bottom: 4px solid var(--accent); border-radius: 14px; padding: 14px 16px; display: grid; }
+.stats b { font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stats span { font-size: 13px; color: var(--muted); }
+.small { font-size: 12px; }
+td.idx { font-size: 20px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+footer { font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body style="margin:0">
+<div class="wrap">
+<header class="top">
+  <div class="brand"><i></i>ADCOM</div>
+  <h1>Corpas · Google Ads <span>2027-1</span></h1>
+  <p>Propuesta de cuatro campañas en Google para los pregrados y posgrados de la Fundación Universitaria Juan N. Corpas: dos de búsqueda y dos de Demand Gen.</p>
+</header>
+
+<section class="intro">
+  <h2>La propuesta en una mirada</h2>
+  <p>Las campañas de Search responden a quien ya está buscando un programa en Google, con o sin el nombre de la Corpas. Las campañas de Demand Gen hacen branding: muestran la Corpas en YouTube, Discover y Gmail a personas con interés en estos programas, antes de que la busquen.</p>
+  <div class="map">
+    <span class="ax c0"></span><span class="ax">Pregrado</span><span class="ax">Posgrado</span>
+    <span class="ax r">Search<small>Buscan el programa</small></span>
+    <a class="tile tile-spre" href="#spre"><span class="tile-name">Search Pregrados</span><span class="tile-stats">4 grupos · 89 palabras clave</span></a><a class="tile tile-spos" href="#spos"><span class="tile-name">Search Posgrados</span><span class="tile-stats">5 grupos · 96 palabras clave</span></a>
+    <span class="ax r">Demand Gen<small>Branding</small></span>
+    <a class="tile tile-dpre" href="#dpre"><span class="tile-name">Branding Pregrados</span><span class="tile-stats">2 audiencias · YouTube, Discover y Gmail</span></a><a class="tile tile-dpos" href="#dpos"><span class="tile-name">Branding Posgrados</span><span class="tile-stats">2 audiencias · YouTube, Discover y Gmail</span></a>
+    <div class="medline"><b>Medicina</b> mantiene su campaña actual. Estas cuatro campañas no compiten con ella.</div>
+  </div>
+</section>
+
+
+<section class="camp" id="spre">
+  <div class="camp-head"><p class="eyebrow">Search · Pregrado</p><h2>Search Pregrados</h2><p class="lead">Aparece cuando alguien busca en Google un pregrado de la Corpas, con el nombre de la universidad o sin él: «corpas enfermería», «estudiar enfermería», «escuela de música», «licenciatura en idiomas».</p>
+    <p class="legend"><span class="chip">sin marca</span><span class="chip b">con marca</span></p></div>
+  
+<article class="group">
+  <header class="group-head"><h3>Marca institucional</h3><p class="muted">25 palabras clave · Página de destino: <a href="https://www.juanncorpas.edu.co/pregrados-fundacion-universitaria-juan-n-corpas/">juanncorpas.edu.co/pregrados-fundacion-universitaria-juan-n-corpas/</a></p></header>
+  <div class="group-grid">
+    <div class="col"><p class="lbl">Palabras clave</p><div class="kwblock"><ul class="chips"><li class=b>corpas</li><li class=b>juan n corpas</li><li class=b>universidad juan n corpas</li><li class=b>universidad corpas</li><li class=b>fundación universitaria juan n corpas</li><li class=b>fundación universitaria corpas</li><li class=b>juan corpas</li><li class=b>unicorpas</li><li class=b>corpas universidad</li><li class=b>universidad juan corpas</li><li class=b>fundación juan n corpas</li><li class=b>universidad la corpas</li><li class=b>la corpas</li><li class=b>universidad de corpas</li><li class=b>juan n corpas universidad</li><li class=b>universidad corpas bogotá</li><li class=b>jn corpas</li><li class=b>inscripciones corpas</li><li class=b>corpas inscripciones</li><li class=b>juan n corpas inscripciones</li><li class=b>inscripciones juan n corpas</li><li class=b>universidad corpas inscripciones</li><li class=b>universidad corpas carreras</li><li class=b>universidad juan n corpas carreras</li><li class=b>carreras corpas</li></ul></div></div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Google</p>
+      <div class="serp">
+        <div class="serp-top"><b>Patrocinado</b><span>juanncorpas.edu.co › Pregrados › Inscripciones</span></div>
+        <div class="serp-h">Universidad Juan N. Corpas | Fundación Universitaria Corpas | Inscripciones 2027-1 Abiertas</div>
+        <div class="serp-d">Fundación Universitaria Juan N. Corpas, con Acreditación Institucional en Alta Calidad. Pregrados en Medicina, Enfermería, Música y Lenguas Extranjeras. ¡Inscríbete ya!</div>
+      </div>
+      <details><summary>Ver los 15 títulos y 4 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Universidad Juan N. Corpas</li><li>Fundación Universitaria Corpas</li><li>Inscripciones 2027-1 Abiertas</li><li>Pregrados en Bogotá</li><li>Acreditación Alta Calidad</li><li>Medicina, Enfermería y Más</li><li>Enfermería en la Corpas</li><li>Música en la Corpas</li><li>Lenguas Extranjeras Corpas</li><li>Centros de Práctica Propios</li><li>Opciones de Financiación</li><li>Inscríbete en la Corpas</li><li>Conoce Nuestros Pregrados</li><li>Sitio Oficial Juan N. Corpas</li><li>Solicita Información Aquí</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Fundación Universitaria Juan N. Corpas, con Acreditación Institucional en Alta Calidad.</li><li>Pregrados en Medicina, Enfermería, Música y Lenguas Extranjeras. ¡Inscríbete ya!</li><li>Inscripciones abiertas 2027-1. Conoce planes de estudio, inversión y financiación.</li><li>Estudia en Bogotá con centros de práctica propios y docentes expertos. Solicita info.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="group">
+  <header class="group-head"><h3>Enfermería</h3><p class="muted">28 palabras clave · Página de destino: <a href="https://www.juanncorpas.edu.co/pregrado-enfermeria/">juanncorpas.edu.co/pregrado-enfermeria/</a></p></header>
+  <div class="group-grid">
+    <div class="col"><p class="lbl">Palabras clave</p><div class="kwblock"><ul class="chips"><li class=b>corpas enfermería</li><li class=b>enfermería corpas</li><li class=b>enfermería juan n corpas</li><li class=b>juan n corpas enfermería</li><li class=b>universidad corpas enfermería</li><li class=b>universidad juan n corpas enfermería</li><li class=b>enfermería universidad corpas</li><li class=b>fundación universitaria juan n corpas enfermería</li><li class=b>juan n corpas enfermería costos</li><li>estudiar enfermería</li><li>carrera enfermería</li><li>enfermería profesional</li><li>profesional en enfermería</li><li>jefe de enfermería</li><li>enfermería jefe universidad</li><li>jefatura de enfermería</li><li>jefe de enfermería carrera</li><li>estudiar enfermería en bogotá</li><li>enfermería bogotá</li><li>quiero estudiar enfermería</li><li>institutos para estudiar enfermería en bogotá</li><li>jefe de enfermería universidades bogotá costos</li><li>valor del semestre de jefe de enfermería</li><li>universidades para estudiar enfermería en bogotá</li><li>enfermería carrera precio</li><li>inscripciones enfermería</li><li>universidad de enfermería</li><li>enfermería</li></ul></div></div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Google</p>
+      <div class="serp">
+        <div class="serp-top"><b>Patrocinado</b><span>juanncorpas.edu.co › Pregrados › Enfermeria</span></div>
+        <div class="serp-h">Enfermería Juan N. Corpas | Enfermería en la Corpas | Pregrado en Enfermería</div>
+        <div class="serp-d">Pregrado en Enfermería de la Fundación Universitaria Juan N. Corpas. ¡Inscríbete ya! Prácticas en la Clínica Juan N. Corpas. Modalidad presencial en Bogotá.</div>
+      </div>
+      <details><summary>Ver los 15 títulos y 4 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Enfermería Juan N. Corpas</li><li>Enfermería en la Corpas</li><li>Pregrado en Enfermería</li><li>Inscripciones 2027-1 Abiertas</li><li>Fundación Universitaria Corpas</li><li>Estudia Enfermería en Bogotá</li><li>Prácticas en Clínica Propia</li><li>Acreditación Alta Calidad</li><li>Enfermería Profesional</li><li>Conoce el Plan de Estudios</li><li>Opciones de Financiación</li><li>Inscríbete Ahora</li><li>Sé Jefe de Enfermería</li><li>Universidad Juan N. Corpas</li><li>Solicita Información Aquí</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Pregrado en Enfermería de la Fundación Universitaria Juan N. Corpas. ¡Inscríbete ya!</li><li>Prácticas en la Clínica Juan N. Corpas. Modalidad presencial en Bogotá.</li><li>Inscripciones abiertas 2027-1. Consulta inversión semestral y opciones de financiación.</li><li>Fórmate como profesional de enfermería en una institución acreditada en Alta Calidad.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="group">
+  <header class="group-head"><h3>Música</h3><p class="muted">15 palabras clave · Página de destino: <a href="https://www.juanncorpas.edu.co/pregrado-musica/">juanncorpas.edu.co/pregrado-musica/</a></p></header>
+  <div class="group-grid">
+    <div class="col"><p class="lbl">Palabras clave</p><div class="kwblock"><ul class="chips"><li class=b>corpas música</li><li class=b>juan n corpas música</li><li class=b>universidad corpas música</li><li class=b>música corpas</li><li class=b>música juan n corpas</li><li>escuela de música</li><li>escuela de música bogotá</li><li>estudiar música</li><li>carrera de música</li><li>universidades de música</li><li>estudiar música en bogotá</li><li>inscripciones música</li><li>universidades para estudiar música en bogotá</li><li>pregrado en música</li><li>músico profesional</li></ul></div></div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Google</p>
+      <div class="serp">
+        <div class="serp-top"><b>Patrocinado</b><span>juanncorpas.edu.co › Pregrados › Musica</span></div>
+        <div class="serp-h">Música Juan N. Corpas | Estudia Música en la Corpas | Pregrado en Música</div>
+        <div class="serp-d">Pregrado en Música de la Fundación Universitaria Juan N. Corpas. ¡Inscríbete hoy! Modalidad presencial en Bogotá. Aplica al curso preparatorio y empieza tu pregrado.</div>
+      </div>
+      <details><summary>Ver los 15 títulos y 4 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Música Juan N. Corpas</li><li>Estudia Música en la Corpas</li><li>Pregrado en Música</li><li>Inscripciones 2027-1 Abiertas</li><li>Música en Bogotá</li><li>Empleabilidad del 80%</li><li>Cátedra de Musicología</li><li>Curso Preparatorio</li><li>Fundación Universitaria Corpas</li><li>Sé Músico Profesional</li><li>Modalidad Presencial</li><li>Opciones de Financiación</li><li>Inscríbete Ahora</li><li>Conoce el Plan de Estudios</li><li>Universidad Juan N. Corpas</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Pregrado en Música de la Fundación Universitaria Juan N. Corpas. ¡Inscríbete hoy!</li><li>Modalidad presencial en Bogotá. Aplica al curso preparatorio y empieza tu pregrado.</li><li>Inscripciones abiertas 2027-1. Consulta inversión semestral y opciones de financiación.</li><li>Conviértete en músico profesional en una institución acreditada en Alta Calidad.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="group">
+  <header class="group-head"><h3>Lenguas Extranjeras</h3><p class="muted">21 palabras clave · Página de destino: <a href="https://www.juanncorpas.edu.co/pregrado-licenciatura-en-lenguas-extranjeras-ingles-portugues/">juanncorpas.edu.co/pregrado-licenciatura-en-lenguas-extranjeras-ingles-portugues/</a></p></header>
+  <div class="group-grid">
+    <div class="col"><p class="lbl">Palabras clave</p><div class="kwblock"><ul class="chips"><li class=b>licenciatura en lenguas extranjeras corpas</li><li class=b>corpas lenguas extranjeras</li><li class=b>lenguas extranjeras corpas</li><li class=b>corpas lenguas modernas</li><li class=b>universidad corpas lenguas modernas</li><li class=b>corpas idiomas</li><li class=b>corpas licenciatura</li><li>licenciatura en idiomas</li><li>lenguas modernas</li><li>lenguas modernas bogotá</li><li>inscripciones lenguas extranjeras</li><li>estudiar lenguas</li><li>lenguas modernas universidades</li><li>licenciatura en lenguas extranjeras</li><li>carrera de lenguas</li><li>lenguas extranjeras universidad</li><li>carrera lenguas extranjeras</li><li>lenguas extranjeras</li><li>licenciatura en inglés</li><li>estudiar lenguas extranjeras</li><li>universidades para estudiar idiomas en bogotá</li></ul></div></div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Google</p>
+      <div class="serp">
+        <div class="serp-top"><b>Patrocinado</b><span>juanncorpas.edu.co › Pregrados › Lenguas</span></div>
+        <div class="serp-h">Lenguas Extranjeras Corpas | Licenciatura en Lenguas | Inglés y Portugués</div>
+        <div class="serp-d">Licenciatura en Lenguas Extranjeras con énfasis en inglés y portugués. ¡Inscríbete! Programa con empleabilidad del 93%. Modalidad presencial en Bogotá.</div>
+      </div>
+      <details><summary>Ver los 15 títulos y 4 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Lenguas Extranjeras Corpas</li><li>Licenciatura en Lenguas</li><li>Inglés y Portugués</li><li>Empleabilidad del 93%</li><li>Inscripciones 2027-1 Abiertas</li><li>Estudia Lenguas en la Corpas</li><li>Licenciatura en Bogotá</li><li>Fundación Universitaria Corpas</li><li>Universidad Juan N. Corpas</li><li>Acreditación Institucional</li><li>Opciones de Financiación</li><li>Modalidad Presencial</li><li>Inscríbete Ahora</li><li>Sé Docente de Idiomas</li><li>Conoce el Plan de Estudios</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Licenciatura en Lenguas Extranjeras con énfasis en inglés y portugués. ¡Inscríbete!</li><li>Programa con empleabilidad del 93%. Modalidad presencial en Bogotá.</li><li>Acreditación Institucional por 6 años. Contamos con opciones de financiación.</li><li>Inscripciones abiertas 2027-1. Fundación Universitaria Juan N. Corpas.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+</section>
+<section class="camp" id="spos">
+  <div class="camp-head"><p class="eyebrow">Search · Posgrado</p><h2>Search Posgrados</h2><p class="lead">Aparece cuando alguien busca un posgrado: «corpas posgrados», «maestría en salud pública», «especialización en medicina interna», «mba virtual». Los programas se agrupan por núcleo académico.</p>
+    <p class="legend"><span class="chip">sin marca</span><span class="chip b">con marca</span></p></div>
+  
+<article class="group">
+  <header class="group-head"><h3>Marca posgrados</h3><p class="muted">9 palabras clave · Página de destino: <a href="https://www.juanncorpas.edu.co/posgradosfujnc/">juanncorpas.edu.co/posgradosfujnc/</a></p></header>
+  <div class="group-grid">
+    <div class="col"><p class="lbl">Palabras clave</p><div class="kwblock"><ul class="chips"><li class=b>corpas posgrados</li><li class=b>posgrados corpas</li><li class=b>juan n corpas posgrados</li><li class=b>posgrados juan n corpas</li><li class=b>universidad juan n corpas posgrados</li><li class=b>corpas maestrías</li><li class=b>corpas especializaciones</li><li class=b>juan n corpas maestrías</li><li class=b>juan n corpas especializaciones</li></ul></div></div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Google</p>
+      <div class="serp">
+        <div class="serp-top"><b>Patrocinado</b><span>juanncorpas.edu.co › Posgrados › Corpas</span></div>
+        <div class="serp-h">Posgrados Juan N. Corpas | Posgrados en la Corpas | Maestrías y Especializaciones</div>
+        <div class="serp-d">Especializaciones médicas, maestrías en salud y en educación, y MBA. ¡Inscríbete! Horarios flexibles pensados para profesionales que trabajan. Inscripciones 2027-1.</div>
+      </div>
+      <details><summary>Ver los 15 títulos y 4 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Posgrados Juan N. Corpas</li><li>Posgrados en la Corpas</li><li>Maestrías y Especializaciones</li><li>Inscripciones 2027-1 Abiertas</li><li>Fundación Universitaria Corpas</li><li>Posgrados en Salud</li><li>Especializaciones Médicas</li><li>Salud Pública y Epidemiología</li><li>MBA 100% Virtual</li><li>Maestrías en Educación</li><li>Horarios Flexibles</li><li>Estudia Mientras Trabajas</li><li>Acreditación Institucional</li><li>Solicita Información Aquí</li><li>Conoce Nuestros Posgrados</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Especializaciones médicas, maestrías en salud y en educación, y MBA. ¡Inscríbete!</li><li>Horarios flexibles pensados para profesionales que trabajan. Inscripciones 2027-1.</li><li>Fundación Universitaria Juan N. Corpas, con Acreditación Institucional en Alta Calidad.</li><li>Conoce plan de estudios, inversión y opciones de financiación. Solicita información hoy.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="group">
+  <header class="group-head"><h3>Posgrados Medicoquirúrgicos</h3><p class="muted">21 palabras clave · Cada palabra clave lleva a la página de su programa.</p></header>
+  <div class="group-grid">
+    <div class="col"><p class="lbl">Palabras clave</p><div class="kwblock"><h4>Especialización en Medicina Interna</h4><ul class="chips"><li class=b>medicina interna corpas</li><li class=b>corpas medicina interna</li><li class=b>especialización medicina interna corpas</li><li>especialización en medicina interna</li><li>posgrado medicina interna</li><li>especialidad medicina interna</li></ul></div><div class="kwblock"><h4>Especialización en Medicina Familiar</h4><ul class="chips"><li class=b>medicina familiar corpas</li><li class=b>corpas medicina familiar</li><li class=b>especialización medicina familiar corpas</li><li>especialización en medicina familiar</li><li>estudiar medicina familiar</li><li>medicina familiar inscripciones abiertas</li><li>posgrado medicina familiar</li></ul></div><div class="kwblock"><h4>Especialización en Terapéuticas Alternativas y Farmacología Vegetal</h4><ul class="chips"><li class=b>tafv corpas</li><li class=b>terapéuticas alternativas corpas</li><li class=b>farmacología vegetal corpas</li><li>especialización medicina alternativa colombia</li><li>especialización en terapéuticas alternativas</li><li>especialización farmacología</li><li>estudiar farmacología</li><li>posgrado medicina alternativa</li></ul></div></div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Google</p>
+      <div class="serp">
+        <div class="serp-top"><b>Patrocinado</b><span>juanncorpas.edu.co › Posgrados › Medicos</span></div>
+        <div class="serp-h">Especializaciones Médicas | Posgrados Médico-Quirúrgicos | Medicina Interna Corpas</div>
+        <div class="serp-d">Especializaciones en Medicina Interna, Medicina Familiar y Terapéuticas Alternativas. Avanza en tu carrera médica con la Fundación Universitaria Juan N. Corpas.</div>
+      </div>
+      <details><summary>Ver los 15 títulos y 4 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Especializaciones Médicas</li><li>Posgrados Médico-Quirúrgicos</li><li>Medicina Interna Corpas</li><li>Medicina Familiar Corpas</li><li>Especialización en TAFV</li><li>Terapéuticas Alternativas</li><li>Especialización Med. Interna</li><li>Especialización Med. Familiar</li><li>Avanza en tu Carrera Médica</li><li>Inscripciones 2027-1 Abiertas</li><li>Modalidad Presencial Bogotá</li><li>Medicina Interna Acreditada</li><li>Fundación Universitaria Corpas</li><li>Acreditación Institucional</li><li>Solicita Información Aquí</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Especializaciones en Medicina Interna, Medicina Familiar y Terapéuticas Alternativas.</li><li>Avanza en tu carrera médica con la Fundación Universitaria Juan N. Corpas.</li><li>Medicina Interna acreditada en Alta Calidad, con práctica en hospitales de Bogotá.</li><li>Consulta requisitos, plan de estudios e inversión de cada especialización.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="group">
+  <header class="group-head"><h3>Posgrados Administrativos</h3><p class="muted">11 palabras clave · Página de destino: <a href="https://www.juanncorpas.edu.co/mba-maestria-en-direccion-de-empresas-fujnc/">juanncorpas.edu.co/mba-maestria-en-direccion-de-empresas-fujnc/</a></p></header>
+  <div class="group-grid">
+    <div class="col"><p class="lbl">Palabras clave</p><div class="kwblock"><ul class="chips"><li class=b>mba corpas</li><li class=b>corpas mba</li><li class=b>mba juan n corpas</li><li>mba</li><li>mba virtual</li><li>administración y dirección de empresas</li><li>maestría en dirección de empresas</li><li>mba empresas</li><li>maestrías virtuales</li><li>maestría virtual</li><li>mba colombia</li></ul></div></div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Google</p>
+      <div class="serp">
+        <div class="serp-top"><b>Patrocinado</b><span>juanncorpas.edu.co › MBA › Virtual</span></div>
+        <div class="serp-h">MBA Dirección de Empresas | MBA 100% Virtual | Maestría Dirección Empresas</div>
+        <div class="serp-d">Obtén un título oficial con aval académico de prestigio internacional. Para quienes buscan desafiar lo establecido, con énfasis en innovación, salud y artes.</div>
+      </div>
+      <details><summary>Ver los 15 títulos y 4 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>MBA Dirección de Empresas</li><li>MBA 100% Virtual</li><li>Maestría Dirección Empresas</li><li>MBA Colombia</li><li>Formación Ejecutiva</li><li>Un MBA de Alcance Mundial</li><li>Título Oficial</li><li>Énfasis en Innovación</li><li>Salud, Artes e Innovación</li><li>MBA en la Corpas</li><li>Inscripciones 2027-1 Abiertas</li><li>Estudia Mientras Trabajas</li><li>Acceso Vitalicio a Contenido</li><li>Fundación Universitaria Corpas</li><li>Solicita Información Aquí</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Obtén un título oficial con aval académico de prestigio internacional.</li><li>Para quienes buscan desafiar lo establecido, con énfasis en innovación, salud y artes.</li><li>MBA Maestría en Dirección de Empresas FUJNC. Modalidad 100% virtual.</li><li>Acceso vitalicio a contenidos exclusivos. Inscripciones abiertas 2027-1.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="group">
+  <header class="group-head"><h3>Posgrados Administrativos en Salud</h3><p class="muted">41 palabras clave · Cada palabra clave lleva a la página de su programa.</p></header>
+  <div class="group-grid">
+    <div class="col"><p class="lbl">Palabras clave</p><div class="kwblock"><h4>Maestría en Salud Pública</h4><ul class="chips"><li class=b>maestría en salud pública juan n corpas</li><li class=b>salud pública juan n corpas</li><li class=b>salud pública corpas</li><li class=b>corpas salud pública</li><li>maestría en salud pública</li><li>estudiar salud pública</li><li>especialización en salud pública colombia</li><li>salud pública maestría</li><li>maestría salud pública bogotá</li><li>carrera salud pública</li><li>estudios en salud pública</li></ul></div><div class="kwblock"><h4>Especialización en Epidemiología</h4><ul class="chips"><li class=b>epidemiología corpas</li><li class=b>corpas epidemiología</li><li class=b>epidemiología juan n corpas</li><li>especialización en epidemiología</li><li>estudiar epidemiología</li><li>especialización en epidemiología bogotá</li><li>maestría en epidemiología</li><li>especialización epidemiología</li><li>especialización en salud</li><li>posgrado epidemiología</li></ul></div><div class="kwblock"><h4>Especialización en Sistemas de Garantía de Calidad y Auditoría de Servicios de Salud</h4><ul class="chips"><li class=b>auditoría en salud corpas</li><li class=b>corpas auditoría</li><li class=b>garantía de calidad corpas</li><li>especialización auditoría en salud</li><li>especialización en auditoría en salud</li><li>auditoría en salud especialización</li><li>estudiar auditoría en salud</li><li>posgrado auditoría en salud</li><li>auditoría en salud bogotá</li><li>especialización en auditoría de calidad</li></ul></div><div class="kwblock"><h4>Maestría en Salud Familiar y Comunitaria</h4><ul class="chips"><li class=b>juan n corpas maestría salud</li><li class=b>maestría salud familiar corpas</li><li class=b>salud familiar y comunitaria corpas</li><li>enfermería comunitaria</li><li>enfermería familiar</li><li>maestría fines de semana</li><li>atención primaria en salud</li><li>maestría en salud familiar y comunitaria</li><li>maestría en salud comunitaria</li><li>maestría atención primaria en salud</li></ul></div></div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Google</p>
+      <div class="serp">
+        <div class="serp-top"><b>Patrocinado</b><span>juanncorpas.edu.co › Posgrados › Salud</span></div>
+        <div class="serp-h">Posgrados en Salud | Maestría en Salud Pública | Especialización Epidemiología</div>
+        <div class="serp-d">Maestría en Salud Pública, Epidemiología, Auditoría en Salud y Salud Familiar. Programas de 3 y 4 semestres pensados para profesionales que trabajan. ¡Inscríbete!</div>
+      </div>
+      <details><summary>Ver los 15 títulos y 4 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Posgrados en Salud</li><li>Maestría en Salud Pública</li><li>Especialización Epidemiología</li><li>Auditoría en Salud</li><li>Garantía de Calidad en Salud</li><li>Salud Familiar y Comunitaria</li><li>Lidera en el Sector Salud</li><li>Inscripciones 2027-1 Abiertas</li><li>Programas de 3 y 4 Semestres</li><li>Estudia Mientras Trabajas</li><li>Fundación Universitaria Corpas</li><li>Acreditación Institucional</li><li>Opciones de Financiación</li><li>Solicita Información Aquí</li><li>Salud Pública Juan N. Corpas</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Maestría en Salud Pública, Epidemiología, Auditoría en Salud y Salud Familiar.</li><li>Programas de 3 y 4 semestres pensados para profesionales que trabajan. ¡Inscríbete!</li><li>Fundación Universitaria Juan N. Corpas, con Acreditación Institucional en Alta Calidad.</li><li>Inscripciones abiertas 2027-1. Consulta inversión y opciones de financiación.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="group">
+  <header class="group-head"><h3>Posgrados en Educación</h3><p class="muted">14 palabras clave · Cada palabra clave lleva a la página de su programa.</p></header>
+  <div class="group-grid">
+    <div class="col"><p class="lbl">Palabras clave</p><div class="kwblock"><h4>Maestría en Educación para la Salud</h4><ul class="chips"><li class=b>educación para la salud corpas</li><li class=b>maestría educación para la salud corpas</li><li>maestría educación en salud</li><li>maestría en educación para la salud</li><li>carrera educación para la salud</li><li>magíster en educación</li><li>inscripciones en salud</li><li>maestría en educación médica</li></ul></div><div class="kwblock"><h4>Maestría en Lingüística Aplicada y Educación Bilingüe</h4><ul class="chips"><li class=b>maestría lingüística corpas</li><li class=b>lingüística aplicada corpas</li><li>maestría en educación bilingüe</li><li>maestría en lingüística aplicada</li><li>maestría en lingüística</li><li>magíster en lingüística aplicada</li></ul></div></div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Google</p>
+      <div class="serp">
+        <div class="serp-top"><b>Patrocinado</b><span>juanncorpas.edu.co › Posgrados › Educacion</span></div>
+        <div class="serp-h">Maestrías en Educación | Educación para la Salud | Maestría en Lingüística</div>
+        <div class="serp-d">Maestrías en Educación para la Salud y en Lingüística Aplicada y Educación Bilingüe. Énfasis investigativo. Modalidad presencial con clases una vez al mes.</div>
+      </div>
+      <details><summary>Ver los 15 títulos y 4 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Maestrías en Educación</li><li>Educación para la Salud</li><li>Maestría en Lingüística</li><li>Educación Bilingüe</li><li>Maestría Educación en Salud</li><li>Lingüística Aplicada</li><li>Maestría de Investigación</li><li>Clases 1 Vez al Mes</li><li>Énfasis Investigativo</li><li>Inscripciones 2027-1 Abiertas</li><li>Modalidad Presencial Bogotá</li><li>Estudia en 8 Trimestres</li><li>Fundación Universitaria Corpas</li><li>Acreditación Institucional</li><li>Solicita Información Aquí</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Maestrías en Educación para la Salud y en Lingüística Aplicada y Educación Bilingüe.</li><li>Énfasis investigativo. Modalidad presencial con clases una vez al mes.</li><li>Fundación Universitaria Juan N. Corpas, con Acreditación Institucional en Alta Calidad.</li><li>Inscripciones abiertas 2027-1. Consulta inversión y opciones de financiación.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+</section>
+<section class="camp" id="dpre">
+  <div class="camp-head"><p class="eyebrow">Demand Gen · Pregrado</p><h2>Branding Pregrados</h2><p class="lead">Presenta los pregrados de la Corpas en YouTube, Discover y Gmail con dos audiencias: jóvenes y padres con interés en Enfermería, Música o Lenguas, y personas que ya conocen la universidad.</p></div>
+  
+<article class="group">
+  <header class="group-head"><h3>Interés en pregrados</h3><p class="muted">16 a 34 años, más padres de adolescentes · Bogotá y Cundinamarca · Página de destino: <a href="https://www.juanncorpas.edu.co/pregrados-fundacion-universitaria-juan-n-corpas/">juanncorpas.edu.co/pregrados-fundacion-universitaria-juan-n-corpas/</a></p></header>
+  
+  <div class="angle">
+    <div class="angle-head"><span class="vert">01 Por qué la Corpas</span><span class="muted">Ángulo: Aplicación y salida · alineado con PRE-01</span></div>
+    <p class="frase">«Cuidar, enseñar, crear: carreras con campo laboral real.»</p>
+    <div class="tblwrap"><table class="pieces"><thead><tr><th>Tipo de pieza</th><th>Qué muestra</th><th>Formato</th><th>Origen</th></tr></thead><tbody><tr><td><span class="pt pt-0">Testimonio real</span></td><td>Estudiantes de varios pregrados contando su carrera</td><td class="muted">Video vertical 9:16 · Shorts · 20 s</td><td class="muted">Reutiliza PRE-01-P2</td></tr><tr><td><span class="pt pt-0">Testimonio real</span></td><td>Foto candid real de una estudiante de Enfermería en práctica, sin plantilla</td><td class="muted">Estático · 1,91:1, 1:1 y 4:5</td><td class="muted">Mismo estilo de las piezas con índice 25 y 34</td></tr><tr><td><span class="pt pt-2">Gráfico</span></td><td>Un dato: 93 % de empleabilidad en Lenguas Extranjeras</td><td class="muted">Estático · 1,91:1, 1:1 y 4:5</td><td class="muted">Nueva</td></tr></tbody></table></div>
+  </div>
+  <div class="group-grid">
+    <div class="col">
+      <p class="lbl">A quién le mostramos el anuncio</p>
+      <div class="kwblock"><h4>Personas que buscaron en Google</h4><ul class="chips"><li>estudiar enfermería</li><li>carrera de enfermería</li><li>jefe de enfermería</li><li>escuela de música</li><li>estudiar música</li><li>licenciatura en idiomas</li><li>lenguas modernas</li><li>universidades en bogotá</li><li>carreras universitarias bogotá</li></ul></div>
+      <div class="kwblock"><h4>Otras señales</h4><ul class="sig"><li>Datos demográficos detallados: padres de adolescentes (13 a 17 años)</li></ul></div>
+    </div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Discover y YouTube</p>
+      <div class="dg">
+        <div class="dg-img"><span>Imagen: Estudiantes de varios pregrados contando su carrera</span></div>
+        <div class="dg-body">
+          <div class="dg-brand"><i></i>U. Juan N. Corpas · <span>Patrocinado</span></div>
+          <div class="dg-h">Cuidar, enseñar, crear</div>
+          <div class="dg-d">Cuidar, enseñar, crear: carreras con campo laboral real en Bogotá.</div>
+          <span class="dg-cta">Más información</span>
+        </div>
+      </div>
+      <details><summary>Ver los 5 títulos y 5 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Inscripciones abiertas 2027-1</li><li>Universidad Juan N. Corpas</li><li>Cuidar, enseñar, crear</li><li>Enfermería, Música y Lenguas Extranjeras</li><li>Empleabilidad del 93 % en Lenguas</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Cuidar, enseñar, crear: carreras con campo laboral real en Bogotá.</li><li>Enfermería con prácticas en la Clínica Juan N. Corpas. ¡Inscríbete!</li><li>Fundación Universitaria Juan N. Corpas, con Acreditación Institucional en Alta Calidad.</li><li>Conoce planes de estudio, inversión y opciones de financiación. Solicita información.</li><li>Inscripciones abiertas 2027-1. Programas presenciales en Bogotá.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="group">
+  <header class="group-head"><h3>Ya conocen la Corpas</h3><p class="muted">16 a 64 años · Bogotá y Cundinamarca · Página de destino: <a href="https://www.juanncorpas.edu.co/pregrados-fundacion-universitaria-juan-n-corpas/">juanncorpas.edu.co/pregrados-fundacion-universitaria-juan-n-corpas/</a></p></header>
+  
+  <div class="angle">
+    <div class="angle-head"><span class="vert">04 Cómo pagarlo</span><span class="muted">Ángulo: Precio y valor · alineado con PRE-02</span></div>
+    <p class="frase">«Esto cuesta estudiar un pregrado en la Corpas. Sin letra pequeña.»</p>
+    <div class="tblwrap"><table class="pieces"><thead><tr><th>Tipo de pieza</th><th>Qué muestra</th><th>Formato</th><th>Origen</th></tr></thead><tbody><tr><td><span class="pt pt-2">Gráfico</span></td><td>Valor de cada pregrado y opciones de financiación</td><td class="muted">Estático · 1,91:1, 1:1 y 4:5</td><td class="muted">Reutiliza PRE-02-P1 (agregar 1:1 y 1,91:1)</td></tr><tr><td><span class="pt pt-0">Testimonio real</span></td><td>Estudiante de Enfermería en la Clínica, contando su día</td><td class="muted">Video vertical 9:16 · Shorts · 20-30 s</td><td class="muted">Adapta BRA-PRE-02-P1 a Enfermería</td></tr></tbody></table></div>
+  </div>
+  <div class="group-grid">
+    <div class="col">
+      <p class="lbl">A quién le mostramos el anuncio</p>
+      <div class="kwblock"><h4>Personas que buscaron en Google</h4><ul class="chips"><li>corpas</li><li>juan n corpas</li><li>universidad corpas</li><li>universidad juan n corpas</li><li>unicorpas</li><li>inscripciones corpas</li></ul></div>
+      <div class="kwblock"><h4>Otras señales</h4><ul class="sig"><li>Visitantes de las páginas de pregrado (últimos 90 días)</li><li>Segmento similar (lookalike) a la lista de inscritos de pregrado del CRM</li></ul></div>
+    </div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Discover y YouTube</p>
+      <div class="dg">
+        <div class="dg-img"><span>Imagen: Valor de cada pregrado y opciones de financiación</span></div>
+        <div class="dg-body">
+          <div class="dg-brand"><i></i>U. Juan N. Corpas · <span>Patrocinado</span></div>
+          <div class="dg-h">Esto cuesta estudiar en la Corpas</div>
+          <div class="dg-d">Valor de cada pregrado y opciones de financiación, sin letra pequeña.</div>
+          <span class="dg-cta">Más información</span>
+        </div>
+      </div>
+      <details><summary>Ver los 5 títulos y 5 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Inscripciones abiertas 2027-1</li><li>Universidad Juan N. Corpas</li><li>Esto cuesta estudiar en la Corpas</li><li>Completa tu inscripción 2027-1</li><li>Opciones de financiación</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Valor de cada pregrado y opciones de financiación, sin letra pequeña.</li><li>Retoma tu proceso: consulta inversión, financiación y fechas de inscripción.</li><li>Fundación Universitaria Juan N. Corpas, con Acreditación Institucional en Alta Calidad.</li><li>Conoce planes de estudio, inversión y opciones de financiación. Solicita información.</li><li>Inscripciones abiertas 2027-1. Programas presenciales en Bogotá.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+</section>
+<section class="camp" id="dpos">
+  <div class="camp-head"><p class="eyebrow">Demand Gen · Posgrado</p><h2>Branding Posgrados</h2><p class="lead">Presenta los posgrados en YouTube, Discover y Gmail con dos audiencias: profesionales con interés en especializaciones, maestrías o MBA, y personas que ya conocen la Corpas.</p></div>
+  
+<article class="group">
+  <header class="group-head"><h3>Interés en posgrados</h3><p class="muted">24 a 54 años · Bogotá y Cundinamarca · Página de destino: <a href="https://www.juanncorpas.edu.co/posgradosfujnc/">juanncorpas.edu.co/posgradosfujnc/</a></p></header>
+  
+  <div class="angle">
+    <div class="angle-head"><span class="vert">02 Voces Corpas</span><span class="muted">Ángulo: Docentes y egresados · alineado con POS-01 y BRA-POS-01</span></div>
+    <p class="frase">«Te enseña quien ejerce.»</p>
+    <div class="tblwrap"><table class="pieces"><thead><tr><th>Tipo de pieza</th><th>Qué muestra</th><th>Formato</th><th>Origen</th></tr></thead><tbody><tr><td><span class="pt pt-0">Testimonio real</span></td><td>Docente de posgrado que ejerce, contando cómo enseña</td><td class="muted">Video vertical 9:16 · Shorts · 20 s</td><td class="muted">Reutiliza POS-01-P2</td></tr><tr><td><span class="pt pt-0">Testimonio real</span></td><td>Egresado de posgrado contando su resultado</td><td class="muted">Video vertical 9:16 · Shorts · 30 s</td><td class="muted">Reutiliza BRA-POS-01-P1</td></tr><tr><td><span class="pt pt-0">Testimonio real</span></td><td>Egresada de Medicina Familiar el día de su grado: «ahora me permite ser especialista»</td><td class="muted">Video vertical 9:16 · Shorts</td><td class="muted">Video existente (310 registros en Meta)</td></tr><tr><td><span class="pt pt-0">Testimonio real</span></td><td>Retrato real del docente en su lugar de trabajo</td><td class="muted">Estático · 1,91:1, 1:1 y 4:5</td><td class="muted">Nueva</td></tr></tbody></table></div>
+  </div>
+  <div class="group-grid">
+    <div class="col">
+      <p class="lbl">A quién le mostramos el anuncio</p>
+      <div class="kwblock"><h4>Personas que buscaron en Google</h4><ul class="chips"><li>especialización en medicina familiar</li><li>especialización en medicina interna</li><li>maestría en salud pública</li><li>especialización en epidemiología</li><li>auditoría en salud</li><li>mba virtual</li><li>maestría en dirección de empresas</li><li>maestría en educación</li><li>maestría en lingüística aplicada</li></ul></div>
+      <div class="kwblock"><h4>Otras señales</h4><ul class="sig"><li>Datos demográficos detallados: título universitario</li></ul></div>
+    </div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Discover y YouTube</p>
+      <div class="dg">
+        <div class="dg-img"><span>Imagen: Docente de posgrado que ejerce, contando cómo enseña</span></div>
+        <div class="dg-body">
+          <div class="dg-brand"><i></i>U. Juan N. Corpas · <span>Patrocinado</span></div>
+          <div class="dg-h">Te enseña quien ejerce</div>
+          <div class="dg-d">Especializaciones médicas, maestrías en salud y en educación, y MBA virtual.</div>
+          <span class="dg-cta">Más información</span>
+        </div>
+      </div>
+      <details><summary>Ver los 5 títulos y 5 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Inscripciones abiertas 2027-1</li><li>Posgrados Juan N. Corpas</li><li>Te enseña quien ejerce</li><li>Especializaciones y maestrías en salud</li><li>MBA 100 % virtual</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Especializaciones médicas, maestrías en salud y en educación, y MBA virtual.</li><li>De aula a práctica clínica, con nombre propio. Conoce a nuestros egresados.</li><li>Fundación Universitaria Juan N. Corpas, con Acreditación Institucional en Alta Calidad.</li><li>Conoce plan de estudios, inversión y opciones de financiación. Solicita información.</li><li>Inscripciones abiertas 2027-1. Posgrados presenciales en Bogotá y MBA virtual.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="group">
+  <header class="group-head"><h3>Ya conocen la Corpas</h3><p class="muted">24 a 54 años · Bogotá y Cundinamarca · Página de destino: <a href="https://www.juanncorpas.edu.co/posgradosfujnc/">juanncorpas.edu.co/posgradosfujnc/</a></p></header>
+  
+  <div class="angle">
+    <div class="angle-head"><span class="vert">05 Cómo entrar</span><span class="muted">Ángulo: Horarios y financiación · alineado con POS-04 y POS-03</span></div>
+    <p class="frase">«Estudia sin dejar de trabajar.»</p>
+    <div class="tblwrap"><table class="pieces"><thead><tr><th>Tipo de pieza</th><th>Qué muestra</th><th>Formato</th><th>Origen</th></tr></thead><tbody><tr><td><span class="pt pt-2">Gráfico</span></td><td>Horarios por programa: fines de semana, híbridos y MBA virtual</td><td class="muted">Estático · 1,91:1, 1:1 y 4:5</td><td class="muted">Reutiliza POS-04-P1 (agregar 1:1 y 1,91:1)</td></tr><tr><td><span class="pt pt-2">Gráfico</span></td><td>Entidades de financiación: ICETEX, Fincomercio, Coomeva, Lumni y Cooperativa JFK</td><td class="muted">Estático · 1,91:1, 1:1 y 4:5</td><td class="muted">Reutiliza POS-03-P1 (agregar 1:1 y 1,91:1)</td></tr></tbody></table></div>
+  </div>
+  <div class="group-grid">
+    <div class="col">
+      <p class="lbl">A quién le mostramos el anuncio</p>
+      <div class="kwblock"><h4>Personas que buscaron en Google</h4><ul class="chips"><li>corpas posgrados</li><li>juan n corpas posgrados</li><li>posgrados corpas</li><li>corpas maestrías</li><li>corpas especializaciones</li></ul></div>
+      <div class="kwblock"><h4>Otras señales</h4><ul class="sig"><li>Visitantes de las páginas de posgrado (últimos 90 días)</li><li>Segmento similar (lookalike) a la lista de inscritos de posgrado del CRM</li></ul></div>
+    </div>
+    <div class="col">
+      <p class="lbl">Así se verá el anuncio en Discover y YouTube</p>
+      <div class="dg">
+        <div class="dg-img"><span>Imagen: Horarios por programa: fines de semana, híbridos y MBA virtual</span></div>
+        <div class="dg-body">
+          <div class="dg-brand"><i></i>U. Juan N. Corpas · <span>Patrocinado</span></div>
+          <div class="dg-h">Estudia sin dejar de trabajar</div>
+          <div class="dg-d">Horarios para profesionales que trabajan, opciones híbridas y MBA 100 % virtual.</div>
+          <span class="dg-cta">Más información</span>
+        </div>
+      </div>
+      <details><summary>Ver los 5 títulos y 5 descripciones</summary>
+        <div class="copy"><div><p class="lbl">Títulos</p><ol><li>Inscripciones abiertas 2027-1</li><li>Posgrados Juan N. Corpas</li><li>Estudia sin dejar de trabajar</li><li>Completa tu inscripción 2027-1</li><li>Financia tu posgrado con ICETEX</li></ol></div><div><p class="lbl">Descripciones</p><ol><li>Horarios para profesionales que trabajan, opciones híbridas y MBA 100 % virtual.</li><li>Financia tu posgrado con ICETEX y entidades aliadas.</li><li>Fundación Universitaria Juan N. Corpas, con Acreditación Institucional en Alta Calidad.</li><li>Conoce plan de estudios, inversión y opciones de financiación. Solicita información.</li><li>Inscripciones abiertas 2027-1. Posgrados presenciales en Bogotá y MBA virtual.</li></ol></div></div>
+      </details>
+    </div>
+  </div>
+</article>
+</section>
+
+<section class="block" id="piezas">
+  <h2>Piezas para Demand Gen</h2>
+  <p class="lead">Las piezas siguen las mismas reglas y verticales del plan de comunicación de Medicina 2027-1, y salen del diagnóstico de 73 piezas de la cuenta en Meta y TikTok.</p>
+  <div class="stats">
+    <div><b>11</b><span>piezas en total</span></div>
+    <div><b>7</b><span>con testimonio real (64 %)</span></div>
+    <div><b>8</b><span>se reutilizan o adaptan de piezas ya planeadas o existentes</span></div>
+    <div><b>0</b><span>con plantilla institucional</span></div>
+  </div>
+  <div class="cols">
+    <div class="card"><h3>Tres reglas</h3><ul>
+      <li><b>1 de cada 3 piezas con testimonio real:</b> estudiantes, docentes y egresados.</li>
+      <li><b>Una sola idea por pieza:</b> cada audiencia tiene un ángulo y una frase.</li>
+      <li><b>Transparencia:</b> precio, financiación y horarios reales.</li></ul></div>
+    <div class="card"><h3>Tipos de pieza</h3><p class="muted small">Índice en Meta frente al promedio de la cuenta; menos es mejor.</p><table><tr><td><b>Testimonio real</b> <span class="muted">· Usar</span><br><span class="muted small">Estudiantes, docentes y egresados reales contando su experiencia. Mínimo 1 de cada 3 piezas.</span></td><td class="idx">85</td></tr><tr><td><b>Vida académica</b> <span class="muted">· Usar</span><br><span class="muted small">Campus, clases, ensayos o prácticas, sin un protagonista.</span></td><td class="idx">71</td></tr><tr><td><b>Gráfico</b> <span class="muted">· Usar</span><br><span class="muted small">Un solo dato claro: precio, horario, financiación o empleabilidad.</span></td><td class="idx">51</td></tr><tr><td><b>Plantilla institucional</b> <span class="muted">· Evitar</span><br><span class="muted small">Molde de marca con escudo. Se llevó el 48 % de la inversión y fue el que peor convirtió.</span></td><td class="idx">127</td></tr></table></div>
+    <div class="card"><h3>Cómo se adaptan las piezas de Meta</h3><ul>
+      <li>El estático 4:5 de Meta sirve tal cual; se agregan las versiones 1:1 y 1,91:1.</li>
+      <li>El Reel 9:16 se sube a YouTube y corre como Short.</li>
+      <li>El logo va en 1:1 (1200 × 1200 px).</li></ul></div>
+  </div>
+  <div class="cols">
+    <div class="card"><h3>Formatos de Demand Gen</h3><table><tr><td>Imágenes horizontales</td><td>1,91:1 · 1200 × 628 px</td></tr><tr><td>Imágenes cuadradas</td><td>1:1 · 1200 × 1200 px</td></tr><tr><td>Imágenes verticales</td><td>4:5 · 960 × 1200 px</td></tr><tr><td>Video vertical (recomendado)</td><td>9:16 · 10 a 30 s</td></tr><tr><td>Video horizontal (opcional)</td><td>16:9 · 10 a 30 s</td></tr><tr><td>Logo</td><td>1:1 · 1200 × 1200 px</td></tr></table></div>
+    <div class="card"><h3>A quién no le mostramos los anuncios</h3><ul><li>Personas que ya completaron el registro (últimos 60 días)</li><li>Lista de estudiantes actuales (CRM)</li><li>Apps y juegos infantiles, y contenido sensible</li></ul></div>
+    <div class="card"><h3>Listas del CRM</h3><p>Para las audiencias similares necesitamos la lista de inscritos de pregrado y de posgrado, con al menos 100 personas cada una.</p></div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>Cómo cuidamos la inversión</h2>
+  <div class="cols">
+    <div class="card"><h3>Medicina sigue intacta</h3><p>Ninguna de las cuatro campañas usa las palabras clave de Medicina, y las de búsqueda la excluyen. Así no compiten por las mismas búsquedas.</p></div>
+    <div class="card"><h3>Basada en resultados reales</h3><p>Las palabras clave y las audiencias salen de las búsquedas que generaron inscritos entre 2024 y 2026.</p></div>
+    <div class="card"><h3>Búsquedas que excluimos</h3><ul>
+      <li>Clínica y hospital: citas, teléfonos, urgencias, resultados</li>
+      <li>Empleo y convocatorias</li>
+      <li>SENA, cursos libres, técnicos y tecnólogos</li>
+      <li>Búsquedas informativas: «qué es», PDF, gratis</li></ul></div>
+  </div>
+</section>
+
+<footer>Preparado por ADCOM para la Fundación Universitaria Juan N. Corpas · Octubre de 2026</footer>
+</div>
+</body>
+</html>
