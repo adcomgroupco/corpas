@@ -258,6 +258,14 @@ const EVENTOS = [                             // fecha ISO, texto corto (tabla y
   ['2026-10-08', 'Optimización', '46 negativas (universidades sin medicina, otras carreras, sin intención); marca de amplia a frase y exacta + «corpas medicina»; pausa de genéricas caras y de «universidad militar medicina»; solo presencia en Bogotá y Cundinamarca; sitelinks propios a medicina-leadgen; exclusión de 65+; fuera la promoción y el callout de descuento.'],
 ];
 const MESES = ['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+// Periodos académicos. 2027-1 arranca el 1 de octubre (pauta oct–ene en presupuesto-2027-1; el fin, de la pestaña METAS).
+// 2026-2: corte del informe de cierre (corpas-informe-cierre-20262). 2026-1: pestaña METAS, cortado antes de 2026-2.
+const PERIODOS = [
+  ['2027-1', '2026-10-01', '2027-02-28'],
+  ['2026-2', '2026-02-15', '2026-08-20'],
+  ['2026-1', '2025-09-01', '2026-02-14'],
+];
+const PER_DEF = '2027-1';
 
 // ── Parsers y formato (los mismos del tablero semanal) ──────────────────────
 function num(v){ if(typeof v === 'number') return isFinite(v) ? v : 0;
@@ -307,7 +315,7 @@ function fetchJSONP({gid, head}){ return new Promise((ok, ko) => {
   u.searchParams.set('tqx', `out:json;responseHandler:${cb}`); u.searchParams.set('gid', gid); u.searchParams.set('headers', '1'); u.searchParams.set('_', Date.now());
   s.src = u.toString(); s.async = true; s.onerror = () => { cleanup(); ko(new Error('red')) }; document.head.appendChild(s) }) }
 
-let DAYS = {}, LAST = '', CRM_HOY = 0, QUICK = '', CPLV = 'dia', CHARTS = {};
+let DAYS = {}, LAST = '', CRM_HOY = 0, QUICK = PER_DEF, CPLV = 'dia', CHARTS = {};
 function load(){
   document.getElementById('loading').style.display = 'flex';
   document.getElementById('ld-msg').textContent = 'Cargando datos...';
@@ -341,18 +349,16 @@ function build(rg, contacts){
 }
 
 function prepare(){
-  const q = [['7','Últimos 7 días'],['14','Últimos 14 días'],['mes','Este mes'],['oct','Desde reactivación'],['temp','Temporada (desde 1 jun)']];
-  document.getElementById('quick').innerHTML = q.map(([k,l]) => `<button class="qbtn" data-q="${k}" onclick="setQuick('${k}')">${l}</button>`).join('');
-  setQuick(QUICK || '14');
+  document.getElementById('quick').innerHTML = PERIODOS.map(([k, a, b]) =>
+    `<button class="qbtn" data-q="${k}" onclick="setQuick('${k}')" title="${fDate(a)} ${a.slice(0,4)} – ${fDate(b)} ${b.slice(0,4)}">Periodo ${k}</button>`).join('');
+  setQuick(QUICK || PER_DEF);
 }
+const perDe = k => PERIODOS.find(p => p[0] === k);
 function setQuick(k){
-  const act = Object.keys(DAYS).filter(d => DAYS[d].inv > 0).sort(); let a, b = LAST;
-  if(k === 'mes') a = LAST.slice(0,8) + '01';
-  else if(k === 'oct') a = '2026-10-01';
-  else if(k === 'temp') a = '2026-06-01';
-  else a = act.slice(-(+k))[0] || LAST;     // últimos N días con inversión
-  document.getElementById('f-desde').value = a; document.getElementById('f-hasta').value = b;
-  QUICK = k; render() }
+  const p = perDe(k) || perDe(PER_DEF);
+  document.getElementById('f-desde').value = p[1];
+  document.getElementById('f-hasta').value = p[2] < LAST ? p[2] : LAST;   // un periodo en curso llega hasta el último día con datos
+  QUICK = p[0]; render() }
 function onDate(){ QUICK = ''; render() }
 function setCplVista(v){ CPLV = v; document.querySelectorAll('[data-cv]').forEach(b => b.classList.toggle('on', b.dataset.cv === v)); render() }
 
@@ -367,10 +373,15 @@ function render(){
   const rows = Object.values(DAYS).filter(x => x.d >= a && x.d <= b && x.inv > 0).sort((x,y) => x.d < y.d ? -1 : 1);
   if(!rows.length){ document.getElementById('kpi-grid').innerHTML = '<div class="sec-note">Sin inversión en el rango elegido.</div>'; return }
   const T = sum(rows), nd = rows.length, cP = div(T.inv, T.lp), cC = div(T.inv, T.lc);
-  const prev = Object.values(DAYS).filter(x => x.d < rows[0].d && x.inv > 0).sort((x,y) => x.d < y.d ? -1 : 1).slice(-nd), P = sum(prev), pP = div(P.inv, P.lp);
+  const yAgo = d => (+d.slice(0,4) - 1) + d.slice(4);
+  const prev = QUICK
+    ? Object.values(DAYS).filter(x => x.d >= yAgo(a) && x.d <= yAgo(b) && x.inv > 0)              // mismas fechas, un año antes
+    : Object.values(DAYS).filter(x => x.d < rows[0].d && x.inv > 0).sort((x,y) => x.d < y.d ? -1 : 1).slice(-nd);
+  const P = sum(prev), pP = div(P.inv, P.lp);
+  const prevTxt = QUICK ? `las mismas fechas de ${a.slice(0,4) - 1}` : `los ${nd} días activos previos`;
   const dlt = isFinite(pP) && isFinite(cP) ? cP / pP - 1 : NaN;
   const L = DAYS[LAST], c7 = div(L.inv7, L.lp7), need = Math.ceil(T.inv / GOAL);
-  document.getElementById('rango-note').textContent = `${fDate(rows[0].d)} – ${fDate(rows[rows.length-1].d)} · ${nd} días con inversión · datos de pauta hasta ${fDate(LAST)}`;
+  document.getElementById('rango-note').textContent = `${QUICK ? 'Periodo ' + QUICK + ' · ' : ''}${fDate(rows[0].d)} – ${fDate(rows[rows.length-1].d)} · ${nd} días con inversión · datos de pauta hasta ${fDate(LAST)}`;
 
   const cr7 = div(L.inv7, L.lc7), pC = div(P.inv, P.lc), dC = isFinite(pC) && isFinite(cC) ? cC / pC - 1 : NaN;
   const pct = v => isFinite(v) ? `<span class="${v <= 0 ? 't-pos' : 't-neg'}">${v > 0 ? '+' : ''}${fN1(v * 100)} %</span>` : '—';
@@ -385,7 +396,7 @@ function render(){
   document.getElementById('kpi-grid2').innerHTML = [
     kpi('CPL CRM últimos 7 días', `<span class="${tcls(cr7)}">${fCOP(cr7)}</span>`, `al ${fDate(LAST)} · ${fCOP(L.inv7)} y ${fN(L.lc7)} leads CRM`),
     kpi('CPL Google últimos 7 días', `<span class="${tcls(c7)}">${fCOP(c7)}</span>`, `al ${fDate(LAST)} · ${fN(L.lp7)} leads de Google`),
-    kpi('vs. periodo anterior', `CRM ${pct(dC)} · Google ${pct(dlt)}`, `frente a los ${nd} días activos previos (CRM ${fCOP(pC)} · Google ${fCOP(pP)})`),
+    kpi(QUICK ? 'vs. un año antes' : 'vs. periodo anterior', `CRM ${pct(dC)} · Google ${pct(dlt)}`, prev.length ? `frente a ${prevTxt} (CRM ${fCOP(pC)} · Google ${fCOP(pP)})` : `sin inversión en ${prevTxt}`),
     kpi('Días en objetivo', `CRM ${rows.filter(x => div(x.inv7, x.lc7) <= GOAL).length} · Google ${rows.filter(x => div(x.inv7, x.lp7) <= GOAL).length}`, `de ${nd} días, con CPL de 7 días ≤ $50.000`),
   ].join('');
 
