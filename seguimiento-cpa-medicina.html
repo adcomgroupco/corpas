@@ -141,6 +141,10 @@ select:focus,input:focus{border-color:var(--accent-fg)}
 .kpi-card.hero .kpi-label,.kpi-card.hero .kpi-sub,.kpi-card.hero .kpi-brow{color:#aaa9a4}
 .kpi-card.hero .kpi-value{color:var(--white);font-size:26px}
 .kpi-card.hero .kpi-bar{background:#2a2a28}
+.kpi-card.step{border:2px solid var(--black)}
+.kpi-card.step .kpi-value{font-size:24px}
+.obj{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 7px;border-radius:999px;margin-bottom:6px;background:var(--black);color:var(--white)}
+.kpi-card.hero .obj{background:var(--yellow);color:var(--accent-ink)}
 .goal-pill{font-size:12px;font-weight:700;background:var(--yellow);color:var(--accent-ink);padding:2px 10px;border-radius:999px;white-space:nowrap}
 .legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--gray-600);margin-left:auto;font-weight:500}
 .legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:5px}
@@ -174,7 +178,7 @@ select:focus,input:focus{border-color:var(--accent-fg)}
   <div class="app-sidebar-nav">
     <span class="app-sidebar-nav-title">Secciones</span>
     <a href="#sec-kpi" class="active"><b></b>Resumen</a>
-    <a href="#sec-cpl"><b></b>CPL plataforma y CRM</a>
+    <a href="#sec-cpl"><b></b>CPL CRM y CPL Google</a>
     <a href="#sec-cmp"><b></b>Antes y después</a>
     <a href="#sec-vol"><b></b>Inversión y leads</a>
     <a href="#sec-dia"><b></b>Detalle diario</a>
@@ -187,7 +191,7 @@ select:focus,input:focus{border-color:var(--accent-fg)}
   <div class="topbar">
     <div class="tb-row">
       <span class="topbar-title">Seguimiento CPL · Search Medicina</span>
-      <span class="goal-pill">Meta: CPL plataforma $50.000</span>
+      <span class="goal-pill">Objetivo principal: CPL CRM $50.000</span><span class="goal-pill" style="background:var(--black);color:var(--white)">Primer objetivo: CPL Google $50.000</span>
       <div class="f-sep"></div>
       <div class="fg"><span class="fl">Desde</span><input type="date" id="f-desde" onchange="onDate()"></div>
       <div class="fg"><span class="fl">Hasta</span><input type="date" id="f-hasta" onchange="onDate()"></div>
@@ -202,23 +206,23 @@ select:focus,input:focus{border-color:var(--accent-fg)}
     <div class="kpi-grid" id="kpi-grid"></div>
     <div class="kpi-grid k4" id="kpi-grid2"></div>
 
-    <div class="sec-title" id="sec-cpl"><span></span>CPL plataforma y CPL CRM por día
-      <span class="legend"><span><i style="background:var(--black)"></i>CPL plataforma</span><span><i style="background:var(--serie-1)"></i>CPL CRM</span><span><i style="background:var(--c-pos)"></i>Meta $50.000</span><span><i style="background:var(--accent-fg)"></i>Cambio en la campaña</span></span>
-      <span style="display:flex;gap:6px;margin-left:10px"><button class="qbtn on" data-cv="dia" onclick="setCplVista('dia')">Por día</button><button class="qbtn" data-cv="7d" onclick="setCplVista('7d')">Últimos 7 días</button></span></div>
+    <div class="sec-title" id="sec-cpl"><span></span>CPL CRM y CPL Google por día
+      <span class="legend"><span><i style="background:var(--serie-1)"></i>CPL CRM (objetivo principal)</span><span><i style="background:var(--black)"></i>CPL Google (primer objetivo)</span><span><i style="background:var(--c-pos)"></i>Objetivo $50.000</span><span><i style="background:var(--accent-fg)"></i>Cambio en la campaña</span></span>
+      <span style="display:flex;gap:6px;margin-left:10px;white-space:nowrap;flex-shrink:0"><button class="qbtn on" data-cv="dia" onclick="setCplVista('dia')">Por día</button><button class="qbtn" data-cv="7d" onclick="setCplVista('7d')">Últimos 7 días</button></span></div>
     <div class="card chart-card"><div class="chart-wrap" style="height:300px"><canvas id="chart-cpl"></canvas></div></div>
 
     <div class="sec-title" id="sec-cmp"><span></span>Antes y después de la optimización del 8 de octubre<span class="sec-note">mismo número de días con inversión a cada lado (mínimo 7 antes)</span></div>
     <div class="cmp-grid" id="cmp-grid"></div>
 
     <div class="sec-title" id="sec-vol"><span></span>Inversión y leads por día
-      <span class="legend"><span><i style="background:var(--ramp-3);height:8px"></i>Inversión</span><span><i style="background:var(--black)"></i>Leads plataforma</span><span><i style="background:var(--serie-1)"></i>Leads CRM</span></span></div>
+      <span class="legend"><span><i style="background:var(--ramp-3);height:8px"></i>Inversión</span><span><i style="background:var(--serie-1)"></i>Leads CRM</span><span><i style="background:var(--black)"></i>Leads Google</span></span></div>
     <div class="card chart-card"><div class="chart-wrap"><canvas id="chart-vol"></canvas></div></div>
 
-    <div class="sec-title" id="sec-dia"><span></span>Detalle diario<span class="sec-note">el estado compara el CPL plataforma de los últimos 7 días con la meta · los últimos 3 días van en cursiva: Google sigue sumando conversiones a esos días</span></div>
+    <div class="sec-title" id="sec-dia"><span></span>Detalle diario<span class="sec-note">los CPL de 7 días van en verde si están en $50.000 o menos, ámbar hasta $60.000 y rojo por encima · los últimos 3 días van en cursiva: Google sigue sumando conversiones a esos días</span></div>
     <div class="card tcard"><div class="tscroll"><table>
-      <thead><tr><th>Fecha</th><th class="r">Inversión</th><th class="r grp">Leads plataforma</th><th class="r">CPL plataforma</th><th class="r grp">Leads CRM</th><th class="r">CPL CRM</th><th class="r grp">CPL plat. 7 días</th><th>Estado</th><th class="grp">Cambio en la campaña</th></tr></thead>
+      <thead><tr><th>Fecha</th><th class="r">Inversión</th><th class="r grp">Leads CRM</th><th class="r">CPL CRM</th><th class="r grp">Leads Google</th><th class="r">CPL Google</th><th class="r grp">CPL CRM 7 días</th><th class="r">CPL Google 7 días</th><th class="grp">Cambio en la campaña</th></tr></thead>
       <tbody id="dia-body"></tbody></table></div>
-      <div class="foot-note">Inversión y leads de plataforma: pestaña RESUMEN GENERAL (Google Ads, campañas <code>_search_pregrado-medicina</code>). Leads CRM: HUBSPOT_CONTACTS con Lead de Pauta = 1, Canal de Ingreso «Google Ads» y Programa de interés «Pregrado Medicina», por fecha de creación. Medio y programa salen igual que en el tablero semanal.</div>
+      <div class="foot-note">Inversión y leads de Google (plataforma): pestaña RESUMEN GENERAL (Google Ads, campañas <code>_search_pregrado-medicina</code>). Leads CRM: HUBSPOT_CONTACTS con Lead de Pauta = 1, Canal de Ingreso «Google Ads» y Programa de interés «Pregrado Medicina», por fecha de creación. Medio y programa salen igual que en el tablero semanal.</div>
     </div>
 
     <div class="two-col" id="sec-log">
@@ -227,9 +231,10 @@ select:focus,input:focus{border-color:var(--accent-fg)}
         <ol class="rules">
           <li><b>Hasta el 22 de octubre no se hacen cambios grandes</b> (CPA objetivo, presupuesto, concordancias): la puja está aprendiendo después de la optimización.</li>
           <li><b>Lunes y jueves:</b> revisar términos de búsqueda y negativizar universidades sin «medicina», otras carreras y búsquedas sin intención.</li>
-          <li><b>CPL plataforma de 7 días por encima de $60.000 tres días seguidos:</b> revisar términos, cuota perdida por ranking y aprobación de keywords y sitelinks.</li>
-          <li><b>CPL plataforma de 7 días en $50.000 o menos durante 7 días seguidos:</b> bajar el CPA objetivo de Google de $55.000 a $50.000; si además pierde cuota por presupuesto, subir el presupuesto 15–20 %.</li>
-          <li><b>Si el CPL CRM se separa más de 30 % del CPL plataforma</b> durante una semana: revisar con el CRM si hay leads duplicados, sin programa o mal atribuidos.</li>
+          <li><b>CPL Google de 7 días por encima de $60.000 tres días seguidos:</b> revisar términos, cuota perdida por ranking y aprobación de keywords y sitelinks.</li>
+          <li><b>Primer objetivo cumplido (CPL Google de 7 días en $50.000 o menos durante 7 días seguidos):</b> bajar el CPA objetivo de Google de $55.000 a $50.000; si además pierde cuota por presupuesto, subir el presupuesto 15–20 %.</li>
+          <li><b>Objetivo principal (CPL CRM en $50.000):</b> con el primer objetivo cumplido, el foco pasa a que los leads de Google lleguen al CRM. Si el CPL CRM sigue arriba, revisar con Corpas leads duplicados, sin programa o que no entran a HubSpot, y la calidad por término de búsqueda.</li>
+          <li><b>Si el CPL CRM se separa más de 30 % del CPL Google</b> durante una semana: revisar con el CRM si hay leads duplicados, sin programa o mal atribuidos.</li>
           <li><b>Los últimos 3 días no son definitivos:</b> sus conversiones todavía suben.</li>
         </ol></div>
     </div>
@@ -242,7 +247,7 @@ const SRC = {
   rg:       { gid: 1686215180 },              // RESUMEN GENERAL: Fecha | Campaña | Inversión | Leads plataforma | Medio | Programa | Modalidad
   contacts: { gid: 929744023, head: true },   // HUBSPOT_CONTACTS
 };
-const GOAL = 50000, WARN = 60000;             // meta y umbral de alerta sobre el CPL plataforma (COP)
+const GOAL = 50000, WARN = 60000;             // objetivo de CPL CRM (principal) y de CPL Google (primero), y umbral de alerta (COP)
 const OPT_DATE = '2026-10-08';
 const CAMP_RE = /_search_pregrado-medicina/i;  // todas las temporadas de Search pregrado Medicina
 const PROG_KEY = 'PREGRADO MEDICINA';
@@ -354,7 +359,7 @@ function setCplVista(v){ CPLV = v; document.querySelectorAll('[data-cv]').forEac
 function sum(rows){ return rows.reduce((a,x) => ({inv: a.inv + x.inv, lp: a.lp + x.lp, lc: a.lc + x.lc}), {inv:0, lp:0, lc:0}) }
 function kpi(label, value, sub, extra = '', cls = ''){ return `<div class="card kpi-card ${cls}"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div><div class="kpi-sub">${sub}</div>${extra}</div>` }
 function bar(v){ if(!isFinite(v)) return ''; const p = Math.min(GOAL / v, 1);
-  return `<div class="kpi-bwrap"><div class="kpi-brow"><span>Meta ${fCOP(GOAL)}</span><span>${v <= GOAL ? 'en meta' : fCOP(v - GOAL) + ' arriba'}</span></div><div class="kpi-bar"><div class="kpi-bfill ${bcls(v)}" style="width:${Math.round(p*100)}%"></div></div></div>` }
+  return `<div class="kpi-bwrap"><div class="kpi-brow"><span>Objetivo ${fCOP(GOAL)}</span><span>${v <= GOAL ? 'en objetivo' : fCOP(v - GOAL) + ' arriba'}</span></div><div class="kpi-bar"><div class="kpi-bfill ${bcls(v)}" style="width:${Math.round(p*100)}%"></div></div></div>` }
 
 function render(){
   document.querySelectorAll('#quick .qbtn').forEach(b => b.classList.toggle('on', b.dataset.q === QUICK));
@@ -367,35 +372,38 @@ function render(){
   const L = DAYS[LAST], c7 = div(L.inv7, L.lp7), need = Math.ceil(T.inv / GOAL);
   document.getElementById('rango-note').textContent = `${fDate(rows[0].d)} – ${fDate(rows[rows.length-1].d)} · ${nd} días con inversión · datos de pauta hasta ${fDate(LAST)}`;
 
+  const cr7 = div(L.inv7, L.lc7), pC = div(P.inv, P.lc), dC = isFinite(pC) && isFinite(cC) ? cC / pC - 1 : NaN;
+  const pct = v => isFinite(v) ? `<span class="${v <= 0 ? 't-pos' : 't-neg'}">${v > 0 ? '+' : ''}${fN1(v * 100)} %</span>` : '—';
+  const brecha = have => have >= need ? '<span class="t-pos">en objetivo</span>' : `faltan <b class="t-neg">${fN(need - have)}</b> leads`;
   document.getElementById('kpi-grid').innerHTML = [
-    kpi('CPL plataforma', `<span>${fCOP(cP)}</span>`, `${fN(T.lp)} leads de Google · <b class="${tcls(cP)}">${est(cP)[0].toLowerCase()}</b>`, bar(cP), 'hero'),
-    kpi('CPL CRM', fCOP(cC), `${fN(T.lc)} leads en HubSpot · ${isFinite(cC) && isFinite(cP) ? fN1((cC / cP - 1) * 100) + ' % frente a plataforma' : '—'}`),
-    kpi('Inversión', fCOP(T.inv), `${fCOP(T.inv / nd)} al día`),
-    kpi('Leads plataforma', fN(T.lp), `${fN1(T.lp / nd)} al día · para la meta: ${fN(need)}`),
-    kpi('Leads CRM', fN(T.lc), `${fN1(T.lc / nd)} al día${CRM_HOY ? ` · hoy van ${CRM_HOY}` : ''}`),
+    kpi('<span class="obj">Objetivo principal</span><br>CPL CRM', fCOP(cC), `${fN(T.lc)} leads en HubSpot · ${brecha(T.lc)}`, bar(cC), 'hero'),
+    kpi('<span class="obj">Primer objetivo</span><br>CPL Google', `<span class="${tcls(cP)}">${fCOP(cP)}</span>`, `${fN(T.lp)} leads de Google · ${brecha(T.lp)}`, bar(cP), 'step'),
+    kpi('Inversión', fCOP(T.inv), `${fCOP(T.inv / nd)} al día · con $50.000 por lead son ${fN(need)} leads`),
+    kpi('Leads CRM', fN(T.lc), `${fN1(T.lc / nd)} al día${CRM_HOY ? ` · hoy van ${CRM_HOY}` : ''}${T.lp ? ` · ${fN1(T.lc / T.lp * 100)} % de los de Google` : ''}`),
+    kpi('Leads Google', fN(T.lp), `${fN1(T.lp / nd)} al día`),
   ].join('');
   document.getElementById('kpi-grid2').innerHTML = [
-    kpi('CPL plataforma últimos 7 días', `<span class="${tcls(c7)}">${fCOP(c7)}</span>`, `al ${fDate(LAST)} · ${fCOP(L.inv7)} y ${fN(L.lp7)} leads`),
-    kpi('vs. periodo anterior', `<span class="${!isFinite(dlt) ? 't-mute' : dlt <= 0 ? 't-pos' : 't-neg'}">${isFinite(dlt) ? (dlt > 0 ? '+' : '') + fN1(dlt * 100) + ' %' : '—'}</span>`, `CPL plataforma de ${fCOP(pP)} en los ${nd} días activos previos`),
-    kpi('Días en meta', `${rows.filter(x => div(x.inv7, x.lp7) <= GOAL).length} de ${nd}`, 'con CPL plataforma de 7 días ≤ $50.000'),
-    kpi('Brecha a la meta', T.lp >= need ? '<span class="t-pos">En meta</span>' : `<span class="t-neg">${fN(need - T.lp)} leads</span>`, T.lp >= need ? `${fN(T.lp - need)} leads de margen con esta inversión` : `o ${fCOP(T.inv - T.lp * GOAL)} de inversión de más`),
+    kpi('CPL CRM últimos 7 días', `<span class="${tcls(cr7)}">${fCOP(cr7)}</span>`, `al ${fDate(LAST)} · ${fCOP(L.inv7)} y ${fN(L.lc7)} leads CRM`),
+    kpi('CPL Google últimos 7 días', `<span class="${tcls(c7)}">${fCOP(c7)}</span>`, `al ${fDate(LAST)} · ${fN(L.lp7)} leads de Google`),
+    kpi('vs. periodo anterior', `CRM ${pct(dC)} · Google ${pct(dlt)}`, `frente a los ${nd} días activos previos (CRM ${fCOP(pC)} · Google ${fCOP(pP)})`),
+    kpi('Días en objetivo', `CRM ${rows.filter(x => div(x.inv7, x.lc7) <= GOAL).length} · Google ${rows.filter(x => div(x.inv7, x.lp7) <= GOAL).length}`, `de ${nd} días, con CPL de 7 días ≤ $50.000`),
   ].join('');
 
   // antes / después
   const act = Object.values(DAYS).filter(x => x.inv > 0).sort((x,y) => x.d < y.d ? -1 : 1);
   const aft = act.filter(x => x.d >= OPT_DATE), bef = act.filter(x => x.d < OPT_DATE).slice(-Math.max(aft.length, 7));
   const A = sum(aft), B = sum(bef);
-  const cm = (t, X, n, rg) => kpi(t, n ? fCOP(div(X.inv, X.lp)) : '—', n ? `CPL CRM ${fCOP(div(X.inv, X.lc))} · ${n} días · ${fCOP(X.inv)} · ${fN(X.lp)} leads plat. · ${fN(X.lc)} CRM` : 'todavía sin días con datos', '', '');
-  const ch = aft.length ? div(A.inv, A.lp) / div(B.inv, B.lp) - 1 : NaN;
+  const cm = (t, X, n) => kpi(t, n ? `CRM ${fCOP(div(X.inv, X.lc))}` : '—', n ? `CPL Google ${fCOP(div(X.inv, X.lp))} · ${n} días · ${fCOP(X.inv)} · ${fN(X.lc)} leads CRM · ${fN(X.lp)} de Google` : 'todavía sin días con datos');
+  const ch = aft.length ? div(A.inv, A.lc) / div(B.inv, B.lc) - 1 : NaN, chG = aft.length ? div(A.inv, A.lp) / div(B.inv, B.lp) - 1 : NaN;
   document.getElementById('cmp-grid').innerHTML = cm(`Antes · ${bef.length ? fDate(bef[0].d) + ' – ' + fDate(bef[bef.length-1].d) : '—'}`, B, bef.length)
     + cm(`Después · desde ${fDate(OPT_DATE)}`, A, aft.length)
-    + kpi('Cambio en CPL plataforma', `<span class="${!isFinite(ch) ? 't-mute' : ch <= 0 ? 't-pos' : 't-neg'}">${isFinite(ch) ? (ch > 0 ? '+' : '') + fN1(ch * 100) + ' %' : '—'}</span>`, aft.length < 7 ? 'menos de 7 días después: todavía no es concluyente' : 'mismo número de días a cada lado');
+    + kpi('Cambio', aft.length ? `CRM ${pct(ch)} · Google ${pct(chG)}` : '—', aft.length < 7 ? 'menos de 7 días después: todavía no es concluyente' : 'mismo número de días a cada lado');
 
   // tabla diaria
   const ev = Object.fromEntries(EVENTOS.map(e => [e[0], e[1]])), lag = addDays(LAST, -2);
-  document.getElementById('dia-body').innerHTML = rows.slice().reverse().map(x => { const c = div(x.inv7, x.lp7), [s, sc] = est(c), lg = x.d >= lag ? ' lagc' : '';
-    return `<tr class="${ev[x.d] ? 'ev' : ''} ${x.d >= lag ? 'lag' : ''}"><td>${fDate(x.d)}</td><td class="r">${fCOP(x.inv)}</td><td class="r grp${lg}">${fN(x.lp)}</td><td class="r${lg}">${fCOP(div(x.inv, x.lp))}</td><td class="r grp">${fN(x.lc)}</td><td class="r">${fCOP(div(x.inv, x.lc))}</td><td class="r grp ${tcls(c)}">${fCOP(c)}</td><td><span class="st ${sc}">${s}</span></td><td class="grp">${ev[x.d] || ''}</td></tr>` }).join('')
-    + `<tr class="tr-total"><td>Total</td><td class="r">${fCOP(T.inv)}</td><td class="r grp">${fN(T.lp)}</td><td class="r">${fCOP(cP)}</td><td class="r grp">${fN(T.lc)}</td><td class="r">${fCOP(cC)}</td><td class="r grp"></td><td><span class="st ${est(cP)[1]}">${est(cP)[0]}</span></td><td class="grp"></td></tr>`;
+  document.getElementById('dia-body').innerHTML = rows.slice().reverse().map(x => { const g7 = div(x.inv7, x.lp7), r7 = div(x.inv7, x.lc7), lg = x.d >= lag ? ' lagc' : '';
+    return `<tr class="${ev[x.d] ? 'ev' : ''} ${x.d >= lag ? 'lag' : ''}"><td>${fDate(x.d)}</td><td class="r">${fCOP(x.inv)}</td><td class="r grp">${fN(x.lc)}</td><td class="r">${fCOP(div(x.inv, x.lc))}</td><td class="r grp${lg}">${fN(x.lp)}</td><td class="r${lg}">${fCOP(div(x.inv, x.lp))}</td><td class="r grp ${tcls(r7)}">${fCOP(r7)}</td><td class="r ${tcls(g7)}">${fCOP(g7)}</td><td class="grp">${ev[x.d] || ''}</td></tr>` }).join('')
+    + `<tr class="tr-total"><td>Total</td><td class="r">${fCOP(T.inv)}</td><td class="r grp">${fN(T.lc)}</td><td class="r ${tcls(cC)}">${fCOP(cC)}</td><td class="r grp">${fN(T.lp)}</td><td class="r ${tcls(cP)}">${fCOP(cP)}</td><td class="r grp"></td><td class="r"></td><td class="grp"></td></tr>`;
 
   document.getElementById('log').innerHTML = EVENTOS.slice().reverse().map(e => `<li><time datetime="${e[0]}">${fDate(e[0])}</time><span>${e[2]}</span></li>`).join('');
   charts(rows);
@@ -423,17 +431,17 @@ function charts(rows){
   const clip = v => isFinite(v) ? Math.min(v, cap) : null;
   CHARTS.cpl = new Chart(document.getElementById('chart-cpl'), {type: 'line',
     data: {labels, datasets: [
-      {label: 'CPL plataforma', data: cp.map(clip), borderColor: css('--black'), backgroundColor: css('--black'), borderWidth: 2.5, pointRadius: 2.5, tension: 0, spanGaps: true},
-      {label: 'CPL CRM', data: cc.map(clip), borderColor: css('--serie-1'), backgroundColor: css('--serie-1'), borderWidth: 2, pointRadius: 2, tension: 0, spanGaps: true, borderDash: [5, 3]},
-      {label: 'Meta', data: rows.map(() => GOAL), borderColor: css('--c-pos'), borderWidth: 2, pointRadius: 0}]},
+      {label: 'CPL Google', data: cp.map(clip), borderColor: css('--black'), backgroundColor: css('--black'), borderWidth: 2, pointRadius: 2, tension: 0, spanGaps: true, borderDash: [5, 3]},
+      {label: 'CPL CRM', data: cc.map(clip), borderColor: css('--serie-1'), backgroundColor: css('--serie-1'), borderWidth: 3, pointRadius: 3, tension: 0, spanGaps: true},
+      {label: 'Objetivo', data: rows.map(() => GOAL), borderColor: css('--c-pos'), borderWidth: 2, pointRadius: 0}]},
     options: {...base, scales: {...base.scales, y: {min: 0, max: cap, grid: {color: grid}, ticks: {callback: yK}}},
-      plugins: {...base.plugins, tooltip: {callbacks: {label: c => `${c.dataset.label}: ${fCOP(c.dataset.label === 'Meta' ? GOAL : (c.datasetIndex === 0 ? cp : cc)[c.dataIndex])}`}}}},
+      plugins: {...base.plugins, tooltip: {callbacks: {label: c => `${c.dataset.label}: ${fCOP(c.dataset.label === 'Objetivo' ? GOAL : (c.datasetIndex === 0 ? cp : cc)[c.dataIndex])}`}}}},
     plugins: [eventLines]});
   CHARTS.vol = new Chart(document.getElementById('chart-vol'), {
     data: {labels, datasets: [
       {type: 'bar', label: 'Inversión', data: rows.map(x => x.inv), backgroundColor: css('--ramp-3'), yAxisID: 'y', order: 3},
-      {type: 'line', label: 'Leads plataforma', data: rows.map(x => x.lp), borderColor: css('--black'), backgroundColor: css('--black'), pointRadius: 2, borderWidth: 2, yAxisID: 'y1', order: 1},
-      {type: 'line', label: 'Leads CRM', data: rows.map(x => x.lc), borderColor: css('--serie-1'), backgroundColor: css('--serie-1'), pointRadius: 2, borderWidth: 2, borderDash: [5, 3], yAxisID: 'y1', order: 2}]},
+      {type: 'line', label: 'Leads Google', data: rows.map(x => x.lp), borderColor: css('--black'), backgroundColor: css('--black'), pointRadius: 2, borderWidth: 2, borderDash: [5, 3], yAxisID: 'y1', order: 2},
+      {type: 'line', label: 'Leads CRM', data: rows.map(x => x.lc), borderColor: css('--serie-1'), backgroundColor: css('--serie-1'), pointRadius: 3, borderWidth: 3, yAxisID: 'y1', order: 1}]},
     options: {...base, scales: {...base.scales,
       y: {min: 0, grid: {color: grid}, ticks: {callback: yK}, title: {display: true, text: 'Inversión'}},
       y1: {min: 0, position: 'right', grid: {display: false}, title: {display: true, text: 'Leads'}}},
