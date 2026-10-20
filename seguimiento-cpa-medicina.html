@@ -158,6 +158,9 @@ select:focus,input:focus{border-color:var(--accent-fg)}
 .log time{font-weight:700;color:var(--black)}
 .rules{padding:14px 16px 14px 34px;display:grid;gap:8px;font-size:12px;color:var(--gray-600)}
 .rules b{color:var(--black)}
+.comp-tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.ct-neg{background:var(--gray-100);color:var(--gray-600)} .ct-act{background:#FEE2E2;color:#991B1B}
+.extra-off{padding:14px 16px;font-size:12px;color:var(--gray-600)}
 @media(max-width:1300px){.kpi-grid.k4{grid-template-columns:repeat(2,1fr)}.cmp-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -181,6 +184,8 @@ select:focus,input:focus{border-color:var(--accent-fg)}
     <a href="#sec-cpl"><b></b>CPL CRM y CPL Google</a>
     <a href="#sec-cmp"><b></b>Antes y después</a>
     <a href="#sec-vol"><b></b>Inversión y leads</a>
+    <a href="#sec-imp"><b></b>Impresiones perdidas</a>
+    <a href="#sec-comp"><b></b>Competencia</a>
     <a href="#sec-dia"><b></b>Detalle diario</a>
     <a href="#sec-log"><b></b>Bitácora y reglas</a>
   </div>
@@ -211,12 +216,28 @@ select:focus,input:focus{border-color:var(--accent-fg)}
       <span style="display:flex;gap:6px;margin-left:10px;white-space:nowrap;flex-shrink:0"><button class="qbtn on" data-cv="dia" onclick="setCplVista('dia')">Por día</button><button class="qbtn" data-cv="7d" onclick="setCplVista('7d')">Últimos 7 días</button></span></div>
     <div class="card chart-card"><div class="chart-wrap" style="height:300px"><canvas id="chart-cpl"></canvas></div></div>
 
-    <div class="sec-title" id="sec-cmp"><span></span>Antes y después de la optimización del 8 de octubre<span class="sec-note">mismo número de días con inversión a cada lado (mínimo 7 antes)</span></div>
+    <div class="sec-title" id="sec-cmp"><span></span>Antes y después de la optimización del 8 de octubre<span class="sec-note">antes = días con inversión del periodo 2027-1 previos al 8 de octubre</span></div>
     <div class="cmp-grid" id="cmp-grid"></div>
 
     <div class="sec-title" id="sec-vol"><span></span>Inversión y leads por día
       <span class="legend"><span><i style="background:var(--ramp-3);height:8px"></i>Inversión</span><span><i style="background:var(--serie-1)"></i>Leads CRM</span><span><i style="background:var(--black)"></i>Leads Google</span></span></div>
     <div class="card chart-card"><div class="chart-wrap"><canvas id="chart-vol"></canvas></div></div>
+
+    <div class="sec-title" id="sec-imp"><span></span>Impresiones perdidas<span class="sec-note" id="imp-note"></span>
+      <span class="legend"><span><i style="background:var(--black);height:8px"></i>Ganadas</span><span><i style="background:var(--serie-2);height:8px"></i>Perdidas por ranking</span><span><i style="background:var(--yellow);height:8px"></i>Perdidas por presupuesto</span><span><i style="background:var(--accent-fg)"></i>Cambio en la campaña</span></span></div>
+    <div class="kpi-grid k4" id="imp-kpis"></div>
+    <div class="card chart-card"><div class="chart-wrap"><canvas id="chart-imp"></canvas></div>
+      <div class="foot-note">Porcentaje de las búsquedas en las que podíamos aparecer. <b>Perdidas por ranking</b>: la puja o la calidad del anuncio no alcanzaron (con «Maximizar conversiones», el CPA objetivo de $55.000 limita la puja). <b>Perdidas por presupuesto</b>: el presupuesto del día se agotó. Google reporta «menos de 10 %» como 10 %.</div></div>
+
+    <div class="sec-title" id="sec-comp"><span></span>Competencia<span class="sec-note">búsquedas con el nombre de otra universidad · «Información de subastas» no está disponible por la API</span></div>
+    <div class="kpi-grid k4" id="comp-kpis"></div>
+    <div class="card chart-card"><div class="chart-wrap" style="height:220px"><canvas id="chart-mix"></canvas></div>
+      <div class="foot-note">Mezcla del gasto en términos de búsqueda por tipo: <b>Marca</b> (contiene «corpas»), <b>Competidores</b> (nombra otra universidad) y <b>Genérico Medicina</b> (el resto).</div></div>
+    <div class="card tcard"><div class="tbar"><b style="font-size:12px">Por universidad</b><span class="sp"></span><span class="sec-note" style="margin:0" id="comp-note"></span></div>
+      <div class="tscroll"><table><thead><tr><th>Universidad</th><th>Estado</th><th class="r grp">Gasto</th><th class="r">% del gasto</th><th class="r">Clics</th><th class="r">Conv.</th><th class="r">CPL</th><th class="r grp">Últimos 7 días</th><th class="r">7 días previos</th></tr></thead><tbody id="comp-body"></tbody></table></div>
+      <div class="foot-note">«Con negativa» = alguna negativa de la campaña coincide con el nombre; las variantes que no la contienen pueden seguir entrando. Cuando un competidor con negativa sigue gastando, revisar los términos de abajo.</div></div>
+    <div class="card tcard"><div class="tbar"><b style="font-size:12px">Términos de competidores con más gasto sin conversiones</b></div>
+      <div class="tscroll"><table><thead><tr><th>Término</th><th>Universidad</th><th class="r">Gasto</th><th class="r">Clics</th></tr></thead><tbody id="term-body"></tbody></table></div></div>
 
     <div class="sec-title" id="sec-dia"><span></span>Detalle diario<span class="sec-note">los CPL de 7 días van en verde si están en $50.000 o menos, ámbar hasta $60.000 y rojo por encima · los últimos 3 días van en cursiva: Google sigue sumando conversiones a esos días</span></div>
     <div class="card tcard"><div class="tscroll"><table>
@@ -317,12 +338,15 @@ function fetchJSONP({gid, head}){ return new Promise((ok, ko) => {
   u.searchParams.set('tqx', `out:json;responseHandler:${cb}`); u.searchParams.set('gid', gid); u.searchParams.set('headers', '1'); u.searchParams.set('_', Date.now());
   s.src = u.toString(); s.async = true; s.onerror = () => { cleanup(); ko(new Error('red')) }; document.head.appendChild(s) }) }
 
-let DAYS = {}, LAST = '', CRM_HOY = 0, QUICK = PER_DEF, CPLV = 'dia', CHARTS = {};
+let DAYS = {}, LAST = '', CRM_HOY = 0, QUICK = PER_DEF, CPLV = 'dia', CHARTS = {}, EXTRA = null;
+// cuota de impresiones y competencia: archivo que genera scripts/google/corpas_medicina_search_extra.py (repo Meta-Ads-CLI)
+const EXTRA_URL = 'data/seguimiento-medicina-search.json';
+const fetchExtra = () => fetch(EXTRA_URL + '?_=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null);
 function load(){
   document.getElementById('loading').style.display = 'flex';
   document.getElementById('ld-msg').textContent = 'Cargando datos...';
-  Promise.all([fetchTab(SRC.rg), fetchTab(SRC.contacts)]).then(([rg, contacts]) => {
-    build(rg, contacts); prepare();
+  Promise.all([fetchTab(SRC.rg), fetchTab(SRC.contacts), fetchExtra()]).then(([rg, contacts, extra]) => {
+    EXTRA = extra; build(rg, contacts); prepare();
     const t = new Date().toLocaleString('es-CO', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
     document.getElementById('last-upd').textContent = 'Datos cargados: ' + t;
     document.getElementById('last-upd-side').textContent = t;
@@ -404,7 +428,7 @@ function render(){
 
   // antes / después
   const act = Object.values(DAYS).filter(x => x.inv > 0).sort((x,y) => x.d < y.d ? -1 : 1);
-  const aft = act.filter(x => x.d >= OPT_DATE), bef = act.filter(x => x.d < OPT_DATE).slice(-Math.max(aft.length, 7));
+  const aft = act.filter(x => x.d >= OPT_DATE), bef = act.filter(x => x.d < OPT_DATE && x.d >= perDe(PER_DEF)[1]).slice(-Math.max(aft.length, 7));
   const A = sum(aft), B = sum(bef);
   const cm = (t, X, n) => kpi(t, n ? `CRM ${fCOP(div(X.inv, X.lc))}` : '—', n ? `CPL Google ${fCOP(div(X.inv, X.lp))} · ${n} días · ${fCOP(X.inv)} · ${fN(X.lc)} leads CRM · ${fN(X.lp)} de Google` : 'todavía sin días con datos');
   const ch = aft.length ? div(A.inv, A.lc) / div(B.inv, B.lc) - 1 : NaN, chG = aft.length ? div(A.inv, A.lp) / div(B.inv, B.lp) - 1 : NaN;
@@ -420,6 +444,7 @@ function render(){
 
   document.getElementById('log').innerHTML = EVENTOS.slice().reverse().map(e => `<li><time datetime="${e[0]}">${fDate(e[0])}</time><span>${e[2]}</span></li>`).join('');
   charts(rows);
+  renderExtra(rows, a, b);
 }
 
 // líneas verticales en las fechas de la bitácora
@@ -459,6 +484,77 @@ function charts(rows){
       y: {min: 0, grid: {color: grid}, ticks: {callback: yK}, title: {display: true, text: 'Inversión'}},
       y1: {min: 0, position: 'right', grid: {display: false}, title: {display: true, text: 'Leads'}}},
       plugins: {...base.plugins, tooltip: {callbacks: {label: c => c.dataset.label === 'Inversión' ? 'Inversión: ' + fCOP(c.raw) : `${c.dataset.label}: ${fN(c.raw)}`}}}},
+    plugins: [eventLines]});
+}
+
+// ── Impresiones perdidas y competencia ──────────────────────────────────────
+const plain = s => String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+const fP0 = v => isFinite(v) ? Math.round(v * 100) + ' %' : '—';
+function isAgg(list){ const t = list.reduce((a,x) => ({impr: a.impr + x.impr, elig: a.elig + x.elig, rank: a.rank + x.rank, budget: a.budget + x.budget, top: a.top + x.top}), {impr:0, elig:0, rank:0, budget:0, top:0});
+  return t.elig ? {is: t.impr / t.elig, rank: t.rank / t.elig, budget: t.budget / t.elig, top: t.top / t.elig} : null }
+function renderExtra(rows, a, b){
+  ['imp', 'mix'].forEach(k => { if(CHARTS[k]){ CHARTS[k].destroy(); delete CHARTS[k] } });
+  const off = msg => { ['imp-kpis','comp-kpis'].forEach(id => document.getElementById(id).innerHTML = `<div class="card extra-off">${msg}</div>`);
+    document.getElementById('comp-body').innerHTML = ''; document.getElementById('term-body').innerHTML = '' };
+  if(!EXTRA){ off('No se encontró el archivo de cuota de impresiones y competencia (data/seguimiento-medicina-search.json). Se genera con el script del repo Meta-Ads-CLI.'); return }
+  document.getElementById('imp-note').textContent = `API de Google Ads · datos hasta ${fDate(EXTRA.hasta)} · actualizado ${EXTRA.generado.replace('T', ' ')}`;
+  const IMP = Object.fromEntries(EXTRA.impresiones.map(x => [x.d, x]));
+  const inR = EXTRA.impresiones.filter(x => x.d >= a && x.d <= b && x.elig > 0);
+  const last7 = EXTRA.impresiones.filter(x => x.elig > 0).slice(-7);
+  const before = EXTRA.impresiones.filter(x => x.d >= '2026-10-05' && x.d <= '2026-10-07' && x.elig > 0);
+  const R = isAgg(inR), L = isAgg(last7), B = isAgg(before);
+  const sub = (k, inv) => `últimos 7 días ${fP0(L?.[k])} · antes de la optimización ${fP0(B?.[k])}`;
+  const tone = (v, good) => !isFinite(v) ? '' : (good ? v >= .5 : v <= .2) ? 't-pos' : (good ? v >= .3 : v <= .4) ? 't-mid' : 't-neg';
+  document.getElementById('imp-kpis').innerHTML = !R ? '<div class="card extra-off">Sin datos de impresiones en el rango.</div>' : [
+    kpi('Cuota de impresiones', `<span class="${tone(R.is, true)}">${fP0(R.is)}</span>`, sub('is')),
+    kpi('Perdidas por ranking', `<span class="${tone(R.rank, false)}">${fP0(R.rank)}</span>`, sub('rank')),
+    kpi('Perdidas por presupuesto', `<span class="${tone(R.budget, false)}">${fP0(R.budget)}</span>`, sub('budget')),
+    kpi('Impresiones en la parte superior', fP0(R.top), sub('top')),
+  ].join('');
+  const days = rows.map(x => x.d), lab = days.map(fDate), grid = css('--rule');
+  const base = {responsive: true, maintainAspectRatio: false, animation: false, interaction: {mode: 'index', intersect: false},
+    plugins: {legend: {display: false}}, scales: {x: {stacked: true, grid: {display: false}, ticks: {maxRotation: 0, autoSkip: true, maxTicksLimit: 12}}}};
+  const share = (d, k) => { const x = IMP[d]; return x && x.elig ? (k === 'is' ? x.impr : x[k]) / x.elig * 100 : null };
+  CHARTS.imp = new Chart(document.getElementById('chart-imp'), {type: 'bar',
+    data: {labels: lab, datasets: [
+      {label: 'Ganadas', data: days.map(d => share(d, 'is')), backgroundColor: css('--black')},
+      {label: 'Perdidas por ranking', data: days.map(d => share(d, 'rank')), backgroundColor: css('--serie-2')},
+      {label: 'Perdidas por presupuesto', data: days.map(d => share(d, 'budget')), backgroundColor: css('--yellow')}]},
+    options: {...base, scales: {...base.scales, y: {stacked: true, min: 0, max: 100, grid: {color: grid}, ticks: {callback: v => v + ' %'}}},
+      plugins: {...base.plugins, tooltip: {callbacks: {label: c => `${c.dataset.label}: ${c.raw === null ? '—' : Math.round(c.raw) + ' %'}`}}}},
+    plugins: [eventLines]});
+
+  // competencia
+  const fams = EXTRA.familias.map(f => ({...f, re: new RegExp(f.patron)}));
+  const negDe = fam => EXTRA.negativas.filter(n => fams.find(f => f.fam === fam).re.test(plain(n)));
+  const comp = EXTRA.competidores.filter(x => x.d >= a && x.d <= b), mix = EXTRA.mezcla.filter(x => x.d >= a && x.d <= b);
+  const sumBy = (list, k) => list.reduce((acc, x) => { const o = acc[x[k]] = acc[x[k]] || {cost:0, conv:0, clicks:0}; o.cost += x.cost; o.conv += x.conv; o.clicks += x.clicks || 0; return acc }, {});
+  const M = sumBy(mix, 'tipo'), totT = Object.values(M).reduce((s, x) => s + x.cost, 0);
+  const C = M['Competidores'] || {cost:0, conv:0}, rest = {cost: totT - C.cost, conv: Object.entries(M).filter(([k]) => k !== 'Competidores').reduce((s, [, x]) => s + x.conv, 0)};
+  const lastD = EXTRA.hasta, w1 = addDays(lastD, -6), w0a = addDays(lastD, -13), w0b = addDays(lastD, -7);
+  const cw = (f, x0, x1) => EXTRA.competidores.filter(x => x.fam === f && x.d >= x0 && x.d <= x1).reduce((s, x) => s + x.cost, 0);
+  const C7 = EXTRA.competidores.filter(x => x.d >= w1).reduce((s, x) => s + x.cost, 0), C7p = EXTRA.competidores.filter(x => x.d >= w0a && x.d <= w0b).reduce((s, x) => s + x.cost, 0);
+  const F = sumBy(comp, 'fam'), rowsF = Object.entries(F).sort((p, q) => q[1].cost - p[1].cost);
+  const activos = rowsF.filter(([f, x]) => !negDe(f).length && x.cost > 0);
+  document.getElementById('comp-kpis').innerHTML = [
+    kpi('Gasto en competidores', fCOP(C.cost), `${totT ? Math.round(C.cost / totT * 100) : 0} % del gasto en términos del rango`),
+    kpi('CPL competidores', `<span class="${tcls(div(C.cost, C.conv))}">${fCOP(div(C.cost, C.conv))}</span>`, `resto de búsquedas: ${fCOP(div(rest.cost, rest.conv))} · ${fN(C.conv)} conv.`),
+    kpi('Últimos 7 días', fCOP(C7), `7 días previos: ${fCOP(C7p)} · ${C7p ? (C7 > C7p ? '+' : '') + fN1((C7 / C7p - 1) * 100) + ' %' : '—'}`),
+    kpi('Competidores sin negativa', `<span class="${activos.length ? 't-neg' : 't-pos'}">${activos.length}</span>`, activos.length ? activos.slice(0, 4).map(([f]) => f).join(', ') + (activos.length > 4 ? '…' : '') : 'todos los que gastaron tienen negativa'),
+  ].join('');
+  document.getElementById('comp-note').textContent = `${rowsF.length} universidades con gasto en el rango`;
+  document.getElementById('comp-body').innerHTML = rowsF.map(([f, x]) => { const ng = negDe(f), w = cw(f, w1, lastD), wp = cw(f, w0a, w0b);
+    return `<tr><td>${f}</td><td>${ng.length ? `<span class="comp-tag ct-neg" title="${ng.join(', ')}">Con negativa</span>` : '<span class="comp-tag ct-act">Sin negativa</span>'}</td><td class="r grp">${fCOP(x.cost)}</td><td class="r">${C.cost ? fN1(x.cost / C.cost * 100) + ' %' : '—'}</td><td class="r">${fN(x.clicks)}</td><td class="r">${fN1(x.conv)}</td><td class="r ${tcls(div(x.cost, x.conv))}">${fCOP(div(x.cost, x.conv))}</td><td class="r grp">${fCOP(w)}</td><td class="r">${fCOP(wp)}</td></tr>` }).join('')
+    + `<tr class="tr-total"><td>Total competidores</td><td></td><td class="r grp">${fCOP(C.cost)}</td><td class="r">100 %</td><td class="r"></td><td class="r">${fN1(C.conv)}</td><td class="r ${tcls(div(C.cost, C.conv))}">${fCOP(div(C.cost, C.conv))}</td><td class="r grp">${fCOP(C7)}</td><td class="r">${fCOP(C7p)}</td></tr>`;
+  const T = {}; EXTRA.terminos.filter(x => x.d >= a && x.d <= b).forEach(x => { const o = T[x.term] = T[x.term] || {fam: x.fam, cost:0, conv:0, clicks:0}; o.cost += x.cost; o.conv += x.conv; o.clicks += x.clicks });
+  const sin = Object.entries(T).filter(([, x]) => x.conv < 1).sort((p, q) => q[1].cost - p[1].cost).slice(0, 12);
+  document.getElementById('term-body').innerHTML = sin.length ? sin.map(([t, x]) => `<tr><td>${t}</td><td>${x.fam}</td><td class="r">${fCOP(x.cost)}</td><td class="r">${fN(x.clicks)}</td></tr>`).join('') : '<tr><td colspan="4">Sin términos de competidores sin conversiones en el rango.</td></tr>';
+  const tipos = ['Marca', 'Genérico Medicina', 'Competidores'], colors = {'Marca': css('--serie-3'), 'Genérico Medicina': css('--ramp-3'), 'Competidores': css('--serie-2')};
+  const byDay = {}; EXTRA.mezcla.forEach(x => { (byDay[x.d] = byDay[x.d] || {})[x.tipo] = x.cost });
+  CHARTS.mix = new Chart(document.getElementById('chart-mix'), {type: 'bar',
+    data: {labels: lab, datasets: tipos.map(t => ({label: t, backgroundColor: colors[t], data: days.map(d => { const o = byDay[d] || {}, tt = tipos.reduce((s, k) => s + (o[k] || 0), 0); return tt ? (o[t] || 0) / tt * 100 : null })}))},
+    options: {...base, plugins: {legend: {display: true, position: 'bottom', labels: {boxWidth: 10}}, tooltip: {callbacks: {label: c => `${c.dataset.label}: ${c.raw === null ? '—' : Math.round(c.raw) + ' %'}`}}},
+      scales: {...base.scales, y: {stacked: true, min: 0, max: 100, grid: {color: grid}, ticks: {callback: v => v + ' %'}}}},
     plugins: [eventLines]});
 }
 
