@@ -1439,9 +1439,9 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
   <div class="block reveal">
     <div class="sub-head"><span class="tag">Tres escenarios</span><h3>Cuánto cuesta cada meta de Medicina</h3><p>El CPL y la conversión por campaña son los mismos en los tres escenarios. Lo único que cambia es la inversión en Medicina y, con ella, los leads, los minutos del agente de voz y las matrículas.</p></div>
     <div class="scen-switch" id="scenSwitch">
-      <button type="button" class="is-active" data-s="s1"><small>Escenario 1</small><strong>150 matrículas</strong><span>Medicina · $294,3M total</span></button>
-      <button type="button" data-s="s2"><small>Escenario 2</small><strong>100 matrículas</strong><span>Medicina · $223,8M total</span></button>
-      <button type="button" data-s="s3"><small>Escenario 3</small><strong>75 matrículas</strong><span>Medicina · $187,6M total</span></button>
+      <button type="button" class="is-active" data-s="s1"><small>Escenario 1</small><strong>150 matrículas</strong><span>Medicina · $294,1M total</span></button>
+      <button type="button" data-s="s2"><small>Escenario 2</small><strong>100 matrículas</strong><span>Medicina · $223,6M total</span></button>
+      <button type="button" data-s="s3"><small>Escenario 3</small><strong>75 matrículas</strong><span>Medicina · $187,4M total</span></button>
     </div>
     <div class="signal-table-wrap" style="margin-top:14px;">
       <table class="signal-table on-light scen-compare">
@@ -1453,7 +1453,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
           <tr><td>Leads totales</td><td>6.758</td><td>5.105</td><td>4.258</td></tr>
           <tr><td>Matrículas totales</td><td>176</td><td>126</td><td>101</td></tr>
           <tr><td>CPL blended</td><td>$36.994</td><td>$36.020</td><td>$35.228</td></tr>
-          <tr class="total-row"><td>Inversión total</td><td>$294.347.500</td><td>$223.764.400</td><td>$187.597.500</td></tr>
+          <tr class="total-row"><td>Inversión total</td><td>$294.147.500</td><td>$223.564.400</td><td>$187.397.500</td></tr>
         </tbody>
       </table>
     </div>
@@ -1468,7 +1468,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:24px clamp(20
         <ul class="tech-list">
           <li><span>Agente de voz IA</span><b id="rVoz"></b></li>
           <li><span>Agente de WhatsApp</span><b>$9.000.000</b></li>
-          <li><span>Landings (3 variantes)</span><b>$2.000.000</b></li>
+          <li><span>Landings (3 variantes)</span><b>$1.800.000</b></li>
         </ul>
       </article>
     </div>
@@ -2094,21 +2094,21 @@ function waTyping(body) {
   ];
   const S = {
     s1: { name: 'Escenario 1', medBig: '$200M', med: 200000000, medPct: '80%', medLeads: '5.000', medMat: 150, prog: '$250.000.000', progBig: '$250M', progD: '80% Medicina · 8% pregrado general · 10% posgrado general · 2% WhatsApp',
-          voz: '$17.347.500', vozMin: 'Pregrado 13.050 min · Posgrado 1.406 min', vozTot: '14.456 minutos × $1.200', tec: '$28.347.500', tecBig: '$28,3M', total: '$294.347.500',
+          voz: '$17.347.500', vozMin: 'Pregrado 13.050 min · Posgrado 1.406 min', vozTot: '14.456 minutos × $1.200', tec: '$28.147.500', tecBig: '$28,1M', total: '$294.147.500',
           leads: '6.758', mat: 176, cpl: '$36.994', conv: '2,60%',
-          months: [['Octubre', '$50.738.417', '$3.336.058', '$58.324.475'], ['Noviembre', '$77.170.035', '$5.004.087', '$84.424.122'], ['Diciembre', '$77.205.448', '$5.004.087', '$84.459.535'], ['Enero', '$60.886.100', '$4.003.268', '$67.139.368']],
+          months: [['Octubre', '$50.738.417', '$3.336.058', '$58.124.475'], ['Noviembre', '$77.170.035', '$5.004.087', '$84.424.122'], ['Diciembre', '$77.205.448', '$5.004.087', '$84.459.535'], ['Enero', '$60.886.100', '$4.003.268', '$67.139.368']],
           pautaTot: '$266.000.000', bars: [[66, 10], [100, 9], [100, 9], [79, 8]],
           g: ['$141,5M', '56,6%', '$120,0M'], m: ['$108,5M', '43,4%', '$80,0M'] },
     s2: { name: 'Escenario 2', medBig: '$133,9M', med: 133880000, medPct: '72,81%', medLeads: '3.347', medMat: 100, prog: '$183.880.000', progBig: '$183,9M', progD: '72,8% Medicina · 10,9% pregrado general · 13,6% posgrado general · 2,7% WhatsApp',
-          voz: '$12.884.400', vozMin: 'Pregrado 9.331 min · Posgrado 1.406 min', vozTot: '10.737 minutos × $1.200', tec: '$23.884.400', tecBig: '$23,9M', total: '$223.764.400',
+          voz: '$12.884.400', vozMin: 'Pregrado 9.331 min · Posgrado 1.406 min', vozTot: '10.737 minutos × $1.200', tec: '$23.684.400', tecBig: '$23,7M', total: '$223.564.400',
           leads: '5.105', mat: 126, cpl: '$36.020', conv: '2,47%',
-          months: [['Octubre', '$38.126.296', '$2.477.769', '$44.854.065'], ['Noviembre', '$57.987.769', '$3.716.654', '$63.954.423'], ['Diciembre', '$58.014.380', '$3.716.654', '$63.981.034'], ['Enero', '$45.751.555', '$2.973.323', '$50.974.878']],
+          months: [['Octubre', '$38.126.296', '$2.477.769', '$44.654.065'], ['Noviembre', '$57.987.769', '$3.716.654', '$63.954.423'], ['Diciembre', '$58.014.380', '$3.716.654', '$63.981.034'], ['Enero', '$45.751.555', '$2.973.323', '$50.974.878']],
           pautaTot: '$199.880.000', bars: [[66, 11], [100, 10], [100, 10], [79, 9]],
           g: ['$101,8M', '55,4%', '$80,3M'], m: ['$82,1M', '44,6%', '$53,6M'] },
     s3: { name: 'Escenario 3', medBig: '$100M', med: 100000000, medPct: '66,67%', medLeads: '2.500', medMat: 75, prog: '$150.000.000', progBig: '$150M', progD: '66,7% Medicina · 13,3% pregrado general · 16,7% posgrado general · 3,3% WhatsApp',
-          voz: '$10.597.500', vozMin: 'Pregrado 7.425 min · Posgrado 1.406 min', vozTot: '8.831 minutos × $1.200', tec: '$21.597.500', tecBig: '$21,6M', total: '$187.597.500',
+          voz: '$10.597.500', vozMin: 'Pregrado 7.425 min · Posgrado 1.406 min', vozTot: '8.831 minutos × $1.200', tec: '$21.397.500', tecBig: '$21,4M', total: '$187.397.500',
           leads: '4.258', mat: 101, cpl: '$35.228', conv: '2,37%',
-          months: [['Octubre', '$31.663.824', '$2.037.981', '$37.951.805'], ['Noviembre', '$48.158.743', '$3.056.971', '$53.465.714'], ['Diciembre', '$48.180.844', '$3.056.971', '$53.487.815'], ['Enero', '$37.996.589', '$2.445.577', '$42.692.166']],
+          months: [['Octubre', '$31.663.824', '$2.037.981', '$37.751.805'], ['Noviembre', '$48.158.743', '$3.056.971', '$53.465.714'], ['Diciembre', '$48.180.844', '$3.056.971', '$53.487.815'], ['Enero', '$37.996.589', '$2.445.577', '$42.692.166']],
           pautaTot: '$166.000.000', bars: [[66, 12], [100, 11], [100, 11], [79, 10]],
           g: ['$81,5M', '54,3%', '$60,0M'], m: ['$68,5M', '45,7%', '$40,0M'] }
   };
@@ -2151,8 +2151,8 @@ function waTyping(body) {
     $('monthChart').innerHTML = s.bars.map((b, i) =>
       '<div class="bar-group"><div class="bar-pair"><div class="mini-bar pauta" style="height:' + b[0] + '%" title="Pauta ' + s.months[i][1] + '"></div><div class="mini-bar ia" style="height:' + b[1] + '%" title="Tecnología"></div></div><div class="bar-label"><strong>' + labels[i][0] + '</strong><span>' + labels[i][1] + '</span></div></div>').join('');
     $('monthFoot').textContent = 'Total del periodo: ' + s.total + ' · ' + s.pautaTot + ' pauta + ' + s.tec + ' tecnología.';
-    $('monthBody').innerHTML = s.months.map((r, i) => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td>' + WA + '</td><td>' + (i === 0 ? '$2.000.000' : '—') + '</td><td>' + r[3] + '</td></tr>').join('') +
-      '<tr class="total-row"><td>Total</td><td>' + s.pautaTot + '</td><td>' + s.voz + '</td><td>$9.000.000</td><td>$2.000.000</td><td>' + s.total + '</td></tr>';
+    $('monthBody').innerHTML = s.months.map((r, i) => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td>' + WA + '</td><td>' + (i === 0 ? '$1.800.000' : '—') + '</td><td>' + r[3] + '</td></tr>').join('') +
+      '<tr class="total-row"><td>Total</td><td>' + s.pautaTot + '</td><td>' + s.voz + '</td><td>$9.000.000</td><td>$1.800.000</td><td>' + s.total + '</td></tr>';
 
     $('gVal').textContent = s.g[0]; $('gPct').textContent = s.g[1]; $('gMed').textContent = s.g[2];
     $('mVal').textContent = s.m[0]; $('mPct').textContent = s.m[1]; $('mMed').textContent = s.m[2];
@@ -2170,7 +2170,7 @@ function waTyping(body) {
     t += '<tr class="group-row"><td colspan="9">Tecnología</td></tr>';
     t += '<tr><td>Agente de voz IA</td><td>' + s.vozMin + '</td><td>—</td><td>' + s.voz + '</td><td colspan="5">' + s.vozTot + '</td></tr>';
     t += '<tr><td>Agente de WhatsApp</td><td>Todas las campañas</td><td>—</td><td>$9.000.000</td><td colspan="5">Bot de la campaña W + botón de la página de gracias</td></tr>';
-    t += '<tr><td>Landings</td><td>Medicina</td><td>—</td><td>$2.000.000</td><td colspan="5">Variantes B (video) y C (quiz) + página de gracias con WhatsApp</td></tr>';
+    t += '<tr><td>Landings</td><td>Medicina</td><td>—</td><td>$1.800.000</td><td colspan="5">Variantes B (video) y C (quiz) + página de gracias con WhatsApp</td></tr>';
     t += '<tr class="subtotal-row"><td>Subtotal tecnología</td><td></td><td></td><td>' + s.tec + '</td><td colspan="5"></td></tr>';
     t += '<tr class="grand-row"><td>Inversión total</td><td></td><td></td><td>' + s.total + '</td><td colspan="5">' + s.mat + ' matrículas proyectadas</td></tr>';
     $('tablaBody').innerHTML = t;
