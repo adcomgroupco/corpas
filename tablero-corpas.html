@@ -183,7 +183,6 @@ select:focus,input:focus{border-color:var(--accent-fg)}
       <div class="fg"><span class="fl">Grupo</span><select id="f-grupo" onchange="onSel()"><option value="">Todos</option></select></div>
       <div class="fg"><span class="fl">Medio</span><select id="f-medio" onchange="onSel()"><option value="">Todos</option></select></div>
       <div class="fg"><span class="fl">Programa</span><select id="f-programa" onchange="onSel()"><option value="">Todos</option></select></div>
-      <label class="chk" title="Reparte la inversión de campañas generales entre los programas del mismo nivel según sus leads CRM"><input type="checkbox" id="f-repartir" checked onchange="render()">Repartir campañas generales</label>
       <button class="btn-reset" onclick="resetFilters()">↺ Reset</button>
     </div>
   </div>
@@ -208,6 +207,9 @@ select:focus,input:focus{border-color:var(--accent-fg)}
     <div class="sec-title" id="sec-semana"><span></span>Evolución<span class="sec-note" id="semana-note"></span><span style="margin-left:auto;display:flex;gap:6px"><button class="qbtn on" data-ev="mes" onclick="setEvo('mes')">Mes a mes</button><button class="qbtn" data-ev="sem" onclick="setEvo('sem')">Semana a semana</button></span></div>
     <div class="card chart-card"><div class="chart-wrap"><canvas id="chart-sem"></canvas></div></div>
     <div class="card tcard"><div class="tscroll"><table><thead id="sem-head"></thead><tbody id="sem-body"></tbody></table></div></div>
+
+    <div class="sec-title" id="sec-embudoprog"><span></span>Embudo por programa<span class="sec-note">estado del lead en el CRM ("Lead Status") y deals · % sobre los leads CRM del programa</span></div>
+    <div class="card tcard"><div class="tscroll"><table><thead id="ep-head"></thead><tbody id="ep-body"></tbody></table></div></div>
 
     <div class="sec-title" id="sec-detalle"><span></span>Nivel · grupo · programa</div>
     <div class="card tcard">
@@ -414,7 +416,9 @@ function build(rg, metas, contacts, deals, homolog){
     METAS.push({ per, ini, fin, niv, pk, gen, grp: grupoDe(niv, nm, gen), ppto: num(x[8]), lm: num(x[5]), mm: num(x[6]) });
   });
   // HUBSPOT_CONTACTS: todas las fuentes van a la comparación; las de pauta, al embudo
-  const cc = colsDe(contacts, {d:'Create Date', canal:'Canal de Ingreso', pauta:'Lead de Pauta', cuenta:'Cuenta Maestra', per:'Periodo Académico Universitario', prog:'Programa de interés'});
+  const cc = colsDe(contacts, {d:'Create Date', canal:'Canal de Ingreso', pauta:'Lead de Pauta', cuenta:'Cuenta Maestra', per:'Periodo Académico Universitario', prog:'Programa de interés', st:'Lead Status'});
+  // Lead Status del CRM → etapa de gestión del lead
+  const stKey = v => { const t = norm(v); return !t ? 'lsV' : /^NO CONTESTA/.test(t) ? 'lsN' : /^DESISTE/.test(t) ? 'lsD' : /^INTERESADO/.test(t) ? 'lsI' : /INSCRI|HOMOLOG/.test(t) ? 'lsP' : 'lsS' };
   contacts.slice(1).forEach(x => {
     const d = iso(x[cc.d]), nm = String(x[cc.prog]||'').trim(), niv = nivelCRM(nm, x[cc.cuenta]), per = perDe(x[cc.per]);
     if(!d || !niv) return;
@@ -422,7 +426,7 @@ function build(rg, metas, contacts, deals, homolog){
     FUE.push({ d, per, niv, fu: pauta ? 'Pauta' : esOrganico(x[cc.canal]) ? 'Orgánico' : 'Otras fuentes', lc: 1, mat: 0 });
     if(!pauta) return;
     const pk = prog(nm);
-    row({ src:'crm', d, per, niv, pk, gen:false, grp: grupoDe(niv, D(pk), false), medio: canal(x[cc.canal]), lc: 1 });
+    row({ src:'crm', d, per, niv, pk, gen:false, grp: grupoDe(niv, D(pk), false), medio: canal(x[cc.canal]), lc: 1, [stKey(x[cc.st])]: 1 });
   });
   // HUBSPOT_DEALS: etapas acumulativas (inscrito → documentos → entrevista → pendiente de pago → matriculado)
   const cd = colsDe(deals, {d:'Created At', won:'Closed Won Date (Internal)', ins:'Aspirante Inscrito', pago:'Pendiente pago matrícula', mat:'Aspirante Matriculado',
@@ -478,7 +482,7 @@ function share(m, f){
   return a > b ? 0 : days(a, b) / days(m.ini, m.fin) }
 function F(){ const g = id => document.getElementById(id).value;
   return { desde: g('f-desde'), hasta: g('f-hasta'), niv: g('f-nivel'), grp: g('f-grupo'), medio: g('f-medio'), prog: g('f-programa'),
-    per: '', rep: document.getElementById('f-repartir').checked } }
+    per: '' } }
 // La pauta no trae periodo: siempre por fechas. El CRM, con periodo elegido, por su columna Periodo.
 // el CRM siempre por fecha: con periodo elegido, las fechas son las del periodo
 const enRango = (r, f) => r.d >= f.desde && r.d <= f.hasta;
@@ -490,10 +494,10 @@ function cascade(){
   fill('f-programa', [...new Set(b2.filter(r => !r.gen).map(r => r.pk))].sort((x, y) => D(x).localeCompare(D(y))), f.prog, D);
 }
 function resetFilters(){ ['f-nivel','f-grupo','f-medio','f-programa'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('f-repartir').checked = true; document.getElementById('q').value = ''; QUICK = 'mes'; prepare() }
+  document.getElementById('q').value = ''; QUICK = 'mes'; prepare() }
 
 // ── Cálculo ──────────────────────────────────────────────────────────────────
-const Z = () => ({inv:0, invG:0, lp:0, lc:0, pre:0, ins:0, adm:0, mat:0, ppto:0, lm:0, mm:0, lcF:0, lcG:0, lcT:0, lcL:0, lcP:0, lcO:0});
+const Z = () => ({inv:0, invG:0, lp:0, lc:0, pre:0, ins:0, adm:0, mat:0, ppto:0, lm:0, mm:0, lcF:0, lcG:0, lcT:0, lcL:0, lcP:0, lcO:0, lsV:0, lsN:0, lsS:0, lsI:0, lsP:0, lsD:0});
 // leads CRM por medio (columnas de la tabla de programas; no se reparten)
 const LCM = [['lcF','Meta'],['lcG','Google'],['lcT','TikTok'],['lcL','LinkedIn'],['lcP','Programática'],['lcO','Otros']];
 const lcKey = m => { const t = norm(m); return /FACE|META|INSTA/.test(t) ? 'lcF' : /GOOGLE/.test(t) ? 'lcG' : /TIKTOK/.test(t) ? 'lcT' : /LINKEDIN/.test(t) ? 'lcL' : /PROGRAM/.test(t) ? 'lcP' : 'lcO' };
@@ -510,16 +514,7 @@ function entradas(f){
     const s = share(m, f); if(!s) return;
     const e = get(m.niv, m.pk, m.grp, m.gen);
     e.ppto += m.ppto * s; e.lm += m.lm * s; e.mm += m.mm * s });
-  let list = Object.values(E);
-  if(f.rep){
-    list.filter(g => g.gen).forEach(g => {
-      const prog = list.filter(e => !e.gen && e.lc > 0);
-      let c = prog.filter(e => e.niv === g.niv); if(!c.length && g.niv === 'General') c = prog; if(!c.length) return;
-      const t = c.reduce((a, e) => a + e.lc, 0);
-      c.forEach(e => { const s = e.lc / t; e.inv += g.inv * s; e.invG += g.inv * s; e.lp += g.lp * s; e.ppto += g.ppto * s; e.lm += g.lm * s; e.mm += g.mm * s });
-      g.repartido = true });
-    list = list.filter(e => !e.repartido);
-  }
+  const list = Object.values(E);
   return list.filter(e => (!f.grp || e.grp === f.grp) && (!f.prog || e.pk === f.prog));
 }
 function filasRango(f){ return RAW.filter(r => pasa(r, f) && (!f.grp || r.grp === f.grp) && (!f.prog || r.pk === f.prog)) }
@@ -535,11 +530,11 @@ function render(){
   document.getElementById('rango-note').textContent = `${fDate(f.desde)} – ${fDate(f.hasta)} ${f.hasta.slice(0,4)} · ${days(f.desde, f.hasta)} días`;
   document.getElementById('embudo-note').textContent = 'etapas por fecha de creación del deal · matrículas por fecha de cierre ganado';
   const gen = RAW.filter(r => r.gen && pasa(r, f)).reduce((a, r) => a + r.inv, 0);
-  document.getElementById('gen-note').textContent = gen ? `Campañas generales: ${fCOP(gen)}, ${f.rep ? 'repartidas entre programas según leads CRM' : 'en su propio grupo'}` : '';
+  document.getElementById('gen-note').textContent = gen ? `Campañas generales: ${fCOP(gen)}, en su propio grupo; los leads CRM quedan en el programa que pidió cada lead` : '';
   // branding, eventos y programática no tienen nivel: solo se suman en la vista de todos los niveles
   const B = renderBrand(f, (r, f) => !f.niv && r.d >= f.desde && r.d <= f.hasta && (!f.medio || r.medio === f.medio), r => r.grupo);
   renderBasis(f);
-  renderKPIs(T, B); renderFunnel(T); renderFuentes(f, (r, f) => (r.d >= f.desde && r.d <= f.hasta) && (!f.niv || r.niv === f.niv)); renderNivel(); renderMedio(f); renderSemana(f); renderDetalle();
+  renderKPIs(T, B); renderFunnel(T); renderFuentes(f, (r, f) => (r.d >= f.desde && r.d <= f.hasta) && (!f.niv || r.niv === f.niv)); renderNivel(); renderMedio(f); renderSemana(f); renderEmbudoProg(); renderDetalle();
 }
 
 function bar(p, lbl){ if(p === null) return '';
@@ -648,6 +643,24 @@ function renderSemana(f){
   CHART = new Chart(document.getElementById('chart-sem'), { data, options: opts });
 }
 
+// ── Embudo por programa: estado del lead (Lead Status) → deals → matrícula ─
+const EP_COLS = [['lc','Leads CRM'], ['lsV','Sin estado en CRM'], ['lsN','No contesta'], ['lsS','En seguimiento'], ['lsI','Interesado'], ['lsP','En inscripción'], ['lsD','Desiste'],
+  ['pre','Oportunidades'], ['ins','Inscritos'], ['adm','Pend. pago'], ['mat','Matriculados']];
+function renderEmbudoProg(){
+  document.getElementById('ep-head').innerHTML = '<tr><th>Nivel / programa</th>' + EP_COLS.map(c => `<th class="r">${c[1]}</th>`).join('') + '</tr>';
+  const td = (e, k) => k === 'lc' ? `<td class="r">${fN(e.lc)}</td>` : `<td class="r">${fN(e[k])}${e.lc && e[k] ? ` <span class="t-mute">${fP(div(e[k], e.lc))}</span>` : ''}</td>`;
+  const ents = ENT.filter(e => !e.gen && (e.lc || e.pre));
+  let h = '';
+  NIVELES.forEach(n => {
+    const es = ents.filter(e => e.niv === n).sort((a, b) => b.lc - a.lc); if(!es.length) return;
+    const t = es.reduce((a, e) => add(a, e), Z());
+    h += `<tr class="lv1"><td>${esc(n)}</td>` + EP_COLS.map(c => td(t, c[0])).join('') + '</tr>';
+    es.forEach(e => { h += `<tr class="lv3"><td>${esc(D(e.pk))}</td>` + EP_COLS.map(c => td(e, c[0])).join('') + '</tr>' }) });
+  const T = ents.reduce((a, e) => add(a, e), Z());
+  h += '<tr class="tr-total"><td>Total</td>' + EP_COLS.map(c => td(T, c[0])).join('') + '</tr>';
+  document.getElementById('ep-body').innerHTML = ents.length ? h : '<tr><td colspan="12" class="t-mute" style="padding:16px;text-align:center">Sin leads en el rango</td></tr>';
+}
+
 function sortBy(col){ SORT.dir = SORT.col === col ? -SORT.dir : -1; SORT.col = col; renderDetalle() }
 function sorter(a, b){ const x = a.m[SORT.col], y = b.m[SORT.col];
   if(x === null && y === null) return 0; if(x === null) return 1; if(y === null) return -1; return SORT.dir * (x - y) }
@@ -672,7 +685,7 @@ function renderDetalle(){
       const gid = cid + '__' + gk.replace(/\W/g, '_'), og = q ? true : !!OPEN[gid];
       h += `<tr class="lv2${oc ? '' : ' hidden'}" data-p="${cid}" onclick="tog('${gid}')"><td><span class="tog${og ? ' open' : ''}" id="t-${gid}">▶</span>${esc(gk)}<span class="t-mute" style="font-weight:400;margin-left:6px">${gv.progs.length}</span></td>` + cols.map(c => cell(m, c)).join('') + '</tr>';
       gv.progs.map(e => ({e, m: M(e)})).sort(sorter).forEach(({e, m}) => {
-        const tag = (!e.gen && !e.inv && (e.lc || e.pre)) ? '<span class="nv nv-gen">sin pauta</span>' : '';
+        const tag = (!e.gen && !e.inv && (e.lc || e.pre)) ? '<span class="nv nv-gen" title="leads que llegan por campañas generales u otras campañas">sin inversión directa</span>' : '';
         h += `<tr class="lv3${oc && og ? '' : ' hidden'}" data-p="${gid}" data-c="${cid}"><td>${esc(D(e.pk))}${tag}</td>` + cols.map(c => cell(m, c)).join('') + '</tr>' }) }) });
   const T = M(ents.reduce((a, e) => add(a, e), Z()));
   h += '<tr class="tr-total"><td>Total</td>' + cols.map(c => cell(T, c)).join('') + '</tr>';
