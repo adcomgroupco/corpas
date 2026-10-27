@@ -224,7 +224,7 @@ select:focus,input:focus{border-color:var(--accent-fg)}
         <b>Oportunidades, inscritos, pendientes de pago y matriculados</b>: HUBSPOT_DEALS con "Deal de pauta" = 1; las etapas van por la fecha de creación del deal y la matrícula por su fecha de cierre ganado.
         Con un periodo elegido en los atajos, el rango de fechas va del inicio del periodo a hoy y las metas son las del periodo completo; leads, etapas y matrículas del CRM se cuentan siempre por su fecha (las matrículas, en la fecha en que se matricularon).
         <b>CRM Meta, CRM Google…</b>: leads CRM de cada medio (las campañas generales no se reparten aquí). <b>Lead → mat.</b>: matrículas sobre leads CRM. <b>Metas</b>: solo las del periodo 2027-1. Con el botón "Meta 2027-1" encendido se toma la meta total del periodo; apagado, la parte proporcional a los días del rango. En los dos casos lo logrado (inversión, leads, matrículas) se cuenta por las fechas elegidas. Con "Repartir" activo, la inversión y metas de campañas generales se reparten entre los programas del mismo nivel según sus leads CRM.
-        Branding, eventos, quiz y programática van en su propia sección y no entran en los costos. El nivel de cada programa sale de su nombre (una maestría siempre es posgrado).
+        Branding, eventos y programática van en su propia sección y no entran en los costos. El nivel de cada programa sale de su nombre (una maestría siempre es posgrado).
       </div>
     </div>
     <div class="sec-title" id="sec-brand"><span></span>Branding y eventos<span class="sec-note">no entra en los costos del embudo ni en la tabla de programas</span></div>
@@ -311,8 +311,8 @@ function prog(s){ // llave del programa; guarda el nombre a mostrar (el que teng
 const D = k => DISP[k] || k;
 // Campañas de leads sin programa: se quedan en su nivel (se pueden repartir)
 const esGeneral = nm => /^(GENERAL|CAMPANA GENERAL)/.test(pkey(nm));
-// Branding, eventos, quiz y programática van a su propia sección
-const esBranding = (mod, nm) => norm(mod) === 'BRANDING' || /BRANDING|PROGRAMATICA|QUIZ|EVENTO/.test(pkey(nm));
+// Branding, eventos y programática van a su propia sección (el quiz de Medicina es un programa de pregrado; el Quiz Vocacional ya viene como modalidad Branding)
+const esBranding = (mod, nm) => norm(mod) === 'BRANDING' || /BRANDING|PROGRAMATICA|EVENTO/.test(pkey(nm));
 const grupoBrand = nm => /PROGRAMATICA/.test(pkey(nm)) ? 'Programática' : /EVENTO/.test(pkey(nm)) ? 'Eventos' : 'Branding';
 const nivelDe = s => { const t = norm(s);
   if(t.includes('POSGRADO')) return 'Posgrado'; if(t.startsWith('PREGRADO') || t.startsWith('PREMEDICO')) return 'Pregrado';
