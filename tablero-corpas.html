@@ -55,6 +55,19 @@ select:focus,input:focus{border-color:var(--accent-fg)}
 .kpi-brow{display:flex;justify-content:space-between;font-size:11px;color:var(--gray-600);margin-bottom:3px}
 .kpi-bar{height:4px;background:var(--gray-200);border-radius:999px;overflow:hidden}
 .kpi-bfill{height:100%;border-radius:999px}
+.med-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:-8px 0 20px}
+.med-card{padding:14px}
+.med-head{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--gray-600);margin-bottom:4px}
+.med-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.med-inv{font-size:20px;font-weight:700;line-height:1.15;font-variant-numeric:tabular-nums}
+.med-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px;padding:5px 0;border-top:1px solid var(--gray-200);font-variant-numeric:tabular-nums}
+.med-row:first-of-type{margin-top:10px}
+.med-row span{color:var(--gray-600)}
+.med-row b{font-weight:600;text-align:right}
+.med-row i{font-style:normal;color:var(--gray-400);font-size:11px;font-weight:400;margin-left:6px}
+.nv-chip{display:inline-flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
+.nv-chip .car{font-size:10px;color:var(--gray-400);transition:transform .15s}
+.nv-chip.open .car{transform:rotate(90deg)}
 .bg-pos{background:var(--c-pos)} .bg-mid{background:var(--c-mid)} .bg-neg{background:var(--c-neg)}
 .t-pos{color:var(--c-pos);font-weight:600} .t-mid{color:var(--c-mid);font-weight:600} .t-neg{color:var(--c-neg);font-weight:600} .t-mute{color:var(--gray-400)}
 
@@ -123,8 +136,8 @@ select:focus,input:focus{border-color:var(--accent-fg)}
 @keyframes spin{to{transform:rotate(360deg)}}
 #ld-msg{color:var(--fg-muted);font-size:12px}
 
-@media(max-width:1300px){.kpi-grid{grid-template-columns:repeat(3,1fr)}.nm-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.f-row{grid-template-columns:90px 1fr 120px 130px}.f-cost span{display:none}.content{padding:14px 16px}}
+@media(max-width:1300px){.med-grid{grid-template-columns:repeat(2,1fr)}.kpi-grid{grid-template-columns:repeat(3,1fr)}.nm-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.med-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.f-row{grid-template-columns:90px 1fr 120px 130px}.f-cost span{display:none}.content{padding:14px 16px}}
 .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
 .tag-pau{background:#FFF3B0;color:#7A5B00} .tag-org{background:#E0F2FE;color:#075985} .tag-otr{background:var(--gray-100);color:var(--gray-600)}
 @media(max-width:1300px){.three-col{grid-template-columns:1fr}}
@@ -190,6 +203,7 @@ select:focus,input:focus{border-color:var(--accent-fg)}
   <div class="content">
     <div class="sec-title" id="sec-kpi"><span></span>Resumen del rango<span class="sec-note" id="rango-note"></span></div>
     <div class="kpi-grid" id="kpi-grid"></div>
+    <div class="med-grid" id="med-grid"></div>
 
     <div class="sec-title" id="sec-embudo"><span></span>Embudo<span class="sec-note" id="embudo-note"></span></div>
     <div class="card funnel" id="funnel"></div>
@@ -534,7 +548,7 @@ function render(){
   // branding, eventos y programática no tienen nivel: solo se suman en la vista de todos los niveles
   const B = renderBrand(f, (r, f) => !f.niv && r.d >= f.desde && r.d <= f.hasta && (!f.medio || r.medio === f.medio), r => r.grupo);
   renderBasis(f);
-  renderKPIs(T, B); renderFunnel(T); renderFuentes(f, (r, f) => (r.d >= f.desde && r.d <= f.hasta) && (!f.niv || r.niv === f.niv)); renderNivel(); renderMedio(f); renderSemana(f); renderEmbudoProg(); renderDetalle();
+  renderKPIs(T, B); renderMedios(f); renderFunnel(T); renderFuentes(f, (r, f) => (r.d >= f.desde && r.d <= f.hasta) && (!f.niv || r.niv === f.niv)); renderNivel(); renderMedio(f); renderSemana(f); renderEmbudoProg(); renderDetalle();
 }
 
 function bar(p, lbl){ if(p === null) return '';
@@ -555,6 +569,24 @@ function renderKPIs(T, B){
     k(META_TOTAL ? 'Meta de matrículas del periodo' : 'Meta de matrículas del rango', fN(T.mm), META_TOTAL ? 'meta completa del periodo' : 'proporcional a los días elegidos'),
   ].join('');
 }
+// Tarjetas por medio del resumen: mismas filas y reglas que la tabla "Por nivel y medio"
+const MEDIO_CARD = [['Facebook','Meta','#1877F2'],['TikTok','TikTok','#111111'],['Google','Google','#EA4335'],['Programática','Programática','#7C3AED']];
+function renderMedios(f){
+  const g = groupRows(filasRango(f), r => r.medio);
+  const cards = MEDIO_CARD.filter(([k]) => !f.medio || f.medio === k || (g[k] && NUM.some(x => g[k][x])));
+  const row = (l, v, sub) => `<div class="med-row"><span>${l}</span><b>${v}${sub ? `<i>${sub}</i>` : ''}</b></div>`;
+  document.getElementById('med-grid').innerHTML = cards.map(([k, lbl, col]) => {
+    const e = M(g[k] || Z());
+    return `<div class="card med-card"><div class="med-head"><span class="med-dot" style="background:${col}"></span>${lbl}</div>
+      <div class="med-inv">${fCOP(e.inv)}</div><div class="kpi-sub">inversión${T_SHARE(e.inv, g)}</div>
+      ${row('Leads plataforma', fN(e.lp), 'CPL ' + fCOP(e.cplP))}
+      ${row('Leads CRM', fN(e.lc), 'CPL ' + fCOP(e.cplC))}
+      ${row('Oportunidades', fN(e.pre), fP(div(e.pre, e.lc)) + ' de leads')}
+      ${row('Pend. pago', fN(e.adm), fN(e.ins) + ' inscritos')}
+      ${row('Matriculados', fN(e.mat), fP(div(e.mat, e.adm)) + ' de pend. pago')}
+      ${row('Lead → mat.', fP(e.conv))}</div>` }).join('') }
+const T_SHARE = (inv, g) => { const t = Object.values(g).reduce((a, x) => a + x.inv, 0); return t ? ' · ' + fP(inv / t) + ' del total' : '' };
+
 function renderFunnel(T){
   // costo por etapa = inversión del rango / volumen de la etapa; se colorea contra el costo meta cuando existe
   const cplMeta = div(T.ppto, T.lm), cpmMeta = div(T.ppto, T.mm);
@@ -616,6 +648,8 @@ function renderMedio(f){
   } else h = medios(rows, '');
   document.getElementById('medio-body').innerHTML = h + fila('tr-total', 'Total', rows.reduce((a, r) => add(a, r), Z()));
 }
+let OPEN_EVO = {};
+function togEvo(k){ OPEN_EVO[k] = !OPEN_EVO[k]; renderSemana(F()) }
 function setEvo(k){ EVO = k; document.querySelectorAll('[data-ev]').forEach(b => b.classList.toggle('on', b.dataset.ev === k)); renderSemana(F()) }
 function renderSemana(f){
   // con periodo elegido: pauta del rango y CRM del periodo, cada fila en su fecha
@@ -624,7 +658,14 @@ function renderSemana(f){
   const lab = k => mes ? MESES[+k.slice(5,7)].replace(/^./, c => c.toUpperCase()) + ' ' + k.slice(0,4) : `${fDate(k)} – ${fDate(addDays(k, 6))}`;
   document.getElementById('sem-head').innerHTML = head(mes ? 'Mes' : 'Semana', COLS_BASE, false);
   const T = M(ks.reduce((a, k) => add(a, g[k]), Z()));
-  document.getElementById('sem-body').innerHTML = ks.slice().reverse().map(k => '<tr><td>' + lab(k) + '</td>' + COLS_BASE.map(c => cell(M(g[k]), c)).join('') + '</tr>').join('') +
+  const lblM = {Facebook:'Meta', Google:'Google', TikTok:'TikTok', 'Programática':'Programática'};
+  const ordM = (a, b) => (CANALES.indexOf(a) + 1 || 9) - (CANALES.indexOf(b) + 1 || 9);
+  // el chip abre una fila por medio con las mismas columnas
+  const subM = k => { const gm = groupRows(rows.filter(r => (mes ? r.d.slice(0,7) : weekStart(r.d)) === k), r => r.medio);
+    return Object.keys(gm).filter(m => NUM.some(x => gm[m][x])).sort(ordM).map(m => '<tr class="lv3"><td>' + (lblM[m] || esc(m)) + '</td>' +
+      COLS_BASE.map(c => cell(M(gm[m]), c)).join('') + '</tr>').join('') };
+  document.getElementById('sem-body').innerHTML = ks.slice().reverse().map(k => { const open = !!OPEN_EVO[k];
+    return `<tr><td><span class="nv-chip${open ? ' open' : ''}" onclick="togEvo('${k}')"><span class="car">▶</span>${lab(k)}</span></td>` + COLS_BASE.map(c => cell(M(g[k]), c)).join('') + '</tr>' + (open ? subM(k) : '') }).join('') +
     '<tr class="tr-total"><td>Total</td>' + COLS_BASE.map(c => cell(T, c)).join('') + '</tr>';
   const css = getComputedStyle(document.body), fg = css.getPropertyValue('--fg-muted').trim() || '#888';
   const data = { labels: ks.map(k => mes ? lab(k) : fDate(k)), datasets: [
