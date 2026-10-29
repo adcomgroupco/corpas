@@ -243,7 +243,7 @@ select:focus,input:focus{border-color:var(--accent-fg)}
     <div class="card tcard"><div class="tscroll"><table>
       <thead><tr><th>Fecha</th><th class="r">Inversión</th><th class="r grp">Leads CRM</th><th class="r">CPL CRM</th><th class="r grp">Leads Google</th><th class="r">CPL Google</th><th class="r grp">CPL CRM 7 días</th><th class="r">CPL Google 7 días</th><th class="grp">Cambio en la campaña</th></tr></thead>
       <tbody id="dia-body"></tbody></table></div>
-      <div class="foot-note">Inversión y leads de Google (plataforma): pestaña RESUMEN GENERAL (Google Ads, campañas <code>_search_pregrado-medicina</code>). Leads CRM: HUBSPOT_CONTACTS con Lead de Pauta = 1, Canal de Ingreso «Google Ads» y Programa de interés «Pregrado Medicina», por fecha de creación. Medio y programa salen igual que en el tablero semanal.</div>
+      <div class="foot-note">Inversión y leads de Google (plataforma): pestaña RESUMEN GENERAL (Google Ads, campañas <code>_search_pregrado-medicina</code>). Leads CRM: HUBSPOT_CONTACTS con Lead de Pauta = 1, Canal de Ingreso «google» o «Google Ads» y Programa de interés «Pregrado Medicina», por fecha de creación. Medio y programa salen igual que en el tablero semanal.</div>
     </div>
 
     <div class="two-col" id="sec-log">
@@ -300,6 +300,8 @@ function iso(v){ const m = String(v||'').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
   return i ? `${i[1]}-${i[2].padStart(2,'0')}-${i[3].padStart(2,'0')}` : '' }
 function norm(s){ return String(s||'').trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'') }
 const pkey = s => norm(s).replace(/[^A-Z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+// HubSpot escribe el canal como «google» (desde el 29 oct) o «Google Ads»; «Google Orgánico» no es pauta
+const esGoogle = s => { const t = norm(s); return t === 'GOOGLE' || t.startsWith('GOOGLE ADS') || t.startsWith('GOOGLE_ADS') };
 const fCOP = n => (n && isFinite(n)) ? '$' + Math.round(n).toLocaleString('es-CO') : '—';
 const fN = n => (n && isFinite(n)) ? Math.round(n).toLocaleString('es-CO') : '0';
 const fN1 = n => isFinite(n) ? n.toLocaleString('es-CO',{maximumFractionDigits:1}) : '—';
@@ -363,7 +365,7 @@ function build(rg, contacts){
   const cc = colsDe(contacts, {d:'Create Date', canal:'Canal de Ingreso', pauta:'Lead de Pauta', prog:'Programa de interés'});
   CRM_HOY = 0;
   contacts.slice(1).forEach(x => { const d = iso(x[cc.d]);
-    if(!d || String(x[cc.pauta]).trim() !== '1' || !norm(x[cc.canal]).startsWith('GOOGLE ADS') || pkey(x[cc.prog]) !== PROG_KEY) return;
+    if(!d || String(x[cc.pauta]).trim() !== '1' || !esGoogle(x[cc.canal]) || pkey(x[cc.prog]) !== PROG_KEY) return;
     if(d > LAST){ CRM_HOY++; return }          // leads de días que la pauta todavía no reporta
     day(d).lc += 1 });
   // días corridos con 7 días acumulados
