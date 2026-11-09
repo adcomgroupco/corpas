@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Plan de pauta por programa del periodo 2027-1 de Corpas: reparto de los $89,3 millones adicionales por mes y por medio, ajustes en Search y Meta frente a las campañas generales y de branding, y material que necesitamos. ADCOM.">
+<title>Corpas · Pauta por programa 2027-1 · ADCOM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* Plantilla cliente ADCOM sobre blanco: encabezado negro redondeado, acento amarillo. Solo modo claro, como los demás documentos del cliente. */
+:root {
+  --bg: #FFFFFF; --ink: #141414; --muted: #63635E; --line: #E6E6E1; --panel: #F7F7F5;
+  --accent: #FFC000; --accent-soft: #FFF5D1; --head: #141414; --head-ink: #FFFFFF; --pos: #1F7A4D; --neg: #B3261E;
+  --f: "Poppins", "Segoe UI", Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body { color: var(--ink); font-family: var(--f); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; display: grid; gap: 48px; }
+h1, h2, h3 { margin: 0; line-height: 1.2; text-wrap: balance; }
+p, ul, ol { margin: 0; }
+.muted { color: var(--muted); }
+.lbl { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.top { background: var(--head); color: var(--head-ink); border-radius: 20px; padding: clamp(24px, 4vw, 44px); display: grid; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .16em; font-size: 13px; }
+.brand i { width: 12px; height: 12px; border-radius: 3px; background: var(--accent); }
+.top h1 { font-size: clamp(28px, 4.6vw, 42px); font-weight: 700; }
+.top h1 span { color: var(--accent); }
+.top p { max-width: 68ch; color: #D6D6D2; font-size: 16px; }
+section { display: grid; gap: 18px; }
+.head { display: grid; gap: 6px; padding-bottom: 14px; border-bottom: 3px solid var(--accent); }
+.head h2 { font-size: clamp(22px, 3vw, 28px); }
+.head p { max-width: 72ch; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.kpi { border: 1px solid var(--line); border-bottom: 4px solid var(--accent); border-radius: 14px; padding: 18px; display: grid; gap: 4px; align-content: start; }
+.kpi .v { font-size: 28px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi .s { font-size: 13px; color: var(--muted); }
+.highlight { background: var(--accent-soft); border-radius: 14px; padding: 18px 20px; display: grid; gap: 4px; }
+.highlight b { font-size: 17px; }
+.tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+thead th { background: var(--head); color: var(--head-ink); font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+tbody th { text-align: left; font-weight: 500; white-space: normal; min-width: 180px; }
+td small { display: block; font-size: 11px; color: var(--muted); }
+tr.grp td { text-align: left; background: var(--panel); font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+tr.tot th, tr.tot td { background: var(--accent-soft); font-weight: 700; border-bottom: 0; }
+table.txt td { text-align: left; white-space: normal; }
+.stack { display: grid; gap: 18px; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.mrows { display: grid; gap: 10px; }
+.mrow { display: grid; grid-template-columns: 90px 1fr 120px; gap: 12px; align-items: center; font-size: 14px; }
+.mrow b { text-align: right; font-variant-numeric: tabular-nums; }
+.track { height: 26px; background: var(--panel); border-radius: 6px; overflow: hidden; }
+.track i { display: block; height: 100%; background: var(--accent); border-radius: 6px; }
+.split { display: flex; height: 34px; border-radius: 8px; overflow: hidden; font-size: 12px; font-weight: 600; }
+.split span { display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; padding: 0 8px; }
+.s-g { background: var(--head); color: #fff; }
+.s-m { background: var(--accent); color: var(--ink); }
+.srow { display: grid; grid-template-columns: 170px 1fr; gap: 12px; align-items: center; font-size: 14px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; }
+.card { border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 18px; }
+.card ul { padding-left: 18px; font-size: 14px; display: grid; gap: 4px; }
+.card .lbl { color: var(--ink); }
+.tag { display: inline-block; border-radius: 99px; padding: 1px 10px; font-size: 12px; font-weight: 600; }
+.tag.ok { background: #E3F2EA; color: var(--pos); }
+.tag.mid { background: var(--accent-soft); color: #7A5A00; }
+.tag.no { background: #FBE5E3; color: var(--neg); }
+.next { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; counter-reset: paso; }
+.next li { background: var(--panel); border-radius: 14px; padding: 16px; font-size: 14px; display: grid; gap: 4px; counter-increment: paso; }
+.next li b { font-size: 15px; }
+.next li b::before { content: counter(paso) ". "; color: #B38600; }
+.foot { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+@media (max-width: 560px) { .mrow { grid-template-columns: 70px 1fr; } .mrow b { grid-column: 2; text-align: left; } .srow { grid-template-columns: 1fr; gap: 4px; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header class="top">
+  <div class="brand"><i></i>ADCOM · CORPAS</div>
+  <h1>Pauta por programa <span>2027-1</span></h1>
+  <p>Cómo invertimos los $89,3 M adicionales aprobados para 12 programas: reparto por mes y por medio, qué cambia en las campañas actuales para que no compitan entre sí, y el material que necesitamos para salir.</p>
+</header>
+
+<section>
+  <div class="head">
+    <span class="lbl">Resumen</span>
+    <h2>$89,3 M para 12 programas, de noviembre a febrero</h2>
+    <p>4 pregrados y 8 posgrados con campaña propia en Google Search y en Meta. Cada programa tiene su presupuesto y su meta de leads, así medimos y optimizamos por separado.</p>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><span class="lbl">Inversión adicional</span><span class="v">$89,3 M</span><span class="s">Escenario #2 aprobado</span></div>
+    <div class="kpi"><span class="lbl">Google Search</span><span class="v">$68,4 M</span><span class="s">77% del total</span></div>
+    <div class="kpi"><span class="lbl">Meta</span><span class="v">$21,0 M</span><span class="s">23% del total</span></div>
+    <div class="kpi"><span class="lbl">Leads esperados</span><span class="v">2.718</span><span class="s">con el costo por lead de cada programa</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Cómo se repartió</span>
+    <h2>Por mes y por medio</h2>
+    <p>Los meses siguen la misma curva del periodo (noviembre 22 %, diciembre 30 %, enero 25 %, febrero 3 %), reescalada a noviembre–febrero porque estos programas arrancan en noviembre. Por medio usamos el reparto que cada programa tuvo en 2026-2, sin TikTok.</p>
+  </div>
+  <div class="cols">
+    <div class="card"><span class="lbl">Inversión por mes</span><div class="mrows">
+<div class="mrow"><span>Noviembre</span><div class="track"><i style="width:73.3%"></i></div><b>$24.562.105</b></div>
+<div class="mrow"><span>Diciembre</span><div class="track"><i style="width:100.0%"></i></div><b>$33.493.780</b></div>
+<div class="mrow"><span>Enero</span><div class="track"><i style="width:83.3%"></i></div><b>$27.911.483</b></div>
+<div class="mrow"><span>Febrero</span><div class="track"><i style="width:10.0%"></i></div><b>$3.349.378</b></div>
+    </div></div>
+    <div class="card"><span class="lbl">Reparto por medio</span>
+      <div class="srow"><span>Pregrados</span><div class="split"><span class="s-g" style="width:75%">Google 75 %</span><span class="s-m" style="width:25%">Meta 25 %</span></div></div>
+      <div class="srow"><span>Posgrados</span><div class="split"><span class="s-g" style="width:80%">Google 80 %</span><span class="s-m" style="width:20%">Meta 20 %</span></div></div>
+      <div class="srow"><span>MBA (100 % virtual)</span><div class="split"><span class="s-g" style="width:70%">Google 70 %</span><span class="s-m" style="width:30%">Meta 30 %</span></div></div>
+      <p class="muted" style="font-size:13px">Search pesa más porque capta a quien ya está buscando el programa; Meta genera demanda y alimenta el remarketing.</p>
+    </div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th scope="col" style="text-align:left">Medio</th><th scope="col">Noviembre</th><th scope="col">Diciembre</th><th scope="col">Enero</th><th scope="col">Febrero</th><th scope="col">Total</th></tr></thead>
+    <tbody>
+<tr><th scope="row">Google Search</th><td>$18.799.466</td><td>$25.635.635</td><td>$21.363.030</td><td>$2.563.564</td><td><b>$68.361.694</b></td></tr>
+<tr><th scope="row">Meta</th><td>$5.762.639</td><td>$7.858.145</td><td>$6.548.454</td><td>$785.814</td><td><b>$20.955.053</b></td></tr>
+<tr class="tot"><th scope="row">Total</th><td>$24.562.105</td><td>$33.493.780</td><td>$27.911.483</td><td>$3.349.378</td><td>$89.316.747</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Por programa</span>
+    <h2>Presupuesto de cada programa</h2>
+    <p>Total del periodo, reparto entre Google y Meta, inversión por mes y leads esperados.</p>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th scope="col" style="text-align:left">Programa</th><th scope="col">Total</th><th scope="col">Google</th><th scope="col">Meta</th><th scope="col">Nov</th><th scope="col">Dic</th><th scope="col">Ene</th><th scope="col">Feb</th><th scope="col">Leads</th></tr></thead>
+    <tbody>
+<tr class="grp"><td colspan="9">Pregrados</td></tr>
+<tr><th scope="row">Enfermería</th><td>$29.023.607</td><td>$21.767.705<small>75%</small></td><td>$7.255.902<small>25%</small></td><td>$7.981.492</td><td>$10.883.853</td><td>$9.069.877</td><td>$1.088.385</td><td>964</td></tr>
+<tr><th scope="row">Lic. Lenguas Extranjeras</th><td>$9.385.190</td><td>$7.038.892<small>75%</small></td><td>$2.346.298<small>25%</small></td><td>$2.580.927</td><td>$3.519.446</td><td>$2.932.872</td><td>$351.945</td><td>260</td></tr>
+<tr><th scope="row">Música</th><td>$8.016.459</td><td>$6.012.344<small>75%</small></td><td>$2.004.115<small>25%</small></td><td>$2.204.526</td><td>$3.006.172</td><td>$2.505.143</td><td>$300.617</td><td>417</td></tr>
+<tr><th scope="row">Premédico</th><td>$2.563.807</td><td>$1.922.855<small>75%</small></td><td>$640.952<small>25%</small></td><td>$705.047</td><td>$961.428</td><td>$801.190</td><td>$96.143</td><td>60</td></tr>
+<tr class="grp"><td colspan="9">Posgrados</td></tr>
+<tr><th scope="row">Esp. Terapéuticas Alternativas (TAFV)</th><td>$8.010.383</td><td>$6.408.306<small>80%</small></td><td>$1.602.077<small>20%</small></td><td>$2.202.855</td><td>$3.003.894</td><td>$2.503.245</td><td>$300.389</td><td>88</td></tr>
+<tr><th scope="row">MBA</th><td>$6.422.500</td><td>$4.495.750<small>70%</small></td><td>$1.926.750<small>30%</small></td><td>$1.766.187</td><td>$2.408.437</td><td>$2.007.031</td><td>$240.844</td><td>184</td></tr>
+<tr><th scope="row">Esp. Garantía de Calidad y Auditoría</th><td>$5.731.898</td><td>$4.585.518<small>80%</small></td><td>$1.146.380<small>20%</small></td><td>$1.576.272</td><td>$2.149.462</td><td>$1.791.218</td><td>$214.946</td><td>135</td></tr>
+<tr><th scope="row">Maestría Educación para la Salud</th><td>$5.303.813</td><td>$4.243.050<small>80%</small></td><td>$1.060.763<small>20%</small></td><td>$1.458.549</td><td>$1.988.930</td><td>$1.657.442</td><td>$198.893</td><td>125</td></tr>
+<tr><th scope="row">Esp. Epidemiología</th><td>$4.760.979</td><td>$3.808.783<small>80%</small></td><td>$952.196<small>20%</small></td><td>$1.309.269</td><td>$1.785.367</td><td>$1.487.806</td><td>$178.537</td><td>99</td></tr>
+<tr><th scope="row">Esp. Medicina Familiar Integral</th><td>$3.529.166</td><td>$2.823.333<small>80%</small></td><td>$705.833<small>20%</small></td><td>$970.521</td><td>$1.323.437</td><td>$1.102.864</td><td>$132.344</td><td>100</td></tr>
+<tr><th scope="row">Maestría Salud Familiar y Comunitaria</th><td>$3.369.840</td><td>$2.695.872<small>80%</small></td><td>$673.968<small>20%</small></td><td>$926.706</td><td>$1.263.690</td><td>$1.053.075</td><td>$126.369</td><td>209</td></tr>
+<tr><th scope="row">Maestría Salud Pública</th><td>$3.199.105</td><td>$2.559.284<small>80%</small></td><td>$639.821<small>20%</small></td><td>$879.754</td><td>$1.199.664</td><td>$999.720</td><td>$119.966</td><td>79</td></tr>
+<tr class="tot"><th scope="row">Total</th><td>$89.316.747</td><td>$68.361.694</td><td>$20.955.053</td><td>$24.562.105</td><td>$33.493.780</td><td>$27.911.483</td><td>$3.349.378</td><td>2.718</td></tr>
+    </tbody>
+  </table></div>
+  <div class="stack">
+    <div><span class="lbl">Google Search por mes</span><div class="tw" style="margin-top:8px"><table>
+      <thead><tr><th scope="col" style="text-align:left">Programa</th><th scope="col">Nov</th><th scope="col">Dic</th><th scope="col">Ene</th><th scope="col">Feb</th><th scope="col">Total</th></tr></thead>
+      <tbody>
+<tr><th scope="row">Enfermería</th><td>$5.986.119</td><td>$8.162.889</td><td>$6.802.408</td><td>$816.289</td><td><b>$21.767.705</b></td></tr>
+<tr><th scope="row">Lic. Lenguas Extranjeras</th><td>$1.935.695</td><td>$2.639.585</td><td>$2.199.654</td><td>$263.958</td><td><b>$7.038.892</b></td></tr>
+<tr><th scope="row">Música</th><td>$1.653.395</td><td>$2.254.629</td><td>$1.878.858</td><td>$225.463</td><td><b>$6.012.344</b></td></tr>
+<tr><th scope="row">Premédico</th><td>$528.785</td><td>$721.071</td><td>$600.892</td><td>$72.107</td><td><b>$1.922.855</b></td></tr>
+<tr><th scope="row">Esp. Terapéuticas Alternativas (TAFV)</th><td>$1.762.284</td><td>$2.403.115</td><td>$2.002.596</td><td>$240.311</td><td><b>$6.408.306</b></td></tr>
+<tr><th scope="row">MBA</th><td>$1.236.331</td><td>$1.685.906</td><td>$1.404.922</td><td>$168.591</td><td><b>$4.495.750</b></td></tr>
+<tr><th scope="row">Esp. Garantía de Calidad y Auditoría</th><td>$1.261.018</td><td>$1.719.569</td><td>$1.432.974</td><td>$171.957</td><td><b>$4.585.518</b></td></tr>
+<tr><th scope="row">Maestría Educación para la Salud</th><td>$1.166.839</td><td>$1.591.144</td><td>$1.325.953</td><td>$159.114</td><td><b>$4.243.050</b></td></tr>
+<tr><th scope="row">Esp. Epidemiología</th><td>$1.047.415</td><td>$1.428.294</td><td>$1.190.245</td><td>$142.829</td><td><b>$3.808.783</b></td></tr>
+<tr><th scope="row">Esp. Medicina Familiar Integral</th><td>$776.417</td><td>$1.058.750</td><td>$882.292</td><td>$105.875</td><td><b>$2.823.333</b></td></tr>
+<tr><th scope="row">Maestría Salud Familiar y Comunitaria</th><td>$741.365</td><td>$1.010.952</td><td>$842.460</td><td>$101.095</td><td><b>$2.695.872</b></td></tr>
+<tr><th scope="row">Maestría Salud Pública</th><td>$703.803</td><td>$959.731</td><td>$799.776</td><td>$95.973</td><td><b>$2.559.284</b></td></tr>
+      </tbody></table></div></div>
+    <div><span class="lbl">Meta por mes</span><div class="tw" style="margin-top:8px"><table>
+      <thead><tr><th scope="col" style="text-align:left">Programa</th><th scope="col">Nov</th><th scope="col">Dic</th><th scope="col">Ene</th><th scope="col">Feb</th><th scope="col">Total</th></tr></thead>
+      <tbody>
+<tr><th scope="row">Enfermería</th><td>$1.995.373</td><td>$2.720.963</td><td>$2.267.469</td><td>$272.096</td><td><b>$7.255.902</b></td></tr>
+<tr><th scope="row">Lic. Lenguas Extranjeras</th><td>$645.232</td><td>$879.862</td><td>$733.218</td><td>$87.986</td><td><b>$2.346.298</b></td></tr>
+<tr><th scope="row">Música</th><td>$551.132</td><td>$751.543</td><td>$626.286</td><td>$75.154</td><td><b>$2.004.115</b></td></tr>
+<tr><th scope="row">Premédico</th><td>$176.262</td><td>$240.357</td><td>$200.297</td><td>$24.036</td><td><b>$640.952</b></td></tr>
+<tr><th scope="row">Esp. Terapéuticas Alternativas (TAFV)</th><td>$440.571</td><td>$600.779</td><td>$500.649</td><td>$60.078</td><td><b>$1.602.077</b></td></tr>
+<tr><th scope="row">MBA</th><td>$529.856</td><td>$722.531</td><td>$602.109</td><td>$72.253</td><td><b>$1.926.750</b></td></tr>
+<tr><th scope="row">Esp. Garantía de Calidad y Auditoría</th><td>$315.254</td><td>$429.892</td><td>$358.244</td><td>$42.989</td><td><b>$1.146.380</b></td></tr>
+<tr><th scope="row">Maestría Educación para la Salud</th><td>$291.710</td><td>$397.786</td><td>$331.488</td><td>$39.779</td><td><b>$1.060.763</b></td></tr>
+<tr><th scope="row">Esp. Epidemiología</th><td>$261.854</td><td>$357.073</td><td>$297.561</td><td>$35.707</td><td><b>$952.196</b></td></tr>
+<tr><th scope="row">Esp. Medicina Familiar Integral</th><td>$194.104</td><td>$264.687</td><td>$220.573</td><td>$26.469</td><td><b>$705.833</b></td></tr>
+<tr><th scope="row">Maestría Salud Familiar y Comunitaria</th><td>$185.341</td><td>$252.738</td><td>$210.615</td><td>$25.274</td><td><b>$673.968</b></td></tr>
+<tr><th scope="row">Maestría Salud Pública</th><td>$175.951</td><td>$239.933</td><td>$199.944</td><td>$23.993</td><td><b>$639.821</b></td></tr>
+      </tbody></table></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Google Search</span>
+    <h2>Ajustes en Search frente a las generales</h2>
+    <p>Hoy las campañas generales cubren varios programas a la vez. Si sumamos campañas por programa sin ajustarlas, competirían entre sí en la misma subasta y subiría el costo por clic. Por eso cada tipo de búsqueda queda con una sola campaña dueña.</p>
+  </div>
+  <div class="tw"><table class="txt">
+    <thead><tr><th scope="col" style="text-align:left">Búsqueda</th><th scope="col" style="text-align:left">Ejemplo</th><th scope="col" style="text-align:left">Campaña dueña</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Un programa</th><td>«enfermería corpas», «especialización en epidemiología», «mba virtual»</td><td><b>Campaña del programa</b></td></tr>
+      <tr><th scope="row">Marca institucional</th><td>«corpas», «universidad juan n corpas», «unicorpas»</td><td><b>Search Medicina</b></td></tr>
+      <tr><th scope="row">Medicina</th><td>«medicina corpas», «estudiar medicina en bogotá»</td><td><b>Search Medicina</b></td></tr>
+      <tr><th scope="row">Genéricas de pregrado</th><td>«carreras de salud», «universidades en bogotá»</td><td><b>General Pregrados</b></td></tr>
+      <tr><th scope="row">Posgrados en general y programas sin campaña propia</th><td>«posgrados corpas», «especialización en medicina interna», «maestría en lingüística»</td><td><b>General Posgrados</b></td></tr>
+    </tbody>
+  </table></div>
+  <div class="cards">
+    <div class="card"><h3>12 campañas por programa</h3><ul>
+      <li>Una campaña por programa, con su presupuesto mensual del plan.</li>
+      <li>Dos grupos: búsquedas del programa con «Corpas» y búsquedas genéricas del programa.</li>
+      <li>Anuncios nuevos 2027-1 con la modalidad real: presencial, cada 15 días, híbrida o 100 % virtual.</li>
+      <li>Cada anuncio lleva a la página del programa con su formulario.</li>
+      <li>Pregrados y posgrados presenciales: Bogotá y Cundinamarca cercana. MBA y maestrías híbridas: todo Colombia.</li>
+    </ul></div>
+    <div class="card"><h3>General Pregrados y General Posgrados</h3><ul>
+      <li>Dejan de pujar por Enfermería, Lenguas, Música, Premédico y los 8 posgrados con campaña propia.</li>
+      <li>General Pregrados pasa a búsquedas genéricas de carreras en salud.</li>
+      <li>General Posgrados se queda con «posgrados Corpas», Medicina Interna y Lingüística Aplicada.</li>
+      <li>Sus presupuestos siguen el plan original del periodo.</li>
+    </ul></div>
+    <div class="card"><h3>Search Medicina</h3><ul>
+      <li>Se queda con las búsquedas de marca institucional, que hoy reparte con General Pregrados y por las que paga más al competir consigo misma.</li>
+      <li>Deja de aparecer en búsquedas de otros programas («enfermería corpas», «mba corpas»).</li>
+      <li>Objetivo: bajar el costo por lead de Medicina.</li>
+    </ul></div>
+    <div class="card"><h3>Para todas las campañas</h3><ul>
+      <li>Lista común de búsquedas a excluir: otras universidades y búsquedas que no son de estudio.</li>
+      <li>Exclusiones entre programas cercanos, por ejemplo Enfermería pregrado frente a la Maestría en Salud Familiar y Comunitaria.</li>
+      <li>Demand Gen de branding no cambia.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Meta</span>
+    <h2>Ajustes en Meta frente a las generales y el branding</h2>
+    <p>Hoy los anuncios de las generales y del branding son piezas de programa. Al pasar cada programa a su campaña, esas piezas salen de las generales, y las generales y el branding necesitan piezas propias para no quedarse vacías.</p>
+  </div>
+  <div class="tw"><table class="txt">
+    <thead><tr><th scope="col" style="text-align:left">Campaña</th><th scope="col" style="text-align:left">Anuncios hoy</th><th scope="col" style="text-align:left">Qué pasa</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">General Pregrados</th><td>14 anuncios de Enfermería (incluye el video nuevo), Lenguas, Música y Premédico</td><td>Pasan a la campaña de su programa. Necesita piezas institucionales de pregrado.</td></tr>
+      <tr><th scope="row">General Posgrados</th><td>Piezas de Salud Pública, TAFV, Medicina Familiar y Medicina Interna</td><td>Salud Pública, TAFV y Medicina Familiar pasan a su campaña. Medicina Interna se queda. Necesita piezas generales de posgrados.</td></tr>
+      <tr><th scope="row">Branding Pregrados</th><td>Pieza 1 de Enfermería, Música y Lenguas</td><td>Necesita piezas de marca que no sean de un programa.</td></tr>
+      <tr><th scope="row">Branding Posgrados</th><td>Pieza 1 de TAFV, Medicina Interna y Salud Pública</td><td>Necesita piezas de marca de posgrados.</td></tr>
+      <tr><th scope="row">12 campañas por programa (nuevas)</th><td>—</td><td>Una campaña por programa, que lleva a la página del programa con su presupuesto mensual del plan.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="highlight">
+    <b>Ninguna campaña se queda sin anuncios</b>
+    <span>Las piezas de programa arrancan en su campaña nueva y se mantienen también en las generales y el branding hasta que lleguen sus piezas propias. Solo entonces las retiramos de las generales.</span>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Lo que necesitamos de Corpas</span>
+    <h2>Material para salir</h2>
+    <p>Google Search no necesita piezas: los anuncios son de texto y ya están listos. Para Meta necesitamos piezas por programa, y piezas propias para las generales y el branding.</p>
+  </div>
+  <div class="tw"><table class="txt">
+    <thead><tr><th scope="col" style="text-align:left">Programa</th><th scope="col" style="text-align:left">Tenemos hoy</th><th scope="col" style="text-align:left">Necesitamos</th><th scope="col" style="text-align:left">Estado</th></tr></thead>
+    <tbody>
+<tr><th scope="row">Enfermería</th><td>4 estáticos + 1 video</td><td>Completo</td><td><span class="tag ok">Listo</span></td></tr>
+<tr><th scope="row">Lic. Lenguas Extranjeras</th><td>4 estáticos</td><td>1 video vertical</td><td><span class="tag mid">Completar</span></td></tr>
+<tr><th scope="row">Música</th><td>4 estáticos</td><td>1 video vertical</td><td><span class="tag mid">Completar</span></td></tr>
+<tr><th scope="row">Premédico</th><td>4 estáticos</td><td>1 video vertical</td><td><span class="tag mid">Completar</span></td></tr>
+<tr><th scope="row">Esp. Terapéuticas Alternativas (TAFV)</th><td>2 estáticos</td><td>1 estático + 1 video</td><td><span class="tag mid">Completar</span></td></tr>
+<tr><th scope="row">MBA</th><td>Sin piezas</td><td>3 estáticos + 1 video</td><td><span class="tag no">Falta todo</span></td></tr>
+<tr><th scope="row">Esp. Garantía de Calidad y Auditoría</th><td>Sin piezas</td><td>3 estáticos + 1 video</td><td><span class="tag no">Falta todo</span></td></tr>
+<tr><th scope="row">Maestría Educación para la Salud</th><td>Sin piezas</td><td>3 estáticos + 1 video</td><td><span class="tag no">Falta todo</span></td></tr>
+<tr><th scope="row">Esp. Epidemiología</th><td>Sin piezas</td><td>3 estáticos + 1 video</td><td><span class="tag no">Falta todo</span></td></tr>
+<tr><th scope="row">Esp. Medicina Familiar Integral</th><td>2 estáticos</td><td>1 estático + 1 video</td><td><span class="tag mid">Completar</span></td></tr>
+<tr><th scope="row">Maestría Salud Familiar y Comunitaria</th><td>Sin piezas</td><td>3 estáticos + 1 video</td><td><span class="tag no">Falta todo</span></td></tr>
+<tr><th scope="row">Maestría Salud Pública</th><td>2 estáticos</td><td>1 estático + 1 video</td><td><span class="tag mid">Completar</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="cards">
+    <div class="card"><h3>Formatos por programa</h3><ul>
+      <li>Estáticos en 4:5 (1080×1350) y 9:16 (1080×1920) de cada pieza.</li>
+      <li>Video vertical 9:16 de 15 a 30 segundos, con subtítulos y el nombre del programa en los primeros 3 segundos.</li>
+      <li>Para cada posgrado: modalidad, frecuencia de clases y fecha de inicio, para que el anuncio coincida con la página.</li>
+    </ul></div>
+    <div class="card"><h3>Generales</h3><ul>
+      <li><b>Pregrados:</b> 3 a 4 piezas institucionales con la oferta de pregrados (campus, clínica propia, 55 años, inscripciones 2027-1) y 1 video.</li>
+      <li><b>Posgrados:</b> 3 a 4 piezas de «posgrados en salud» con las modalidades (presencial cada 15 días, híbrida y virtual) y 1 video.</li>
+    </ul></div>
+    <div class="card"><h3>Branding</h3><ul>
+      <li>3 piezas de marca por nivel (pregrado y posgrado) que no sean de un programa.</li>
+      <li>Cortes de 15 a 30 segundos de los videos de brigadas, campus y vida universitaria. Hoy duran de 26 a 115 segundos y se usan también en TikTok.</li>
+      <li>Para Demand Gen: imágenes horizontales 1,91:1 y un video.</li>
+    </ul></div>
+    <div class="card"><h3>Validaciones</h3><ul>
+      <li>Confirmar si las opciones de financiación (crédito, becas, pronto pago) aplican a todos los programas.</li>
+      <li>Confirmar modalidad y fecha de inicio de cada posgrado para 2027-1.</li>
+      <li>Confirmar que cada página de programa tiene su formulario activo y conectado a HubSpot.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Próximos pasos</span>
+    <h2>Cómo salimos</h2>
+  </div>
+  <ol class="next">
+    <li><b>Search por programa</b><span>Subimos las 12 campañas y los ajustes de las generales y Medicina el mismo día, para que ningún programa quede sin cobertura.</span></li>
+    <li><b>Meta con piezas existentes</b><span>Arrancan los programas que ya tienen piezas: Enfermería, Lenguas, Música, Premédico, Salud Pública, TAFV y Medicina Familiar.</span></li>
+    <li><b>Material nuevo</b><span>Con las piezas de cada posgrado sin material salen sus campañas en Meta; con las institucionales retiramos las piezas de programa de las generales y el branding.</span></li>
+    <li><b>Seguimiento semanal</b><span>Costo por lead por programa frente a su meta y ajuste del reparto entre programas y medios si alguno se desvía.</span></li>
+  </ol>
+</section>
+
+<p class="foot">ADCOM para Fundación Universitaria Juan N. Corpas · Plan al 5 de noviembre de 2026 · Cifras en pesos colombianos.</p>
+</main>
+</body>
+</html>
