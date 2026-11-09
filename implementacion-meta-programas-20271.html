@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Implementación en Meta de las 12 campañas por programa del periodo 2027-1 de Corpas: estructura, público por programa, presupuesto de noviembre, anuncios y pasos para salir al aire. ADCOM.">
+<title>Corpas · Implementación Meta por programa · ADCOM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* Plantilla cliente ADCOM sobre blanco: encabezado negro redondeado, acento amarillo. Solo modo claro, como los demás documentos del cliente. */
+:root {
+  --bg: #FFFFFF; --ink: #141414; --muted: #63635E; --line: #E6E6E1; --panel: #F7F7F5;
+  --accent: #FFC000; --accent-soft: #FFF5D1; --head: #141414; --head-ink: #FFFFFF; --pos: #1F7A4D; --neg: #B3261E;
+  --f: "Poppins", "Segoe UI", Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body { color: var(--ink); font-family: var(--f); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; display: grid; gap: 48px; }
+h1, h2, h3 { margin: 0; line-height: 1.2; text-wrap: balance; }
+p, ul, ol { margin: 0; }
+.muted { color: var(--muted); }
+.lbl { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.top { background: var(--head); color: var(--head-ink); border-radius: 20px; padding: clamp(24px, 4vw, 44px); display: grid; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .16em; font-size: 13px; }
+.brand i { width: 12px; height: 12px; border-radius: 3px; background: var(--accent); }
+.top h1 { font-size: clamp(28px, 4.6vw, 42px); font-weight: 700; }
+.top h1 span { color: var(--accent); }
+.top p { max-width: 68ch; color: #D6D6D2; font-size: 16px; }
+section { display: grid; gap: 18px; }
+.head { display: grid; gap: 6px; padding-bottom: 14px; border-bottom: 3px solid var(--accent); }
+.head h2 { font-size: clamp(22px, 3vw, 28px); }
+.head p { max-width: 72ch; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.kpi { border: 1px solid var(--line); border-bottom: 4px solid var(--accent); border-radius: 14px; padding: 18px; display: grid; gap: 4px; align-content: start; }
+.kpi .v { font-size: 28px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi .s { font-size: 13px; color: var(--muted); }
+.highlight { background: var(--accent-soft); border-radius: 14px; padding: 18px 20px; display: grid; gap: 4px; }
+.highlight b { font-size: 17px; }
+.tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+thead th { background: var(--head); color: var(--head-ink); font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+tbody th { text-align: left; font-weight: 500; white-space: normal; min-width: 180px; }
+td small { display: block; font-size: 11px; color: var(--muted); }
+tr.grp td { text-align: left; background: var(--panel); font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+tr.tot th, tr.tot td { background: var(--accent-soft); font-weight: 700; border-bottom: 0; }
+table.txt td { text-align: left; white-space: normal; }
+.stack { display: grid; gap: 18px; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.mrows { display: grid; gap: 10px; }
+.mrow { display: grid; grid-template-columns: 90px 1fr 120px; gap: 12px; align-items: center; font-size: 14px; }
+.mrow b { text-align: right; font-variant-numeric: tabular-nums; }
+.track { height: 26px; background: var(--panel); border-radius: 6px; overflow: hidden; }
+.track i { display: block; height: 100%; background: var(--accent); border-radius: 6px; }
+.split { display: flex; height: 34px; border-radius: 8px; overflow: hidden; font-size: 12px; font-weight: 600; }
+.split span { display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; padding: 0 8px; }
+.s-g { background: var(--head); color: #fff; }
+.s-m { background: var(--accent); color: var(--ink); }
+.srow { display: grid; grid-template-columns: 170px 1fr; gap: 12px; align-items: center; font-size: 14px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; }
+.card { border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 18px; }
+.card ul { padding-left: 18px; font-size: 14px; display: grid; gap: 4px; }
+.card .lbl { color: var(--ink); }
+.tag { display: inline-block; border-radius: 99px; padding: 1px 10px; font-size: 12px; font-weight: 600; }
+.tag.ok { background: #E3F2EA; color: var(--pos); }
+.tag.mid { background: var(--accent-soft); color: #7A5A00; }
+.tag.no { background: #FBE5E3; color: var(--neg); }
+.next { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; counter-reset: paso; }
+.next li { background: var(--panel); border-radius: 14px; padding: 16px; font-size: 14px; display: grid; gap: 4px; counter-increment: paso; }
+.next li b { font-size: 15px; }
+.next li b::before { content: counter(paso) ". "; color: #B38600; }
+.foot { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+@media (max-width: 560px) { .mrow { grid-template-columns: 70px 1fr; } .mrow b { grid-column: 2; text-align: left; } .srow { grid-template-columns: 1fr; gap: 4px; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header class="top">
+  <div class="brand"><i></i>ADCOM · CORPAS</div>
+  <h1>Implementación Meta por programa <span>2027-1</span></h1>
+  <p>Creamos en Meta una campaña para cada uno de los 12 programas del plan de pauta por programa, con su público, su presupuesto de noviembre y anuncios que llevan a la página del programa. Implementación del 9 de noviembre de 2026.</p>
+</header>
+
+<section>
+  <div class="head">
+    <span class="lbl">Resumen</span>
+    <h2>12 campañas listas para salir</h2>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><span class="v">12</span><span class="s">Campañas, una por programa, con su conjunto y su presupuesto</span></div>
+    <div class="kpi"><span class="v">30</span><span class="s">Anuncios en los 8 programas que ya tienen piezas</span></div>
+    <div class="kpi"><span class="v">$5,8 M</span><span class="s">Presupuesto de Meta para noviembre, unos $273.000 al día entre los 12 programas</span></div>
+    <div class="kpi"><span class="v">4</span><span class="s">Programas esperando piezas: SGCA, Educación para la Salud, Epidemiología y Salud Familiar</span></div>
+  </div>
+  <div class="highlight">
+    <b>Todas las campañas están creadas en pausa</b>
+    <span>Salen al aire el mismo día en que retiramos las piezas de programa de las campañas generales y de branding, para que no compitan entre sí por el mismo público.</span>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Estructura</span>
+    <h2>Cómo están armadas</h2>
+    <p>Misma configuración de las campañas generales, que ya está probada en la cuenta.</p>
+  </div>
+  <div class="cards">
+    <div class="card"><h3>Objetivo</h3><ul>
+      <li>Clientes potenciales: Meta busca a quienes completan el formulario de la página del programa.</li>
+      <li>Conversión medida con el píxel de la Corpas (registro completado).</li>
+    </ul></div>
+    <div class="card"><h3>Presupuesto</h3><ul>
+      <li>Un conjunto por campaña, con el presupuesto de noviembre del plan repartido entre el 10 y el 30 de noviembre.</li>
+      <li>Así medimos y ajustamos cada programa por separado.</li>
+    </ul></div>
+    <div class="card"><h3>Público</h3><ul>
+      <li>Público Advantage+ de Meta con sugerencias: edad, intereses, nivel de estudios y sector de cada programa.</li>
+      <li>Meta parte de esas sugerencias y amplía hacia quienes tienen más probabilidad de inscribirse.</li>
+    </ul></div>
+    <div class="card"><h3>Destino</h3><ul>
+      <li>Cada anuncio lleva a la página de su programa en juanncorpas.edu.co, con su formulario.</li>
+      <li>El UTM de cada enlace es el nombre de la campaña, para leer los leads por programa en HubSpot.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Público</span>
+    <h2>Audiencia por programa</h2>
+    <p>Los presenciales se muestran en Bogotá (20 km alrededor de Suba) y en Soacha, Zipaquirá y Facatativá, de donde vienen los estudiantes según el estudio de nichos. El MBA y las maestrías híbridas se muestran en todo el país.</p>
+  </div>
+  <div class="tw"><table class="txt">
+    <thead><tr><th scope="col" style="text-align:left">Programa</th><th scope="col" style="text-align:left">Edad sugerida</th><th scope="col" style="text-align:left">Zona</th><th scope="col" style="text-align:left">Intereses y perfil sugeridos</th><th scope="col">Diario nov</th><th scope="col">Anuncios</th></tr></thead>
+    <tbody>
+      <tr class="grp"><td colspan="6">Pregrados</td></tr>
+      <tr><th scope="row">Enfermería</th><td>18–34</td><td>Bogotá y Sabana</td><td>Enfermería, educación médica, universidad privada, pregrado, becas; bachilleres</td><td style="text-align:right">$95.000</td><td style="text-align:right">5</td></tr>
+      <tr><th scope="row">Música</th><td>18–34</td><td>Bogotá y Sabana</td><td>Conservatorio, música clásica, piano, guitarra, canto, pregrado</td><td style="text-align:right">$26.000</td><td style="text-align:right">8</td></tr>
+      <tr><th scope="row">Lic. Lenguas Extranjeras</th><td>18–34</td><td>Bogotá y Sabana</td><td>Enseñanza de idiomas, inglés como segunda lengua, docencia, pregrado</td><td style="text-align:right">$31.000</td><td style="text-align:right">4</td></tr>
+      <tr><th scope="row">Premédico</th><td>18–24</td><td>Bogotá y Sabana</td><td>Escuela de medicina, educación médica, preparación de exámenes, estudiantes</td><td style="text-align:right">$8.000</td><td style="text-align:right">4</td></tr>
+      <tr class="grp"><td colspan="6">Posgrados</td></tr>
+      <tr><th scope="row">Esp. Terapéuticas Alternativas (TAFV)</th><td>24–54</td><td>Bogotá y Sabana</td><td>Medicina natural, educación médica, enfermería; profesionales del sector salud</td><td style="text-align:right">$21.000</td><td style="text-align:right">2</td></tr>
+      <tr><th scope="row">MBA</th><td>25–50</td><td>Colombia</td><td>MBA, escuela de negocios, administración, emprendimiento, liderazgo, educación a distancia; profesionales</td><td style="text-align:right">$25.000</td><td style="text-align:right">3</td></tr>
+      <tr><th scope="row">Esp. Garantía de Calidad y Auditoría</th><td>24–54</td><td>Bogotá y Sabana</td><td>Auditoría, administración, gestión de riesgos; profesionales del sector salud</td><td style="text-align:right">$15.000</td><td style="text-align:right">—</td></tr>
+      <tr><th scope="row">Maestría Educación para la Salud</th><td>25–54</td><td>Bogotá y Sabana</td><td>Pedagogía, capacitación docente, educación médica; profesionales del sector salud</td><td style="text-align:right">$14.000</td><td style="text-align:right">—</td></tr>
+      <tr><th scope="row">Esp. Epidemiología</th><td>24–54</td><td>Bogotá y Sabana</td><td>Escuela de medicina, educación médica, enfermería, posgrado; profesionales del sector salud</td><td style="text-align:right">$12.000</td><td style="text-align:right">—</td></tr>
+      <tr><th scope="row">Esp. Medicina Familiar Integral</th><td>24–44</td><td>Bogotá y Sabana</td><td>Escuela de medicina, educación médica, posgrado; médicos del sector salud</td><td style="text-align:right">$9.000</td><td style="text-align:right">2</td></tr>
+      <tr><th scope="row">Maestría Salud Familiar y Comunitaria</th><td>25–54</td><td>Colombia</td><td>Enfermería, educación médica, maestría, educación a distancia; sector salud</td><td style="text-align:right">$9.000</td><td style="text-align:right">—</td></tr>
+      <tr><th scope="row">Maestría Salud Pública</th><td>25–54</td><td>Colombia</td><td>Escuela de medicina, educación médica, enfermería, maestría, educación a distancia; sector salud</td><td style="text-align:right">$8.000</td><td style="text-align:right">2</td></tr>
+      <tr class="tot"><th scope="row">Total</th><td></td><td></td><td></td><td style="text-align:right">$273.000</td><td style="text-align:right">30</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Anuncios</span>
+    <h2>Qué piezas salen en cada campaña</h2>
+  </div>
+  <div class="tw"><table class="txt">
+    <thead><tr><th scope="col" style="text-align:left">Programa</th><th scope="col" style="text-align:left">Piezas</th><th scope="col" style="text-align:left">Estado</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Enfermería</th><td>4 estáticos y el video «¿Estás listo para estudiar Enfermería?»</td><td><span class="tag ok">Completo</span></td></tr>
+      <tr><th scope="row">Música</th><td>4 estáticos y 4 videos nuevos del docente de teoría (acordes cuartales, semidisminuido y más), recibidos el 9 de noviembre</td><td><span class="tag ok">Completo</span></td></tr>
+      <tr><th scope="row">Lic. Lenguas Extranjeras</th><td>4 estáticos</td><td><span class="tag mid">Falta video</span></td></tr>
+      <tr><th scope="row">Premédico</th><td>4 estáticos</td><td><span class="tag mid">Falta video</span></td></tr>
+      <tr><th scope="row">MBA</th><td>3 estáticos nuevos «Lidera sin límites», en formato para feed y para historias</td><td><span class="tag mid">Falta video</span></td></tr>
+      <tr><th scope="row">TAFV · Medicina Familiar · Salud Pública</th><td>2 estáticos cada uno</td><td><span class="tag mid">Falta 1 estático y 1 video</span></td></tr>
+      <tr><th scope="row">SGCA · Educación para la Salud · Epidemiología · Salud Familiar</th><td>Campaña y público listos, sin anuncios</td><td><span class="tag no">Falta material</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted">Las piezas que ya corrían en las campañas generales y de branding se duplicaron con el mismo texto, cambiando el enlace a la página de su programa. Cada estático lleva su versión para feed y su versión vertical para historias y reels.</p>
+</section>
+
+<section>
+  <div class="head">
+    <span class="lbl">Próximos pasos</span>
+    <h2>Para salir al aire</h2>
+  </div>
+  <ol class="next">
+    <li><b>Activación</b><span>Encendemos las 8 campañas con anuncios y el mismo día pausamos en las generales y el branding las piezas de esos programas.</span></li>
+    <li><b>Material pendiente</b><span>Con 3 estáticos y 1 video por programa salen SGCA, Educación para la Salud, Epidemiología y Salud Familiar; videos para Lenguas, Premédico y MBA.</span></li>
+    <li><b>Formularios</b><span>Confirmar que el formulario de cada página de programa está activo y conectado a HubSpot.</span></li>
+    <li><b>Seguimiento</b><span>Costo por lead de cada programa frente a su meta desde la primera semana, y ajuste del reparto si alguno se desvía.</span></li>
+  </ol>
+</section>
+
+<p class="foot">ADCOM para Fundación Universitaria Juan N. Corpas · Implementación del 9 de noviembre de 2026 · Cifras en pesos colombianos.</p>
+</main>
+</body>
+</html>
