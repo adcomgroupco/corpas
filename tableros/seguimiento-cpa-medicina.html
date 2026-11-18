@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Seguimiento CPL Search Medicina · Corpas</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="assets/css/adcom.css">
-<script defer src="assets/js/adcom.js"></script>
+<link rel="stylesheet" href="../assets/css/adcom.css">
+<script defer src="../assets/js/adcom.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
@@ -172,7 +172,7 @@ select:focus,input:focus{border-color:var(--accent-fg)}
 
 <nav class="app-sidebar">
   <div class="app-sidebar-top">
-    <a class="app-sidebar-brand" href="index.html"><i></i>Adcom</a>
+    <a class="app-sidebar-brand" href="../index.html"><i></i>Adcom</a>
     <div class="app-sidebar-client">
       <span class="app-sidebar-client-label">Cliente · uso interno</span>
       <strong class="app-sidebar-client-name">Juan N. Corpas, Search Medicina</strong>
@@ -287,7 +287,7 @@ const EVENTOS = [                             // fecha ISO, texto corto (tabla y
 ];
 const MESES = ['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 // Periodos académicos. 2027-1 arranca el 1 de octubre (pauta oct–ene en presupuesto-2027-1; el fin, de la pestaña METAS).
-// 2026-2: corte del informe de cierre (corpas-informe-cierre-20262). 2026-1: pestaña METAS, cortado antes de 2026-2.
+// 2026-2: corte del informe de cierre (../informes/corpas-informe-cierre-20262). 2026-1: pestaña METAS, cortado antes de 2026-2.
 const PERIODOS = [
   ['2027-1', '2026-10-01', '2027-02-28'],
   ['2026-2', '2026-02-15', '2026-08-20'],
@@ -347,7 +347,7 @@ function fetchJSONP({gid, head}){ return new Promise((ok, ko) => {
 
 let DAYS = {}, LAST = '', CRM_HOY = 0, QUICK = PER_DEF, CPLV = 'dia', CHARTS = {}, EXTRA = null;
 // cuota de impresiones y competencia: archivo que genera scripts/google/corpas_medicina_search_extra.py (repo Meta-Ads-CLI)
-const EXTRA_URL = 'data/seguimiento-medicina-search.json';
+const EXTRA_URL = '../data/seguimiento-medicina-search.json';
 const fetchExtra = () => fetch(EXTRA_URL + '?_=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null);
 function load(){
   document.getElementById('loading').style.display = 'flex';
@@ -503,7 +503,7 @@ function renderExtra(rows, a, b){
   ['imp', 'mix'].forEach(k => { if(CHARTS[k]){ CHARTS[k].destroy(); delete CHARTS[k] } });
   const off = msg => { ['imp-kpis','comp-kpis'].forEach(id => document.getElementById(id).innerHTML = `<div class="card extra-off">${msg}</div>`);
     document.getElementById('comp-body').innerHTML = ''; document.getElementById('term-body').innerHTML = '' };
-  if(!EXTRA){ off('No se encontró el archivo de cuota de impresiones y competencia (data/seguimiento-medicina-search.json). Se genera con el script del repo Meta-Ads-CLI.'); return }
+  if(!EXTRA){ off('No se encontró el archivo de cuota de impresiones y competencia (../data/seguimiento-medicina-search.json). Se genera con el script del repo Meta-Ads-CLI.'); return }
   document.getElementById('imp-note').textContent = `API de Google Ads · datos hasta ${fDate(EXTRA.hasta)} · actualizado ${EXTRA.generado.replace('T', ' ')}`;
   const IMP = Object.fromEntries(EXTRA.impresiones.map(x => [x.d, x]));
   const inR = EXTRA.impresiones.filter(x => x.d >= a && x.d <= b && x.elig > 0);

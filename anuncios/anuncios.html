@@ -5,7 +5,7 @@
 <style type="text/css" id="operaUserStyle"></style><title>Tablero de Implementación — Compensar</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="assets/css/adcom-tokens.css">
+  <link rel="stylesheet" href="../assets/css/adcom-tokens.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -536,7 +536,7 @@ function saveVersion(){
   const data={v:1,m:S.metaAds,g:S.googleAds,h:S.homoRows,hk:S.homoKeys,pw:localStorage.getItem('pw')||PRELOADED.pw||''};
   let src='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
   src=src.replace(/\/\/ @@PRELOAD_START@@[\s\S]*?\/\/ @@PRELOAD_END@@/,
-    '// @@PRELOAD_START@@\nconst PRELOADED\/*SNAPSHOT*\/='+JSON.stringify(data)+';\n// @@PRELOAD_END@@');
+    '// @@PRELOAD_START@@\nconst PRELOADED\/*SNAPSHOT*\/='+JSON.stringify(../data)+';\n// @@PRELOAD_END@@');
   const blob=new Blob([src],{type:'text/html;charset=utf-8'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
