@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Test de landings Medicina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* ADCOM client template, shared by the RIS hub pages. Black rounded header, yellow accent, white cards on light gray. Light only, like the other client reports. */
+:root {
+  --bg: #F5F5F5; --card: #FFFFFF; --ink: #141414; --muted: #63635E; --line: #E6E6E1; --panel: #F7F7F5;
+  --accent: #FFC000; --accent-soft: #FFF5D1; --head: #141414; --head-ink: #FFFFFF;
+  --f: "Poppins", "Segoe UI", Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body { color: var(--ink); font-family: var(--f); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; display: grid; gap: 44px; }
+h1, h2, h3 { margin: 0; line-height: 1.2; text-wrap: balance; }
+p, ul, ol { margin: 0; }
+a { color: inherit; }
+.muted { color: var(--muted); }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+/* Header */
+.top { background: var(--head); color: var(--head-ink); border-radius: 20px; padding: clamp(24px, 4vw, 44px); display: grid; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .16em; font-size: 13px; }
+.brand i { width: 12px; height: 12px; border-radius: 3px; background: var(--accent); }
+.brand .sep { color: #8A8A85; font-weight: 400; letter-spacing: 0; }
+.top h1 { font-size: clamp(28px, 4.6vw, 42px); font-weight: 700; }
+.top h1 span { color: var(--accent); }
+.top p { max-width: 62ch; color: #D6D6D2; font-size: 16px; }
+.back { color: #D6D6D2; font-size: 13px; text-decoration: none; justify-self: start; }
+.back:hover, .back:focus-visible { color: var(--accent); }
+
+/* Sections */
+.section { display: grid; gap: 16px; }
+.section-head { display: grid; gap: 4px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); }
+.section-head h2 { font-size: clamp(21px, 3vw, 26px); }
+
+/* Link cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+.card { background: var(--card); border-radius: 16px; padding: 22px; display: grid; gap: 10px; align-content: start;
+  border: 1px solid var(--line); border-bottom: 4px solid var(--accent); text-decoration: none; color: var(--ink); }
+a.card:hover, a.card:focus-visible { background: var(--accent-soft); outline: none; }
+.card h3 { font-size: 19px; }
+.card p { font-size: 14px; color: var(--muted); }
+.card .go { font-size: 14px; font-weight: 600; margin-top: 4px; }
+.card.soon { border-bottom-color: var(--line); border-style: dashed; border-bottom-style: dashed; background: transparent; }
+.tag { justify-self: start; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  background: var(--accent); color: var(--ink); border-radius: 99px; padding: 2px 10px; }
+.tag.off { background: var(--line); color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; }
+.facts li { background: var(--panel); border-radius: 99px; padding: 2px 10px; font-size: 12px; }
+
+/* Buttons */
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 99px; padding: 10px 18px; font-weight: 600; font-size: 14px;
+  text-decoration: none; background: var(--accent); color: var(--ink); border: 2px solid var(--accent); }
+.btn:hover, .btn:focus-visible { background: var(--head); color: var(--accent); border-color: var(--head); outline: none; }
+.btn.ghost { background: transparent; color: var(--head-ink); border-color: #5A5A56; }
+.btn.ghost:hover, .btn.ghost:focus-visible { border-color: var(--accent); color: var(--accent); background: transparent; }
+.btn.off { background: transparent; color: var(--muted); border: 2px dashed #8A8A85; cursor: not-allowed; }
+
+/* KPIs */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.kpi { background: var(--card); border-radius: 16px; padding: 20px; display: grid; gap: 4px; border: 1px solid var(--line); }
+.kpi b { font-size: clamp(26px, 3.4vw, 32px); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi b::after { content: ""; display: block; width: 36px; height: 4px; border-radius: 2px; background: var(--accent); margin-top: 10px; }
+.kpi span { font-size: 13px; color: var(--muted); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; background: var(--card); border-radius: 16px; border: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 640px; }
+th, td { padding: 11px 14px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--line); }
+tbody tr + tr td { border-top: 1px solid var(--line); }
+tr.hi td { background: var(--accent-soft); }
+tfoot td { font-weight: 700; border-top: 2px solid var(--ink); }
+
+.note { font-size: 13px; color: var(--muted); max-width: 72ch; }
+.panel { background: var(--card); border-radius: 16px; padding: clamp(18px, 3vw, 26px); border: 1px solid var(--line); display: grid; gap: 10px; }
+footer { font-size: 12px; color: var(--muted); }
+
+.tag.bad{background:#FBE3E0;color:#B3261E}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.list{display:grid;gap:16px}
+.card.ad{padding:0;overflow:hidden;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0}
+.media{background:var(--panel);padding:14px;display:grid;align-items:start}
+.media figure{margin:0;display:grid;gap:6px}
+.media img{display:block;width:100%;height:auto;border-radius:10px}
+.pair{grid-template-columns:1fr 56%;gap:10px}
+.pair figure:first-child{align-self:center}
+.single figure{justify-items:center}
+.single img{width:auto;max-width:100%;max-height:480px}
+.vid figure{position:relative}
+.vid figure::after{content:"▶";position:absolute;top:calc(50% - 40px);left:calc(50% - 26px);width:52px;height:52px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-size:18px}
+figcaption{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.meta{padding:22px;display:grid;gap:14px;align-content:start;min-width:0}
+.adhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.adhead>div{min-width:0;display:grid;gap:4px}
+.copy{font-size:14px;background:var(--panel);border-radius:12px;padding:14px 16px;border-left:4px solid var(--accent)}
+.fix{font-size:13px;background:var(--accent-soft);border-radius:10px;padding:10px 12px}
+.cfg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:0;overflow:hidden}
+.cfg>div{padding:16px 18px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);min-width:0;display:grid;gap:4px}
+.cfg>div:nth-child(3n){border-right:0}
+.cfg .wide{grid-column:1/-1;border-right:0;border-bottom:0}
+.cfg .v{font-size:14px;font-weight:500;overflow-wrap:anywhere}
+.alert{background:var(--accent);color:var(--ink);border-radius:12px;padding:12px 16px;font-size:14px;justify-self:start}
+@media (max-width:760px){.card.ad{grid-template-columns:1fr}.cfg{grid-template-columns:1fr}.cfg>div{border-right:0}}
+
+
+.wrap>*,.section,.card,.kpis,.trio{min-width:0} .scroll{max-width:100%}
+.chart{width:100%;height:auto;display:block;font-family:var(--f)}
+.chart .lab{font-size:13px;fill:var(--ink)} .chart .val{font-size:13px;font-weight:600;fill:var(--ink)}
+.chart .ax{font-size:11px;fill:var(--muted)} .chart .grid{stroke:var(--line);stroke-width:1}
+.chart .corte{fill:#F0F0EC} .chart .xh{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+#tip{position:fixed;display:none;z-index:9;background:#141414;color:#fff;font-size:12px;line-height:1.5;padding:8px 10px;border-radius:8px;pointer-events:none;max-width:260px}
+#tip i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+.card.pad{padding:clamp(16px,3vw,26px);display:grid;gap:14px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)} .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.tbl{width:100%;border-collapse:collapse;font-size:13px} .tbl th,.tbl td{padding:8px 7px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left} .tbl thead th{white-space:normal;vertical-align:bottom;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.tbl tr.best td{font-weight:600} .tbl i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+.scroll{overflow-x:auto}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.trio .card{padding:18px 20px;display:grid;gap:8px;align-content:start} .trio h3{font-size:17px} .trio p{font-size:14px;color:var(--muted)}
+.trio a{font-size:13px;word-break:break-all} .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+.lista{display:grid;gap:12px;padding:0;margin:0;list-style:none}
+.lista li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font-size:15px}
+.lista li b{display:block;margin-bottom:2px}
+.nota{font-size:13px;color:var(--muted)}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html#informes" style="color:var(--muted);font-size:13px;text-decoration:none">← Portal Corpas</a>
+<header class="top"><div class="brand"><i></i>ADCOM <span class="sep">×</span> CORPAS</div>
+<h1>Test de landings · <span>Medicina en Meta</span></h1>
+<p>Del 1 de noviembre al 12 de diciembre, las campañas de Medicina en Meta prueban tres landings con el mismo público y los mismos anuncios base: el formulario original, una landing con video y una con quiz. Este corte cubre del 1 al 17 de noviembre (17 de 42 días del test).</p></header>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Resumen</div><h2>Resultados al 17 de noviembre</h2></div>
+<div class="kpis">
+<div class="kpi"><b>$8.337.902</b><span>Inversión de las tres landings</span></div>
+<div class="kpi"><b>370</b><span>Leads en HubSpot · CPL $22.535</span></div>
+<div class="kpi"><b>$10.216</b><span>CPL del quiz, el más bajo</span></div>
+<div class="kpi"><b>3,2×</b><span>Más barato el lead del quiz que el del original</span></div>
+</div></section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Diseño</div><h2>Las tres landings</h2></div>
+<div class="trio"><div class="card"><h3><span class="sw" style="background:#2a78d6"></span>Formulario original</h3><p>La landing de siempre: información del programa y formulario de 6 campos a la vista.</p><a href="https://programas.juanncorpas.edu.co/medicina-leadgen/" target="_blank" rel="noopener">programas.juanncorpas.edu.co/medicina-leadgen/</a><p>7 anuncios activos · $3.610.520 invertidos</p></div><div class="card"><h3><span class="sw" style="background:#eb6834"></span>Video</h3><p>Mismo formulario, que se desbloquea al ver la mitad de un video sobre el programa («Míralo antes de decidirlo»).</p><a href="https://programas.juanncorpas.edu.co/medicina-leadgen-en-video/" target="_blank" rel="noopener">programas.juanncorpas.edu.co/medicina-leadgen-en-video/</a><p>4 anuncios activos · $3.358.466 invertidos</p></div><div class="card"><h3><span class="sw" style="background:#1baf7a"></span>Quiz</h3><p>Test «¿Tienes perfil de médico?»: preguntas cortas y al final el formulario para ver el resultado.</p><a href="https://programas.juanncorpas.edu.co/medicina-leadgen-quiz/" target="_blank" rel="noopener">programas.juanncorpas.edu.co/medicina-leadgen-quiz/</a><p>4 anuncios activos · $1.368.916 invertidos</p></div></div>
+<p class="nota">Público igual en las tres: remarketing de la base de no admitidos de la Universidad Nacional y sus públicos similares, en Bogotá (gasto por conjunto: Formulario original: rmk_bbbdd-noadmitidosunal $3.610.472; Video: rmk_bbbdd-noadmitidosunal_landing-video $3.358.466; Quiz: rmk_bbbdd-noadmitidosunal_landing-quiz $1.368.916). Mismos videos base en las tres campañas; el original tiene además 3 anuncios que vienen de octubre. Presupuesto: 33 % por landing al inicio; el 13/11 se pasó más presupuesto a video y quiz por su mejor CPL, y el 18/11 se nivelaron los diarios.</p>
+</section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Costo</div><h2 id="t-cpl">Costo por lead en HubSpot</h2></div>
+<div class="card pad"><svg viewBox="0 0 640 148" role="img" aria-labelledby="t-cpl" class="chart"><g class="hov" data-tip="Formulario original: $33.124"><rect x="0" y="4" width="640" height="42" fill="transparent"/><text x="138" y="27" text-anchor="end" class="lab">Formulario original</text><rect x="150" y="12" width="400.0" height="24" rx="4" fill="#2a78d6"/><text x="558.0" y="29" class="val">$33.124</text></g><g class="hov" data-tip="Video: $26.445"><rect x="0" y="50" width="640" height="42" fill="transparent"/><text x="138" y="73" text-anchor="end" class="lab">Video</text><rect x="150" y="58" width="319.3" height="24" rx="4" fill="#eb6834"/><text x="477.3" y="75" class="val">$26.445</text></g><g class="hov" data-tip="Quiz: $10.216"><rect x="0" y="96" width="640" height="42" fill="transparent"/><text x="138" y="119" text-anchor="end" class="lab">Quiz</text><rect x="150" y="104" width="123.4" height="24" rx="4" fill="#1baf7a"/><text x="281.4" y="121" class="val">$10.216</text></g></svg></div></section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Detalle</div><h2>Embudo por landing</h2></div><div class="card pad scroll"><table class="tbl"><thead><tr><th>Landing</th><th>Inversión</th><th>Impresiones</th><th>Clics al enlace</th><th>CTR</th><th>CPC</th><th>Registros (píxel)</th><th>Leads HubSpot</th><th>CPL HubSpot</th><th>Clic → lead</th></tr></thead><tbody><tr class=""><td><i style="background:#2a78d6"></i>Formulario original</td><td>$3.610.520</td><td>568.949</td><td>7.905</td><td>1,4 %</td><td>$457</td><td>205</td><td>109</td><td>$33.124</td><td>1,4 %</td></tr><tr class=""><td><i style="background:#eb6834"></i>Video</td><td>$3.358.466</td><td>440.970</td><td>6.576</td><td>1,5 %</td><td>$511</td><td>158</td><td>127</td><td>$26.445</td><td>1,9 %</td></tr><tr class="best"><td><i style="background:#1baf7a"></i>Quiz</td><td>$1.368.916</td><td>302.791</td><td>2.967</td><td>1,0 %</td><td>$461</td><td>92</td><td>134</td><td>$10.216</td><td>4,5 %</td></tr></tbody></table><p class="nota">Leads HubSpot = contactos marcados como lead de pauta con el utm_campaign de cada campaña, creados del 1 al 17 de noviembre. Registros (píxel) = evento CompleteRegistration que reporta Meta.</p></div></section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Ritmo</div><h2 id="t-dia">Leads en HubSpot por día</h2></div>
+<div class="card pad"><div class="legend"><span><i style="background:#2a78d6"></i>Formulario original</span><span><i style="background:#eb6834"></i>Video</span><span><i style="background:#1baf7a"></i>Quiz</span></div><svg viewBox="0 0 720 260" role="img" aria-labelledby="t-dia" class="chart line" data-dias='["01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11", "13/11", "14/11", "15/11", "16/11", "17/11"]' data-series='[["Formulario original", "#2a78d6", [13, 10, 11, 6, 10, 7, 7, 13, 4, 2, 7, 8, 6, 5, 0, 0, 0]], ["Video", "#eb6834", [5, 11, 4, 3, 17, 5, 9, 3, 6, 11, 15, 8, 10, 14, 6, 0, 0]], ["Quiz", "#1baf7a", [15, 9, 9, 7, 11, 10, 5, 7, 5, 16, 4, 5, 12, 11, 8, 0, 0]]]'><line x1="40" x2="704" y1="230.0" y2="230.0" class="grid"/><text x="32" y="234.0" text-anchor="end" class="ax">0</text><line x1="40" x2="704" y1="176.0" y2="176.0" class="grid"/><text x="32" y="180.0" text-anchor="end" class="ax">5</text><line x1="40" x2="704" y1="122.0" y2="122.0" class="grid"/><text x="32" y="126.0" text-anchor="end" class="ax">10</text><line x1="40" x2="704" y1="68.0" y2="68.0" class="grid"/><text x="32" y="72.0" text-anchor="end" class="ax">15</text><line x1="40" x2="704" y1="14.0" y2="14.0" class="grid"/><text x="32" y="18.0" text-anchor="end" class="ax">20</text><rect x="641.8" y="14" width="62.2" height="216" class="corte"/><text x="672.9" y="28" text-anchor="middle" class="ax">Meta sin entrega</text><text x="40.0" y="252" text-anchor="middle" class="ax">1</text><text x="123.0" y="252" text-anchor="middle" class="ax">3</text><text x="206.0" y="252" text-anchor="middle" class="ax">5</text><text x="289.0" y="252" text-anchor="middle" class="ax">7</text><text x="372.0" y="252" text-anchor="middle" class="ax">9</text><text x="455.0" y="252" text-anchor="middle" class="ax">11</text><text x="538.0" y="252" text-anchor="middle" class="ax">13</text><text x="621.0" y="252" text-anchor="middle" class="ax">15</text><text x="704.0" y="252" text-anchor="middle" class="ax">17</text><polyline points="40.0,89.6 81.5,122.0 123.0,111.2 164.5,165.2 206.0,122.0 247.5,154.4 289.0,154.4 330.5,89.6 372.0,186.8 413.5,208.4 455.0,154.4 496.5,143.6 538.0,165.2 579.5,176.0 621.0,230.0 662.5,230.0 704.0,230.0" fill="none" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><polyline points="40.0,176.0 81.5,111.2 123.0,186.8 164.5,197.6 206.0,46.4 247.5,176.0 289.0,132.8 330.5,197.6 372.0,165.2 413.5,111.2 455.0,68.0 496.5,143.6 538.0,122.0 579.5,78.8 621.0,165.2 662.5,230.0 704.0,230.0" fill="none" stroke="#eb6834" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><polyline points="40.0,68.0 81.5,132.8 123.0,132.8 164.5,154.4 206.0,111.2 247.5,122.0 289.0,176.0 330.5,154.4 372.0,176.0 413.5,57.2 455.0,186.8 496.5,176.0 538.0,100.4 579.5,111.2 621.0,143.6 662.5,230.0 704.0,230.0" fill="none" stroke="#1baf7a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><line class="xh" x1="0" x2="0" y1="14" y2="230" style="display:none"/><rect class="hit" x="40" y="14" width="664" height="216" fill="transparent"/></svg>
+<p class="nota">La cuenta de Meta no entregó del 15/11 por la tarde al 18/11 por la mañana (causa en revisión), por eso no hay leads el 16 y el 17.</p></div></section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Calidad</div><h2>Qué pasa con los leads en HubSpot</h2></div><div class="card pad scroll"><table class="tbl"><thead><tr><th>Landing</th><th>Leads</th><th>Seguimiento en curso</th><th>No contesta / apagado</th><th>Desiste</th><th>Inscrito u otro avance</th><th>Leads en gestión</th><th>Costo por lead en gestión</th></tr></thead><tbody><tr><td><i style="background:#2a78d6"></i>Formulario original</td><td>109</td><td>47 <span class="nota">(43,1 %)</span></td><td>42 <span class="nota">(38,5 %)</span></td><td>19 <span class="nota">(17,4 %)</span></td><td>1</td><td>48</td><td>$75.219</td></tr><tr><td><i style="background:#eb6834"></i>Video</td><td>127</td><td>54 <span class="nota">(42,5 %)</span></td><td>51 <span class="nota">(40,2 %)</span></td><td>18 <span class="nota">(14,2 %)</span></td><td>4</td><td>58</td><td>$57.905</td></tr><tr><td><i style="background:#1baf7a"></i>Quiz</td><td>134</td><td>51 <span class="nota">(38,1 %)</span></td><td>50 <span class="nota">(37,3 %)</span></td><td>32 <span class="nota">(23,9 %)</span></td><td>1</td><td>52</td><td>$26.325</td></tr></tbody></table><p class="nota">Estado del lead en HubSpot al 17/11. «Leads en gestión» = todos menos «Desiste» y «No contesta / apagado».</p></div>
+<div class="card pad"><h3 id="t-cpu" style="font-size:16px">Costo por lead en gestión (sin desistidos ni no contactados)</h3><svg viewBox="0 0 640 148" role="img" aria-labelledby="t-cpu" class="chart"><g class="hov" data-tip="Formulario original: $75.219"><rect x="0" y="4" width="640" height="42" fill="transparent"/><text x="138" y="27" text-anchor="end" class="lab">Formulario original</text><rect x="150" y="12" width="400.0" height="24" rx="4" fill="#2a78d6"/><text x="558.0" y="29" class="val">$75.219</text></g><g class="hov" data-tip="Video: $57.905"><rect x="0" y="50" width="640" height="42" fill="transparent"/><text x="138" y="73" text-anchor="end" class="lab">Video</text><rect x="150" y="58" width="307.9" height="24" rx="4" fill="#eb6834"/><text x="465.9" y="75" class="val">$57.905</text></g><g class="hov" data-tip="Quiz: $26.325"><rect x="0" y="96" width="640" height="42" fill="transparent"/><text x="138" y="119" text-anchor="end" class="lab">Quiz</text><rect x="150" y="104" width="140.0" height="24" rx="4" fill="#1baf7a"/><text x="298.0" y="121" class="val">$26.325</text></g></svg></div>
+<ul class="lista"><li><b><span class="sw" style="background:#2a78d6"></span>Formulario original · 19 desisten</b>No interesado en el programa 9 · No interesado en esta convocatoria 5 · Horarios 1 · Recursos Económicos 1</li><li><b><span class="sw" style="background:#eb6834"></span>Video · 18 desisten</b>Ubicación 6 · No localizado 5 · Mal perfilado 3 · No interesado en el programa 2</li><li><b><span class="sw" style="background:#1baf7a"></span>Quiz · 32 desisten</b>Ubicación 12 · Mal perfilado 6 · No interesado en el programa 5 · Recursos Económicos 3</li></ul></section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Lectura</div><h2>Qué nos dice el test hasta ahora</h2></div><ul class="lista">
+<li><b>El quiz consigue el lead más barato.</b>$10.216 por lead en HubSpot, 3,2 veces menos que el formulario original ($33.124) y 2,6 veces menos que el video ($26.445). Con menos de la mitad de la inversión del original trajo más leads (134 contra 109).</li>
+<li><b>La diferencia está en la landing, no en el anuncio.</b>El quiz convierte el 4,5 % de los clics en lead, contra 1,9 % del video y 1,4 % del original. Las tres campañas usan el mismo público y la misma base de videos.</li>
+<li><b>Pero el quiz trae más leads que desisten.</b>El 23,9 % de sus leads ya está en «Desiste», contra 14,2 % del video y 17,4 % del original; sobresalen los motivos «Ubicación» y «Mal perfilado». Aun descontando desistidos y no contactados, el quiz sigue siendo el más barato: $26.325 por lead en gestión, contra $57.905 del video y $75.219 del original.</li>
+<li><b>El video es el único con inscritos desde que arrancó el test.</b>2 leads del video ya están inscritos; las otras dos todavía no tienen. Es una señal temprana de calidad, con muy pocos casos para concluir.</li>
+<li><b>Todavía no hay matrículas suficientes para comparar.</b>El objetivo del test es el costo por matrícula, y la matrícula llega semanas después del lead. Con 17 de 42 días de test, la decisión se toma con el corte del 12 de diciembre.</li></ul></section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Próximos pasos</div><h2>Qué proponemos</h2></div><ul class="lista">
+<li><b>Seguir el test hasta el 12 de diciembre.</b>Con el mismo público y los mismos anuncios base en las tres landings, para que la comparación siga siendo justa.</li>
+<li><b>Pedir a admisiones una lectura de los leads del quiz.</b>Si los que desisten por «Ubicación» y «Mal perfilado» son un patrón, ajustar las preguntas del quiz para filtrar antes del formulario (por ejemplo, ciudad de residencia).</li>
+<li><b>Revisar el píxel del quiz.</b>Meta registró 92 registros y HubSpot recibió 134 leads: el píxel cuenta de menos y Meta optimiza con menos señales de las que hay. En el original pasa lo contrario (205 registros contra 109 leads).</li>
+<li><b>Decidir la escala el 12 de diciembre.</b>Con el costo por inscrito y por matrícula de cada landing (no solo el costo por lead), la ganadora recibe el 60 % del presupuesto de Meta Medicina y las otras dos el 20 % cada una.</li>
+<li><b>Para escalar el quiz habrá que abrir público.</b>Hoy corre solo con el conjunto de remarketing y no logra gastar más de ~$108k al día; tiene un conjunto de intereses listo y en pausa.</li></ul></section>
+
+<footer>ADCOM · Datos de la API de Meta y de «[Corpas] Fuente de datos» (HubSpot) con corte al 17/11/2026. Generado con build_test_landings_medicina.py.</footer>
+</div>
+
+<div id="tip" role="tooltip"></div>
+<script>
+(function(){
+  const tip=document.getElementById('tip');
+  const show=(html,ev)=>{tip.innerHTML=html;tip.style.display='block';const x=Math.min(ev.clientX+14,innerWidth-tip.offsetWidth-8);tip.style.left=x+'px';tip.style.top=(ev.clientY+14)+'px';};
+  const hide=()=>{tip.style.display='none';};
+  document.querySelectorAll('.hov').forEach(g=>{g.addEventListener('mousemove',ev=>show(g.dataset.tip,ev));g.addEventListener('mouseleave',hide);});
+  document.querySelectorAll('svg.line').forEach(svg=>{
+    const dias=JSON.parse(svg.dataset.dias), ser=JSON.parse(svg.dataset.series), hit=svg.querySelector('.hit'), xh=svg.querySelector('.xh');
+    const vb=svg.viewBox.baseVal, x0=+hit.getAttribute('x'), w=+hit.getAttribute('width');
+    hit.addEventListener('mousemove',ev=>{
+      const r=svg.getBoundingClientRect(), px=(ev.clientX-r.left)*vb.width/r.width;
+      const i=Math.max(0,Math.min(dias.length-1,Math.round((px-x0)/w*(dias.length-1)))), X=x0+w*i/(dias.length-1);
+      xh.setAttribute('x1',X);xh.setAttribute('x2',X);xh.style.display='';
+      show('<b>'+dias[i]+'</b>'+ser.map(s=>'<div><i style="background:'+s[1]+'"></i>'+s[0]+': <b>'+s[2][i]+'</b></div>').join(''),ev);
+    });
+    hit.addEventListener('mouseleave',()=>{xh.style.display='none';hide();});
+  });
+})();
+</script>
+
+</body>
+</html>
