@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuste de presupuesto 2027-1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* ADCOM client template, shared by the RIS hub pages. Black rounded header, yellow accent, white cards on light gray. Light only, like the other client reports. */
+:root {
+  --bg: #F5F5F5; --card: #FFFFFF; --ink: #141414; --muted: #63635E; --line: #E6E6E1; --panel: #F7F7F5;
+  --accent: #FFC000; --accent-soft: #FFF5D1; --head: #141414; --head-ink: #FFFFFF;
+  --f: "Poppins", "Segoe UI", Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); margin: 0; }
+body { color: var(--ink); font-family: var(--f); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; display: grid; gap: 44px; }
+h1, h2, h3 { margin: 0; line-height: 1.2; text-wrap: balance; }
+p, ul, ol { margin: 0; }
+a { color: inherit; }
+.muted { color: var(--muted); }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+/* Header */
+.top { background: var(--head); color: var(--head-ink); border-radius: 20px; padding: clamp(24px, 4vw, 44px); display: grid; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .16em; font-size: 13px; }
+.brand i { width: 12px; height: 12px; border-radius: 3px; background: var(--accent); }
+.brand .sep { color: #8A8A85; font-weight: 400; letter-spacing: 0; }
+.top h1 { font-size: clamp(28px, 4.6vw, 42px); font-weight: 700; }
+.top h1 span { color: var(--accent); }
+.top p { max-width: 62ch; color: #D6D6D2; font-size: 16px; }
+.back { color: #D6D6D2; font-size: 13px; text-decoration: none; justify-self: start; }
+.back:hover, .back:focus-visible { color: var(--accent); }
+
+/* Sections */
+.section { display: grid; gap: 16px; }
+.section-head { display: grid; gap: 4px; padding-bottom: 12px; border-bottom: 3px solid var(--accent); }
+.section-head h2 { font-size: clamp(21px, 3vw, 26px); }
+
+/* Link cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+.card { background: var(--card); border-radius: 16px; padding: 22px; display: grid; gap: 10px; align-content: start;
+  border: 1px solid var(--line); border-bottom: 4px solid var(--accent); text-decoration: none; color: var(--ink); }
+a.card:hover, a.card:focus-visible { background: var(--accent-soft); outline: none; }
+.card h3 { font-size: 19px; }
+.card p { font-size: 14px; color: var(--muted); }
+.card .go { font-size: 14px; font-weight: 600; margin-top: 4px; }
+.card.soon { border-bottom-color: var(--line); border-style: dashed; border-bottom-style: dashed; background: transparent; }
+.tag { justify-self: start; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  background: var(--accent); color: var(--ink); border-radius: 99px; padding: 2px 10px; }
+.tag.off { background: var(--line); color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; }
+.facts li { background: var(--panel); border-radius: 99px; padding: 2px 10px; font-size: 12px; }
+
+/* Buttons */
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 99px; padding: 10px 18px; font-weight: 600; font-size: 14px;
+  text-decoration: none; background: var(--accent); color: var(--ink); border: 2px solid var(--accent); }
+.btn:hover, .btn:focus-visible { background: var(--head); color: var(--accent); border-color: var(--head); outline: none; }
+.btn.ghost { background: transparent; color: var(--head-ink); border-color: #5A5A56; }
+.btn.ghost:hover, .btn.ghost:focus-visible { border-color: var(--accent); color: var(--accent); background: transparent; }
+.btn.off { background: transparent; color: var(--muted); border: 2px dashed #8A8A85; cursor: not-allowed; }
+
+/* KPIs */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.kpi { background: var(--card); border-radius: 16px; padding: 20px; display: grid; gap: 4px; border: 1px solid var(--line); }
+.kpi b { font-size: clamp(26px, 3.4vw, 32px); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi b::after { content: ""; display: block; width: 36px; height: 4px; border-radius: 2px; background: var(--accent); margin-top: 10px; }
+.kpi span { font-size: 13px; color: var(--muted); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; background: var(--card); border-radius: 16px; border: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 640px; }
+th, td { padding: 11px 14px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--line); }
+tbody tr + tr td { border-top: 1px solid var(--line); }
+tr.hi td { background: var(--accent-soft); }
+tfoot td { font-weight: 700; border-top: 2px solid var(--ink); }
+
+.note { font-size: 13px; color: var(--muted); max-width: 72ch; }
+.panel { background: var(--card); border-radius: 16px; padding: clamp(18px, 3vw, 26px); border: 1px solid var(--line); display: grid; gap: 10px; }
+footer { font-size: 12px; color: var(--muted); }
+
+.tag.bad{background:#FBE3E0;color:#B3261E}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.list{display:grid;gap:16px}
+.card.ad{padding:0;overflow:hidden;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0}
+.media{background:var(--panel);padding:14px;display:grid;align-items:start}
+.media figure{margin:0;display:grid;gap:6px}
+.media img{display:block;width:100%;height:auto;border-radius:10px}
+.pair{grid-template-columns:1fr 56%;gap:10px}
+.pair figure:first-child{align-self:center}
+.single figure{justify-items:center}
+.single img{width:auto;max-width:100%;max-height:480px}
+.vid figure{position:relative}
+.vid figure::after{content:"▶";position:absolute;top:calc(50% - 40px);left:calc(50% - 26px);width:52px;height:52px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-size:18px}
+figcaption{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.meta{padding:22px;display:grid;gap:14px;align-content:start;min-width:0}
+.adhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.adhead>div{min-width:0;display:grid;gap:4px}
+.copy{font-size:14px;background:var(--panel);border-radius:12px;padding:14px 16px;border-left:4px solid var(--accent)}
+.fix{font-size:13px;background:var(--accent-soft);border-radius:10px;padding:10px 12px}
+.cfg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:0;overflow:hidden}
+.cfg>div{padding:16px 18px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);min-width:0;display:grid;gap:4px}
+.cfg>div:nth-child(3n){border-right:0}
+.cfg .wide{grid-column:1/-1;border-right:0;border-bottom:0}
+.cfg .v{font-size:14px;font-weight:500;overflow-wrap:anywhere}
+.alert{background:var(--accent);color:var(--ink);border-radius:12px;padding:12px 16px;font-size:14px;justify-self:start}
+@media (max-width:760px){.card.ad{grid-template-columns:1fr}.cfg{grid-template-columns:1fr}.cfg>div{border-right:0}}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:grid;gap:4px}
+.kpi b{font-size:26px;line-height:1.1} .kpi span{color:var(--muted);font-size:13px}
+.card2{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:grid;gap:12px}
+.small{font-size:13px}
+.chart{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:end;height:280px;padding-top:8px;border-bottom:1px solid var(--line)}
+.col{display:grid;grid-template-rows:auto 1fr;height:100%;align-items:end;justify-items:center;position:relative}
+.col .b{width:min(64px,80%);background:#CFCFC9;border-radius:4px 4px 0 0;align-self:end}
+.col .b.hi{background:var(--accent)}
+.col:hover .b{filter:brightness(.92)}
+.col .v{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;align-self:end;margin-bottom:6px}
+.col .l,.col .p{position:absolute;bottom:-44px;font-size:13px} .col .p{bottom:-62px;color:var(--muted);font-size:12px}
+.chartwrap{padding-bottom:64px}
+table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right}
+thead th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+th[scope=row],thead th:first-child{text-align:left} tr.hi{background:var(--accent-soft)} tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+.fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.fase{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:8px;align-content:start}
+.fase.hi{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.fase h3{font-size:16px} .fase .monto{font-size:22px;font-weight:700}
+.fase ul{padding-left:18px;display:grid;gap:6px;color:var(--muted);font-size:14px}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--accent-soft);justify-self:start}
+ol.pide{padding-left:20px;display:grid;gap:10px}
+.meta{display:grid;gap:8px} .track{height:14px;background:var(--panel);border-radius:999px;overflow:hidden;position:relative}
+.track span{display:block;height:100%;background:var(--accent);border-radius:999px}
+.track i{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+.meta-l{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+footer{color:var(--muted);font-size:12.5px}
+@media (max-width:520px){.chart{gap:6px;height:220px} .col .v{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html#planeacion" style="color:var(--muted);font-size:13px;text-decoration:none">← Portal Corpas</a>
+<header class="top"><div class="brand"><i></i>ADCOM <span class="sep">×</span> CORPAS</div>
+<h1>Presupuesto 2027-1 · <span>más inversión hasta el 20 de diciembre</span></h1>
+<p>Atendiendo la solicitud de invertir más fuerte antes de las vacaciones, reorganizamos la distribución mensual del presupuesto 2027-1. El total del periodo no cambia: adelantamos a noviembre y diciembre buena parte de lo que estaba planeado para enero.</p></header>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Resumen</div><h2>El cambio en cifras</h2></div>
+<div class="kpis">
+<div class="kpi"><b>$360,6 M</b><span>Presupuesto total 2027-1 · sin cambio</span></div>
+<div class="kpi"><b>$105,0 M</b><span>Noviembre (antes 22 % del periodo)</span></div>
+<div class="kpi"><b>$160,3 M</b><span>Diciembre, casi todo del 1 al 20</span></div>
+<div class="kpi"><b>6.712</b><span>Leads meta al 20 de diciembre (70 % del periodo)</span></div>
+</div></section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Distribución mensual</div><h2>Cuándo se invierte</h2></div>
+<div class="card2"><div class="chartwrap"><div class="chart" role="img" aria-label="Inversión por mes del periodo 2027-1"><div class="col" title="Octubre (real): $48.405.521 (13 % del periodo) · plan anterior 20 %"><span class="v">$48,4 M</span><span class="b " style="height:30.2%"></span><span class="l">Oct</span><span class="p">13 %</span></div><div class="col" title="Noviembre: $105.041.989 (29 % del periodo) · plan anterior 22 %"><span class="v">$105,0 M</span><span class="b hi" style="height:65.5%"></span><span class="l">Nov</span><span class="p">29 %</span></div><div class="col" title="Diciembre: $160.291.296 (44 % del periodo) · plan anterior 30 %"><span class="v">$160,3 M</span><span class="b hi" style="height:100.0%"></span><span class="l">Dic</span><span class="p">44 %</span></div><div class="col" title="Enero: $36.061.932 (10 % del periodo) · plan anterior 25 %"><span class="v">$36,1 M</span><span class="b " style="height:22.5%"></span><span class="l">Ene</span><span class="p">10 %</span></div><div class="col" title="Febrero: $10.818.580 (3 % del periodo) · plan anterior 3 %"><span class="v">$10,8 M</span><span class="b " style="height:6.7%"></span><span class="l">Feb</span><span class="p">3 %</span></div></div></div>
+<p class="muted small">Noviembre y diciembre, en amarillo, concentran la inversión. Enero queda en 10 % y febrero en 3 % del periodo. Octubre es lo invertido real.</p></div>
+<div class="card2"><table><thead><tr><th>Mes</th><th>Plan anterior</th><th>Plan nuevo</th><th>% del periodo</th></tr></thead><tbody><tr><th scope="row">Octubre (real)</th><td>20 %</td><td>$48.405.521</td><td>13 %</td></tr><tr class=hi><th scope="row">Noviembre</th><td>22 %</td><td>$105.041.989</td><td>29 %</td></tr><tr class=hi><th scope="row">Diciembre</th><td>30 %</td><td>$160.291.296</td><td>44 %</td></tr><tr><th scope="row">Enero</th><td>25 %</td><td>$36.061.932</td><td>10 %</td></tr><tr><th scope="row">Febrero</th><td>3 %</td><td>$10.818.580</td><td>3 %</td></tr></tbody></table>
+<p class="muted small">La participación de cada programa en el presupuesto se mantiene igual: ningún programa gana ni pierde, solo se mueve el calendario.</p></div>
+</section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Objetivo</div><h2>Por qué: el 70 % de los leads antes del 20 de diciembre</h2></div>
+<div class="card2"><p>Diciembre es el mes en que más se decide la carrera, y a partir de la tercera semana la gente sale a vacaciones y baja la búsqueda. Por eso concentramos la inversión antes: la meta es llegar al 20 de diciembre con <b>6.712 leads</b>, el 70 % de los 9.588 del periodo.</p>
+<div class="meta"><div class="meta-l"><span>Leads de pauta en el CRM al 26 de noviembre: <b style="color:var(--ink)">3.053 (32 %)</b></span><span>Meta al 20 de diciembre: 6.712 (70 %)</span></div>
+<div class="track" role="img" aria-label="Avance 32 % de 70 %"><span style="width:32%"></span><i style="left:70%"></i></div>
+<p class="muted small">Para llegar necesitamos unos 150 leads diarios. Con la subida del 23 de noviembre pasamos de 58 a 92 leads diarios; la inversión de diciembre debe cerrar la diferencia.</p></div></div>
+</section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Plan</div><h2>Cómo lo vamos a manejar</h2></div>
+<div class="fases">
+<div class="fase"><span class="tag">23–30 nov</span><h3>Noviembre</h3><div class="monto">$105,0 M</div><ul>
+<li>El 23 de noviembre subimos los presupuestos diarios de todas las campañas activas: de unos $2,8 M a unos $5,8 M al día entre Meta, Google y TikTok.</li>
+<li>Misma proporción para cada programa.</li><li>Descuento hasta el 30 de noviembre activo en Meta y Google para Medicina, Enfermería, Lenguas y Música.</li></ul></div>
+<div class="fase hi"><span class="tag">1–20 dic</span><h3>Diciembre, el pico</h3><div class="monto">≈ $157 M</div><ul>
+<li>Unos $7,8 M al día.</li><li>El 1 de diciembre cargamos los nuevos diarios y reactivamos el branding (Demand Gen en Google, branding en Meta y TikTok).</li>
+<li>Seguimiento diario del ritmo de leads contra la meta.</li><li>Si una campaña no logra gastar lo asignado, movemos ese saldo a los medios y anuncios con mejor costo por lead del mismo programa.</li></ul></div>
+<div class="fase"><span class="tag">21–31 dic</span><h3>Vacaciones</h3><div class="monto">≈ $3,3 M</div><ul>
+<li>Inversión mínima.</li><li>Solo campañas de marca en Google y remarketing a quienes ya mostraron interés.</li><li>Mantener presencia sin invertir fuerte en las semanas de menor actividad.</li></ul></div>
+<div class="fase"><span class="tag">Ene–feb</span><h3>Cierre de inscripciones</h3><div class="monto">$36,1 M + $10,8 M</div><ul>
+<li>Enero (10 %): reactivación con foco en cerrar: remarketing a los leads de noviembre y diciembre, búsqueda y los programas con mejores resultados.</li>
+<li>Febrero (3 %): presencia de marca y búsqueda en la última etapa de inscripciones.</li></ul></div>
+</div></section>
+
+<section class="section"><div class="section-head"><div class="eyebrow">Apoyo</div><h2>Lo que necesitamos de ustedes</h2></div>
+<div class="card2"><ol class="pide">
+<li><b>Material de branding</b> (estáticos horizontales y videos) para la reactivación del 1 de diciembre.</li>
+<li><b>Gestión de los leads.</b> Con este volumen vamos a generar muchos más contactos en pocos días. Cerca del 40 % de los leads recientes está en «No contesta»: el contacto rápido es lo que convierte este esfuerzo en matrículas.</li>
+<li><b>Promociones o fechas clave de diciembre,</b> para tener las piezas y los mensajes a tiempo.</li>
+</ol></div></section>
+
+<footer>ADCOM · Presupuesto: Forecast 2027-1 (RESUMEN, distribución mensual) y hoja de seguimiento. Leads: HubSpot, leads de pauta, corte 26 de noviembre de 2026.</footer>
+</div>
+</body>
+</html>
